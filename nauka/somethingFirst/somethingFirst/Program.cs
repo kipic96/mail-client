@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace somethingFirst
 {
-    class Program
+    static class Program
     {
         static void Main()
         {
@@ -16,9 +16,9 @@ namespace somethingFirst
             int number = 20;
             string str = "shits";
 
-            FirstClass shit = new FirstClass();
-            shit.WriteSomething(number, str);
-            
+            UseClass use = new UseClass();
+            use.meg();         
         }
+        
     }
 }

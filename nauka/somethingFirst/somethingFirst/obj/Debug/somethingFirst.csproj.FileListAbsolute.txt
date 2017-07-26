@@ -7,3 +7,6 @@ D:\wszystko\programowanie\C#\nauka\somethingFirst\somethingFirst\obj\Debug\somet
 D:\wszystko\programowanie\C#\private-projects\nauka\somethingFirst\somethingFirst\bin\Debug\somethingFirst.exe.config
 D:\wszystko\programowanie\C#\private-projects\nauka\somethingFirst\somethingFirst\obj\Debug\somethingFirst.exe
 D:\wszystko\programowanie\C#\private-projects\nauka\somethingFirst\somethingFirst\obj\Debug\somethingFirst.pdb
+D:\wszystko\programowanie\C#\private-projects\nauka\somethingFirst\somethingFirst\bin\Debug\somethingFirst.exe
+D:\wszystko\programowanie\C#\private-projects\nauka\somethingFirst\somethingFirst\bin\Debug\somethingFirst.pdb
+D:\wszystko\programowanie\C#\private-projects\nauka\somethingFirst\somethingFirst\obj\Debug\somethingFirst.csprojResolveAssemblyReference.cache
