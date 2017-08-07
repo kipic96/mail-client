@@ -74,6 +74,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MathSymbols.cs" />
+    <Compile Include="OperationProgress.cs" />
+    <Compile Include="OperationResult.cs" />
     <Compile Include="OperationType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

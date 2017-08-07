@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:SimpleCalculator"
         mc:Ignorable="d"
         Title="Calculator" Height="400" Width="265" MinHeight="400" MinWidth="265" SizeToContent="WidthAndHeight">
-    <Grid Margin="0">
+    <Grid Name="MainGrid" Margin="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.7*" />
             <RowDefinition Height="*" />
@@ -33,13 +33,13 @@
         <Button Content="9" FontSize="26" Grid.Row="3" Grid.Column="2" Margin="3" Click="buttonNumber_Click"/>
         <Button Content="6" FontSize="26" Grid.Row="4" Grid.Column="2" Margin="3" Click="buttonNumber_Click"/>
         <Button Content="3" FontSize="26" Grid.Row="5" Grid.Column="2" Margin="3" Click="buttonNumber_Click"/>
-        <Button Content="," FontSize="26" Grid.Row="6" Grid.Column="2" Margin="3" Click="buttonDot_Click"/>
-        <Button Content="=" FontSize="26" Grid.Row="5" Grid.RowSpan="2" Grid.Column="3" Margin="3" Click="buttonExecute_Click"/>
-        <Button Content="÷" FontSize="26" Grid.Row="2" Grid.Column="1" Margin="3" Click="buttonDivide_Click"/>
-        <Button Content="×" FontSize="26" Grid.Row="2" Grid.Column="2" Margin="3" Click="buttonMultiply_Click"/>
-        <Button Content="-" FontSize="26" Grid.Row="2" Grid.Column="3" Margin="3" Click="buttonSubstract_Click"/>
-        <Button Content="+" FontSize="26" Grid.Row="3" Grid.RowSpan="2" Grid.Column="3" Margin="3" Click="buttonAdd_Click"/>
-        <Button Content="C" FontSize="24" Grid.Row="2" Grid.Column="0" Margin="3" Click="buttonClear_Click"/>
+        <Button Content="{Binding Source={x:Static local:MathSymbols.Dot}}" FontSize="26" Grid.Row="6" Grid.Column="2" Margin="3" Click="buttonDot_Click"/>
+        <Button Content="{Binding Source={x:Static local:MathSymbols.EqualSign}}" FontSize="26" Grid.Row="5" Grid.RowSpan="2" Grid.Column="3" Margin="3" Click="buttonExecute_Click"/>
+        <Button Content="{Binding Source={x:Static local:MathSymbols.DivisionSign}}" FontSize="26" Grid.Row="2" Grid.Column="1" Margin="3" Click="buttonDivide_Click"/>
+        <Button Content="{Binding Source={x:Static local:MathSymbols.MultiplicationSign}}" FontSize="26" Grid.Row="2" Grid.Column="2" Margin="3" Click="buttonMultiply_Click"/>
+        <Button Content="{Binding Source={x:Static local:MathSymbols.MinusSign}}" FontSize="26" Grid.Row="2" Grid.Column="3" Margin="3" Click="buttonSubstract_Click"/>
+        <Button Content="{Binding Source={x:Static local:MathSymbols.PlusSign}}" FontSize="26" Grid.Row="3" Grid.RowSpan="2" Grid.Column="3" Margin="3" Click="buttonAdd_Click"/>
+        <Button Content="{Binding Source={x:Static local:MathSymbols.ClearSign}}" FontSize="24" Grid.Row="2" Grid.Column="0" Margin="3" Click="buttonClear_Click"/>
         <TextBox Name="_boxOperation" IsEnabled="False" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" BorderThickness="0" TextAlignment="Right" FontSize="20" Margin="2,2,2,0"></TextBox>
         <TextBox Name="_boxResult" IsEnabled="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"  BorderThickness="0" TextAlignment="Right" FontSize="32" Margin="2">0</TextBox>
     </Grid> 

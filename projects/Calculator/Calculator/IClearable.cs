@@ -8,8 +8,7 @@ namespace SimpleCalculator
 {
     interface IClearable
     {
-        void ClearAfterDividingByZero();
-        void ClearAfterExecutingOperation();
+        void Clear(OperationResult operationResult);
         void ClearEverything();
     }
 }
