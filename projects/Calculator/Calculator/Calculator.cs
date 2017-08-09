@@ -13,7 +13,7 @@ namespace SimpleCalculator
         public double? Result { get; set; } = null;
         public OperationType OperationType { get; set; } = OperationType.None;
 
-        // check at which moment of program we are, which variables do we have
+        // check at which moment of program we are, which members of Calculator do we have and which are null (we dont have)
         public OperationProgress CheckOperationProgress()
         {
             if (FirstNumber.HasValue)
@@ -37,7 +37,7 @@ namespace SimpleCalculator
                 return OperationProgress.None;
         }
 
-        /* Returns operation result in enum number */
+        // executes operation and returns type of operation result in enum number 
         public OperationResult ExecuteOperation()
         {
             OperationProgress currentProgress = CheckOperationProgress();
@@ -79,32 +79,15 @@ namespace SimpleCalculator
             return OperationResult.None;
         }
 
-        /*public void ClearAfterDividingByZero()
-        {
-            FirstNumber = null;
-            SecondNumber = null;
-            OperationType = OperationType.None;
-            Result = null;
-            IsOperationJustExecuted = true;
-        }
-
-        public void ClearAfterExecutingOperation()
-        {
-            FirstNumber = Result;
-            IsOperationJustExecuted = true;
-        }*/
-
         public void Clear(OperationResult operationResult)
         {
             switch (operationResult)
             {
                 case OperationResult.None:
-                    // TO DO not sure if this should be 
-                    ClearEverything(); 
+                    // nothing else here in this condition
                     break;
                 case OperationResult.Good:
                     FirstNumber = Result;
-                    Result = null;
                     break;
                 case OperationResult.Infinity:
                     ClearEverything();
@@ -120,6 +103,16 @@ namespace SimpleCalculator
             FirstNumber = null;
             SecondNumber = null;
             OperationType = OperationType.None;
+        }
+
+        public void ClearResult()
+        {
+            Result = null;
+        }
+
+        public void ClearSecondNumberAndResult()
+        {
+            SecondNumber = null;
             Result = null;
         }
     }

@@ -15,13 +15,9 @@ using System.Windows.Shapes;
 
 namespace SimpleCalculator
 {
-   
-
     public partial class MainWindow : Window, IClearable
     {
         private Calculator _calculator;
-
-       // private MathSymbols _symbols;
 
         public MainWindow()
         {
@@ -38,17 +34,26 @@ namespace SimpleCalculator
         private void AddToNumber(char numberToAdd)
         {
             OperationProgress currentProgress = _calculator.CheckOperationProgress();
-            if (currentProgress == OperationProgress.None || currentProgress == OperationProgress.OnOperationType /*|| currentProgress == OperationProgress.OnFirstNumber*/)
+            if (currentProgress == OperationProgress.None || currentProgress == OperationProgress.OnOperationType)
             {
-                if (_boxResult.Text == MathSymbols.ZeroSign && char.IsDigit(numberToAdd))
+                if ((_boxResult.Text == MathSymbols.ZeroSign && char.IsDigit(numberToAdd)) || _boxResult.Text == MathSymbols.Infinity || _boxResult.Text == MathSymbols.ResultUndefined)
                     _boxResult.Text = string.Empty;
                 _boxResult.Text += numberToAdd;
+            }
+            else if (currentProgress == OperationProgress.OnFirstNumber)
+            {
+                _boxResult.Text = numberToAdd.ToString();
+                _calculator.ClearEverything();
+            }
+            else if (currentProgress == OperationProgress.OnSecondNumber)
+            {
+                // nothing else here in this condition
             }
             else if (currentProgress == OperationProgress.OnResult)
             {
                 ClearEverything();
+                _calculator.ClearEverything();
                 _boxResult.Text = numberToAdd.ToString();
-               // _calculator.IsOperationJustExecuted = false;
             }
         }
 
@@ -61,7 +66,7 @@ namespace SimpleCalculator
         }
 
         // reaction for choosing one of the operation signs
-        private void SetOperationReaction(string operationSign, OperationType operationTypeToSet)
+        private void SetOperation(string operationSign, OperationType operationTypeToSet)
         {
             OperationProgress currentProgress = _calculator.CheckOperationProgress();
             if (currentProgress == OperationProgress.None)
@@ -70,61 +75,69 @@ namespace SimpleCalculator
             }
             else if (currentProgress == OperationProgress.OnFirstNumber)
             {
-                // just update the operation type like below, nothing else here in this condition
+                // nothing else here in this condition
             }
             else if (currentProgress == OperationProgress.OnOperationType)
             {
                 _calculator.SecondNumber = double.Parse(_boxResult.Text);
-                //TryToExecuteOperation();
-                // TODO: how to do the closing the second number and continous operations?
+                TryToExecuteOperation();
+                _calculator.ClearSecondNumberAndResult();
             }
-            else if (currentProgress == OperationProgress.OnResult)
+            else if (currentProgress == OperationProgress.OnResult || currentProgress == OperationProgress.OnSecondNumber)
             {
                 _calculator.SecondNumber = null;
                 _calculator.Result = null;
             }
             UpdateOperationType(operationSign, operationTypeToSet);
-
-
-
-            /*if (!_calculator.FirstNumber.HasValue)
-            {
-                _calculator.FirstNumber = double.Parse(_boxResult.Text);
-                _calculator.SecondNumber = null;
-                _boxResult.Text = MathSymbols.ZeroSign;
-            }
-            else if (!_calculator.IsOperationJustExecuted)
-            {
-                _calculator.SecondNumber = double.Parse(_boxResult.Text);
-               // _calculator.ExecuteOperation();
-                _calculator.IsOperationJustExecuted = false;
-            }
-            _calculator.OperationType = operationTypeToSet;
-            _boxOperation.Text = _calculator.FirstNumber.Value.ToString() + " " + operationSign; */
         }
 
         public void TryToExecuteOperation()
         {
+            OperationProgress currentProgress = _calculator.CheckOperationProgress();
+            if (currentProgress == OperationProgress.None)
+            {
+                _calculator.FirstNumber = double.Parse(_boxResult.Text);
+            }
+            else if (currentProgress == OperationProgress.OnFirstNumber)
+            {
+                // nothing else here in this condition
+            }
+            else if (currentProgress == OperationProgress.OnOperationType)
+            {
+                _calculator.SecondNumber = double.Parse(_boxResult.Text);
+            }
+            else if (currentProgress == OperationProgress.OnSecondNumber)
+            {
+                // nothing else here in this condition
+            }
+            else if (currentProgress == OperationProgress.OnResult)
+            {
+                // nothing else here in this condition
+            }
+
             OperationResult operationResult = _calculator.ExecuteOperation();
             Clear(operationResult);
         }
 
-        /*public void ClearAfterDividingByZero()
-        {            
-            _boxOperation.Text = string.Empty;
-            _boxResult.Text = MathSymbols.Infinity;
-            //_calculator.ClearAfterDividingByZero();
-        }
-
-        public void ClearAfterExecutingOperation()
-        {
-            _boxResult.Text = _calculator.Result.ToString();
-            _boxOperation.Text = string.Empty;
-            //_calculator.ClearAfterExecutingOperation();
-        }*/
-
         public void Clear(OperationResult operationResult)
-        {
+        {           
+            
+            ClearEverything();
+            switch (operationResult)
+            {
+                case OperationResult.None:
+                    // nothing else here in this condition
+                    break;
+                case OperationResult.Good:
+                    _boxResult.Text = _calculator.Result.ToString();
+                    break;
+                case OperationResult.Infinity:
+                    _boxResult.Text = MathSymbols.Infinity;
+                    break;
+                case OperationResult.Undefined:
+                    _boxResult.Text = MathSymbols.ResultUndefined;
+                    break;
+            }
             _calculator.Clear(operationResult);
         }
 
@@ -132,12 +145,12 @@ namespace SimpleCalculator
         {
             _boxResult.Text = MathSymbols.ZeroSign;
             _boxOperation.Text = string.Empty;
-            _calculator.ClearEverything();
         }
 
         private void AddDotToNumber()
-        {            
-            if (!_boxResult.Text.Contains(MathSymbols.Dot))            
+        {
+            OperationProgress operationProgress = _calculator.CheckOperationProgress();
+            if (!_boxResult.Text.Contains(MathSymbols.Dot) && operationProgress != OperationProgress.OnResult && operationProgress != OperationProgress.OnFirstNumber)            
                 _boxResult.Text += MathSymbols.Dot;
         }
 
@@ -155,38 +168,33 @@ namespace SimpleCalculator
 
         private void buttonDivide_Click(object sender, RoutedEventArgs e)
         {
-            SetOperationReaction(((Button)sender).Content.ToString(), OperationType.Division);            
+            SetOperation(((Button)sender).Content.ToString(), OperationType.Division);            
         }
 
         private void buttonMultiply_Click(object sender, RoutedEventArgs e)
         {
-            SetOperationReaction(((Button)sender).Content.ToString(), OperationType.Multiplication);
+            SetOperation(((Button)sender).Content.ToString(), OperationType.Multiplication);
         }
 
         private void buttonSubstract_Click(object sender, RoutedEventArgs e)
         {
-            SetOperationReaction(((Button)sender).Content.ToString(), OperationType.Substraction);
+            SetOperation(((Button)sender).Content.ToString(), OperationType.Substraction);
         }
 
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
-            SetOperationReaction(((Button)sender).Content.ToString(), OperationType.Addition);
+            SetOperation(((Button)sender).Content.ToString(), OperationType.Addition);
         }
 
         private void buttonClear_Click(object sender, RoutedEventArgs e)
         {
-            ClearEverything();            
+            ClearEverything();
+            _calculator.ClearEverything();        
         }
 
         private void buttonExecute_Click(object sender, RoutedEventArgs e)
         {
-            /*TODO: przerobic tak jak wyzej z uzyciem OperationProgress
-             * 
-             * if (_calculator.FirstNumber.HasValue && !_calculator.SecondNumber.HasValue)
-                _calculator.SecondNumber = double.Parse(_boxResult.Text);
-            else if (!_calculator.FirstNumber.HasValue)
-                _calculator.FirstNumber = double.Parse(_boxResult.Text);
-            */
+            TryToExecuteOperation();
         }
     }
 }
