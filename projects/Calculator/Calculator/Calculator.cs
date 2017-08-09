@@ -74,21 +74,18 @@
         }
 
         public void Clear(OperationResult operationResult)
-        {
-            switch (operationResult)
+        {            
+            if (operationResult == OperationResult.Good)
             {
-                case OperationResult.None:
-                    // nothing else here in this condition
-                    break;
-                case OperationResult.Good:
-                    FirstNumber = Result;
-                    break;
-                case OperationResult.Infinity:
-                    ClearEverything();
-                    break;
-                case OperationResult.Undefined:
-                    ClearEverything();
-                    break;
+                FirstNumber = Result;
+            }
+            else if (operationResult == OperationResult.Infinity || operationResult == OperationResult.Undefined)
+            {
+                ClearEverything();
+            }
+            else if (operationResult == OperationResult.None)
+            {
+                // nothing else here in this condition
             }
         }
 
@@ -97,11 +94,6 @@
             FirstNumber = null;
             SecondNumber = null;
             OperationType = OperationType.None;
-        }
-
-        public void ClearResult()
-        {
-            Result = null;
         }
 
         public void ClearSecondNumberAndResult()

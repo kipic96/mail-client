@@ -18,6 +18,14 @@ namespace SimpleCalculator
             _calculator = new Calculator();            
         }       
 
+        private double? GetNumberFromBoxResult()
+        {
+            if (!_boxResult.Text.Contains(MathSymbols.Infinity) && !_boxResult.Text.Contains(MathSymbols.ResultUndefined))
+                return double.Parse(_boxResult.Text);
+            else
+                return null;
+        }
+
         // adds number to the box where we write numbers 
         private void AddToNumber(char numberToAdd)
         {
@@ -32,16 +40,16 @@ namespace SimpleCalculator
             {
                 _boxResult.Text = numberToAdd.ToString();
                 _calculator.ClearEverything();
-            }
-            else if (currentProgress == OperationProgress.OnSecondNumber)
-            {
-                // nothing else here in this condition
-            }
+            }            
             else if (currentProgress == OperationProgress.OnResult)
             {
                 ClearEverything();
                 _calculator.ClearEverything();
                 _boxResult.Text = numberToAdd.ToString();
+            }
+            else if (currentProgress == OperationProgress.OnSecondNumber)
+            {
+                // nothing else here in this condition
             }
         }
 
@@ -63,15 +71,11 @@ namespace SimpleCalculator
             OperationProgress currentProgress = _calculator.CheckOperationProgress();
             if (currentProgress == OperationProgress.None)
             {
-                _calculator.FirstNumber = double.Parse(_boxResult.Text);                
-            }
-            else if (currentProgress == OperationProgress.OnFirstNumber)
-            {
-                // nothing else here in this condition
-            }
+                _calculator.FirstNumber = GetNumberFromBoxResult();                
+            }            
             else if (currentProgress == OperationProgress.OnOperationType)
             {
-                _calculator.SecondNumber = double.Parse(_boxResult.Text);
+                _calculator.SecondNumber = GetNumberFromBoxResult();
                 TryToExecuteOperation();
                 _calculator.ClearSecondNumberAndResult();
             }
@@ -79,6 +83,10 @@ namespace SimpleCalculator
             {
                 _calculator.SecondNumber = null;
                 _calculator.Result = null;
+            }
+            else if (currentProgress == OperationProgress.OnFirstNumber)
+            {
+                // nothing else here in this condition
             }
             UpdateOperationType(operationSign, operationTypeToSet);
         }
@@ -88,21 +96,13 @@ namespace SimpleCalculator
             OperationProgress currentProgress = _calculator.CheckOperationProgress();
             if (currentProgress == OperationProgress.None)
             {
-                _calculator.FirstNumber = double.Parse(_boxResult.Text);
-            }
-            else if (currentProgress == OperationProgress.OnFirstNumber)
-            {
-                // nothing else here in this condition
+                _calculator.FirstNumber = GetNumberFromBoxResult();
             }
             else if (currentProgress == OperationProgress.OnOperationType)
             {
-                _calculator.SecondNumber = double.Parse(_boxResult.Text);
+                _calculator.SecondNumber = GetNumberFromBoxResult();
             }
-            else if (currentProgress == OperationProgress.OnSecondNumber)
-            {
-                // nothing else here in this condition
-            }
-            else if (currentProgress == OperationProgress.OnResult)
+            else if (currentProgress == OperationProgress.OnFirstNumber || currentProgress == OperationProgress.OnSecondNumber || currentProgress == OperationProgress.OnResult)
             {
                 // nothing else here in this condition
             }
@@ -116,10 +116,7 @@ namespace SimpleCalculator
             
             ClearEverything();
             switch (operationResult)
-            {
-                case OperationResult.None:
-                    // nothing else here in this condition
-                    break;
+            {                
                 case OperationResult.Good:
                     _boxResult.Text = _calculator.Result.ToString();
                     break;
@@ -128,6 +125,9 @@ namespace SimpleCalculator
                     break;
                 case OperationResult.Undefined:
                     _boxResult.Text = MathSymbols.ResultUndefined;
+                    break;
+                case OperationResult.None:
+                    // nothing else here in this condition
                     break;
             }
             _calculator.Clear(operationResult);
@@ -142,7 +142,7 @@ namespace SimpleCalculator
         private void AddDotToNumber()
         {
             OperationProgress operationProgress = _calculator.CheckOperationProgress();
-            if (!_boxResult.Text.Contains(MathSymbols.Dot) && operationProgress != OperationProgress.OnResult && operationProgress != OperationProgress.OnFirstNumber)            
+            if (!_boxResult.Text.Contains(MathSymbols.Dot) && operationProgress != OperationProgress.OnResult && operationProgress != OperationProgress.OnFirstNumber && _boxResult.Text != MathSymbols.Infinity && _boxResult.Text != MathSymbols.ResultUndefined)            
                 _boxResult.Text += MathSymbols.Dot;
         }
 
