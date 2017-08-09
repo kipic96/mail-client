@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SimpleCalculator
 {
@@ -60,9 +48,13 @@ namespace SimpleCalculator
         // only update the operation type
         private void UpdateOperationType(string operationSign, OperationType operationTypeToSet)
         {
-            _calculator.OperationType = operationTypeToSet;
-            _boxOperation.Text = _calculator.FirstNumber.Value.ToString() + " " + operationSign;
-            _boxResult.Text = MathSymbols.ZeroSign;
+            OperationProgress operationProgress = _calculator.CheckOperationProgress();
+            if (operationProgress != OperationProgress.None)
+            {
+                _calculator.OperationType = operationTypeToSet;
+                _boxOperation.Text = _calculator.FirstNumber.ToString() + " " + operationSign;
+                _boxResult.Text = MathSymbols.ZeroSign;
+            }
         }
 
         // reaction for choosing one of the operation signs

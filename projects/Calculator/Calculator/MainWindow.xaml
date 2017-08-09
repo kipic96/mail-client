@@ -38,9 +38,7 @@
                 <Setter Property="BorderThickness" Value="0"></Setter>
                 <Setter Property="TextAlignment" Value="Right"></Setter>
                 <Setter Property="Background" Value="LightGray"></Setter>
-
-            </Style>
-            
+            </Style>            
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.7*" />
