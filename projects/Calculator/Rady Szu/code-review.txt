@@ -1,0 +1,31 @@
+Calculator:
+- property i zmienne maj¹ domyœlne wartoœci podczas ich tworzenia, np wszystkie nullable maj¹ null, tak¿e nie trzeba przydzielaæ nulla FirstNumber, SecondNumber i Result. Ale du¿y plus ¿e znasz ten sposób inicjalizacji propert, jest to doœæ nowa funkcjonalnoœæ
+- jeœli komentujesz metody w Visual Studio, u¿yj TRZECH slashy. Automatycznie wygeneruje siê pole, w którym to co wpiszesz bêdziesz mia³ widoczne z poziomu IntelliSensa wykorzystuj¹c tê klasê/metodê w innym miejscu programu
+- w metodzie CheckOperationProgress mo¿esz nie pisaæ 'else', return i tak wychodzi z metody, a kod bêdzie czytelniejszy
+- w metodzie ExecuteOperation to samo, pierwszy else mo¿e byæ wywalony, bo metoda i tak skoñczy dzia³anie, drugi ma sens, niech zostanie
+- metoda Clear: ca³¹ metodê mo¿na napisaæ przy u¿yciu switcha, ifelsy w takiej iloœci to bardzo z³y pomys³, szczególnie jeœli masz wszystko na enumach
+
+MainWindow.xaml:
+- Noo!! teraz to wygl¹da du¿o lepiej :) ale te style mo¿na by jeszcze wrzuciæ do osobnego pliku
+- boxOperation i boxResult zmieñ nazwy bez podkreœlenia, takiego nazewnictwa nie stosuje siê w xamlu, tylko w czystym kodzie C#. Potem s¹ one widoczne w .xaml.cs z podkreœleniem, ale ¿adej wczeœniejszej deklaracji w tym pliku nie widaæ, to trochê myli podczas czytania code-behind
+
+MainWindow.xaml.cs:
+- to co w Calculator, opisuj¹c metody u¿yj trzech slashy
+- œrednio widzi mi siê dzidziczenie IClearable przez MainWindow, bo to nie ma ¿adnego celu. Interfejsy tworzy siê po to, ¿eby u¿ywaæ polimorfizmu i ¿eby kolejne klasy by³y od siebie bardziej niezale¿ne (bo tak de facto u¿ywaj¹c instancji interfejsu "w³aœciciel" takiej zmiennej nie wie jakiej klasy obiekt tam jest). Tak¿e wywal IClearable z MainWindow i zamieñ jej metody na prywatne
+- line 8: jako ¿e Calculator jest implementuje IClearable, to mo¿na tê zmienn¹ zdefiniowaæ przez 'private IClearable _calculator'. Lepiej operowaæ na abstrakcjach, a ni¿eli na konkretnych klasach, wtedy klasy nie s¹ ze sob¹ tak œciœle z³¹czone
+- line 30: ca³¹ metodê mo¿na napisaæ przy u¿yciu switcha, ifelsy w takiej iloœci to bardzo z³y pomys³, szczególnie jeœli masz wszystko na enumachpisaæ 'var curren
+- line 32, 59, 71, 96 itd: tworz¹c lokalne zmienne w C# lepiej u¿ywaæ s³owa kluczowego 'var' ni¿ konkretnych typów (usprawnia to pisanie), tj zamiast 'OperationProgress currentProgress = (...)' natProgress = (...)'
+- line 35: szeroki jakiœ ten warunek, porób entery przed znakami || (od || ma siê zaczynaæ nowa linia), to nic z³ego mieæ ifa w kilku liniach :D
+- line 69: zamieñ metodê z ifów na switcha
+- line 94: na switcha
+- line 116: pusta linia na pocz¹tku kodu, zbêdna
+- line 145: zdecydowanie za d³uga ta linia, poenterowaæ
+
+Ca³y projekt:
+- wrzuæ wszystkie pliki z enumami do osobnego folderu Enums i zmieñ im wszyskim namespacy
+- ten interfejs IClearable... no on do koñca nie jest dobry (patrz powy¿ej) :) najlepiej ¿eby dziedziczy³ po nim tylko Calculator. Tak¿e zmieñ jego nazwê na ICalculator i dopisz tam wszystkie metody jakie ma Calculator. Po co tak zrobiæ? T³umaczy to regu³a SOLID (5 podstawowych zasad programowania obiektowego), a dok³adniej ostatnia jej zasada
+- BARDZO czysty kod, du¿y plus :D
+- sporo tutaj pustych ifów i casów z komentarzami.. wiem ¿e chodzi o czytelnoœæ kodu, ale on i tak jest czytelny, tak¿e mo¿na je wszystkie wywaliæ
+- generalnie bardzo du¿o tu switchów, i ifów, wszystko jest napisane trochê na zasadzie mikro maszyn stanów... No tak siê nie pisze obiektowo, ale za du¿o by³oby poprawiania :P ale du¿o te¿ t³umaczy fakt, ¿e kalkulator nie jest zbyt wdziêcznym projektem do pisania obiekowego :) 
+- rada na przysz³oœæ: pisz¹c program, zaprojektuj najpierw schemat klas i ich metody (najlepiej na kartce), dopiero potem pisz do nich UI 
+- jak na pierwszy projekt to naprawdê dobra robota! :)

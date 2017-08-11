@@ -3,128 +3,152 @@ using System.Windows.Controls;
 
 namespace SimpleCalculator
 {
-    public partial class MainWindow : Window, IClearable
+    public partial class MainWindow : Window
     {
-        private Calculator _calculator;
+        private ICalculator _calculator;
 
+        /// <summary>
+        /// Initialize window and the fields
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();            
             InitializeFields();
         }
         
+        /// <summary>
+        /// Initialize all the fields
+        /// </summary>
         private void InitializeFields()
         {
             _calculator = new Calculator();            
-        }       
+        }
 
+        /// <summary>
+        /// Gets the string from the TextBox boxResult and converts it to double
+        /// </summary>
+        /// <returns> Returns number from TextBox boxrResult
+        /// If it contains comments that operation is infinity or undefined it return null </returns>
         private double? GetNumberFromBoxResult()
         {
-            if (!_boxResult.Text.Contains(MathSymbols.Infinity) && !_boxResult.Text.Contains(MathSymbols.ResultUndefined))
-                return double.Parse(_boxResult.Text);
+            if (!boxResult.Text.Contains(MathSymbols.Infinity) 
+                && !boxResult.Text.Contains(MathSymbols.ResultUndefined))
+                return double.Parse(boxResult.Text);
             else
                 return null;
         }
 
-        // adds number to the box where we write numbers 
+        /// <summary>
+        /// Adds number to the TextBox boxResult
+        /// </summary>
+        /// <param name="numberToAdd"></param>
         private void AddToNumber(char numberToAdd)
         {
-            OperationProgress currentProgress = _calculator.CheckOperationProgress();
-            if (currentProgress == OperationProgress.None || currentProgress == OperationProgress.OnOperationType)
+            var currentProgress = _calculator.CheckOperationProgress();
+            switch (currentProgress)
             {
-                if ((_boxResult.Text == MathSymbols.ZeroSign && char.IsDigit(numberToAdd)) || _boxResult.Text == MathSymbols.Infinity || _boxResult.Text == MathSymbols.ResultUndefined)
-                    _boxResult.Text = string.Empty;
-                _boxResult.Text += numberToAdd;
-            }
-            else if (currentProgress == OperationProgress.OnFirstNumber)
-            {
-                _boxResult.Text = numberToAdd.ToString();
-                _calculator.ClearEverything();
-            }            
-            else if (currentProgress == OperationProgress.OnResult)
-            {
-                ClearEverything();
-                _calculator.ClearEverything();
-                _boxResult.Text = numberToAdd.ToString();
-            }
-            else if (currentProgress == OperationProgress.OnSecondNumber)
-            {
-                // nothing else here in this condition
+                case OperationProgress.None:
+                    goto case OperationProgress.OnOperationType;
+                case OperationProgress.OnOperationType:
+                    if ((boxResult.Text == MathSymbols.ZeroSign && char.IsDigit(numberToAdd))
+                        || boxResult.Text == MathSymbols.Infinity
+                        || boxResult.Text == MathSymbols.ResultUndefined)
+                    {
+                        boxResult.Text = string.Empty;
+                    }
+                    boxResult.Text += numberToAdd;
+                    break;
+                case OperationProgress.OnFirstNumber:
+                    boxResult.Text = numberToAdd.ToString();
+                    _calculator.ClearEverything();
+                    break;
+                case OperationProgress.OnResult:
+                    ClearEverything();
+                    _calculator.ClearEverything();
+                    boxResult.Text = numberToAdd.ToString();
+                    break;
             }
         }
 
-        // only update the operation type
+        /// <summary>
+        /// Only update the operation type
+        /// </summary>
+        /// <param name="operationSign"></param>
+        /// <param name="operationTypeToSet"></param>
         private void UpdateOperationType(string operationSign, OperationType operationTypeToSet)
         {
-            OperationProgress operationProgress = _calculator.CheckOperationProgress();
+            var operationProgress = _calculator.CheckOperationProgress();
             if (operationProgress != OperationProgress.None)
             {
                 _calculator.OperationType = operationTypeToSet;
-                _boxOperation.Text = _calculator.FirstNumber.ToString() + " " + operationSign;
-                _boxResult.Text = MathSymbols.ZeroSign;
+                boxOperation.Text = _calculator.FirstNumber.ToString() + " " + operationSign;
+                boxResult.Text = MathSymbols.ZeroSign;
             }
         }
 
-        // reaction for choosing one of the operation signs
+        /// <summary>
+        /// Setting the chosen operation type
+        /// </summary>
+        /// <param name="operationSign"></param>
+        /// <param name="operationTypeToSet"></param>
         private void SetOperation(string operationSign, OperationType operationTypeToSet)
         {
-            OperationProgress currentProgress = _calculator.CheckOperationProgress();
-            if (currentProgress == OperationProgress.None)
+            var currentProgress = _calculator.CheckOperationProgress();
+            switch (currentProgress)
             {
-                _calculator.FirstNumber = GetNumberFromBoxResult();                
-            }            
-            else if (currentProgress == OperationProgress.OnOperationType)
-            {
-                _calculator.SecondNumber = GetNumberFromBoxResult();
-                TryToExecuteOperation();
-                _calculator.ClearSecondNumberAndResult();
-            }
-            else if (currentProgress == OperationProgress.OnResult || currentProgress == OperationProgress.OnSecondNumber)
-            {
-                _calculator.SecondNumber = null;
-                _calculator.Result = null;
-            }
-            else if (currentProgress == OperationProgress.OnFirstNumber)
-            {
-                // nothing else here in this condition
+                case OperationProgress.None:
+                    _calculator.FirstNumber = GetNumberFromBoxResult();
+                    break;
+                case OperationProgress.OnOperationType:
+                    _calculator.SecondNumber = GetNumberFromBoxResult();
+                    //TryToExecuteOperation();
+                    _calculator.ClearSecondNumberAndResult();
+                    break;
+                case OperationProgress.OnSecondNumber:
+                    goto case OperationProgress.OnResult;
+                case OperationProgress.OnResult:
+                    _calculator.ClearSecondNumberAndResult();
+                    break;
             }
             UpdateOperationType(operationSign, operationTypeToSet);
         }
 
-        public void TryToExecuteOperation()
+        /// <summary>
+        /// Checks the operation progress, gets the number from TexBox boxResult if nessesery
+        /// </summary>
+        private void TryToExecuteOperation()
         {
-            OperationProgress currentProgress = _calculator.CheckOperationProgress();
-            if (currentProgress == OperationProgress.None)
+            var currentProgress = _calculator.CheckOperationProgress();
+            switch (currentProgress)
             {
-                _calculator.FirstNumber = GetNumberFromBoxResult();
+                case OperationProgress.None:
+                    _calculator.FirstNumber = GetNumberFromBoxResult();
+                    break;
+                case OperationProgress.OnOperationType:
+                    _calculator.SecondNumber = GetNumberFromBoxResult();
+                    break;
             }
-            else if (currentProgress == OperationProgress.OnOperationType)
-            {
-                _calculator.SecondNumber = GetNumberFromBoxResult();
-            }
-            else if (currentProgress == OperationProgress.OnFirstNumber || currentProgress == OperationProgress.OnSecondNumber || currentProgress == OperationProgress.OnResult)
-            {
-                // nothing else here in this condition
-            }
-
             OperationResult operationResult = _calculator.ExecuteOperation();
             Clear(operationResult);
         }
 
-        public void Clear(OperationResult operationResult)
-        {           
-            
+        /// <summary>
+        /// Clears TextBoxes on different operation results cases
+        /// </summary>
+        /// <param name="operationResult"></param>
+        private void Clear(OperationResult operationResult)
+        {        
             ClearEverything();
             switch (operationResult)
             {                
                 case OperationResult.Good:
-                    _boxResult.Text = _calculator.Result.ToString();
+                    boxResult.Text = _calculator.Result.ToString();
                     break;
                 case OperationResult.Infinity:
-                    _boxResult.Text = MathSymbols.Infinity;
+                    boxResult.Text = MathSymbols.Infinity;
                     break;
                 case OperationResult.Undefined:
-                    _boxResult.Text = MathSymbols.ResultUndefined;
+                    boxResult.Text = MathSymbols.ResultUndefined;
                     break;
                 case OperationResult.None:
                     // nothing else here in this condition
@@ -133,57 +157,109 @@ namespace SimpleCalculator
             _calculator.Clear(operationResult);
         }
 
-        public void ClearEverything()
+        /// <summary>
+        /// Clears boxOperation and puts in boxResult sign zero
+        /// </summary>
+        private void ClearEverything()
         {
-            _boxResult.Text = MathSymbols.ZeroSign;
-            _boxOperation.Text = string.Empty;
+            boxResult.Text = MathSymbols.ZeroSign;
+            boxOperation.Text = string.Empty;
         }
 
+        /// <summary>
+        /// Adds dot to a number in boxResult if no dot is there and it is number, not a comment of operation result
+        /// </summary>
         private void AddDotToNumber()
         {
-            OperationProgress operationProgress = _calculator.CheckOperationProgress();
-            if (!_boxResult.Text.Contains(MathSymbols.Dot) && operationProgress != OperationProgress.OnResult && operationProgress != OperationProgress.OnFirstNumber && _boxResult.Text != MathSymbols.Infinity && _boxResult.Text != MathSymbols.ResultUndefined)            
-                _boxResult.Text += MathSymbols.Dot;
+            var operationProgress = _calculator.CheckOperationProgress();
+            if (!boxResult.Text.Contains(MathSymbols.Dot)
+                && operationProgress != OperationProgress.OnResult
+                && operationProgress != OperationProgress.OnFirstNumber
+                && boxResult.Text != MathSymbols.Infinity
+                && boxResult.Text != MathSymbols.ResultUndefined)
+            {
+                boxResult.Text += MathSymbols.Dot;
+            }
         }
 
+        /// <summary>
+        /// Do when number is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonNumber_Click(object sender, RoutedEventArgs e)
         {
-            Button button = (Button)sender;
-            char numberToAdd = char.Parse(button.Content.ToString());
+            var button = (Button)sender;
+            var numberToAdd = char.Parse(button.Content.ToString());
             AddToNumber(numberToAdd);
         }
 
+        /// <summary>
+        /// Do when dot sign is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonDot_Click(object sender, RoutedEventArgs e)
         {
             AddDotToNumber();
         }
 
+        /// <summary>
+        /// Do when divide sign is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonDivide_Click(object sender, RoutedEventArgs e)
         {
             SetOperation(((Button)sender).Content.ToString(), OperationType.Division);            
         }
 
+        /// <summary>
+        /// Do when multiplication sign is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonMultiply_Click(object sender, RoutedEventArgs e)
         {
             SetOperation(((Button)sender).Content.ToString(), OperationType.Multiplication);
         }
 
+        /// <summary>
+        /// Do when minus sign is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonSubstract_Click(object sender, RoutedEventArgs e)
         {
             SetOperation(((Button)sender).Content.ToString(), OperationType.Substraction);
         }
 
+        /// <summary>
+        /// Do when plus sign is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
             SetOperation(((Button)sender).Content.ToString(), OperationType.Addition);
         }
 
+        /// <summary>
+        /// Do when clear button is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonClear_Click(object sender, RoutedEventArgs e)
         {
             ClearEverything();
             _calculator.ClearEverything();        
         }
 
+        /// <summary>
+        /// Do when execute button is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonExecute_Click(object sender, RoutedEventArgs e)
         {
             TryToExecuteOperation();

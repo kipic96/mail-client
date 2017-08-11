@@ -1,13 +1,16 @@
 ﻿namespace SimpleCalculator
 {
-    class Calculator : IClearable
+    class Calculator : ICalculator
     {
-        public double? FirstNumber { get; set; } = null;
-        public double? SecondNumber { get; set; } = null;
-        public double? Result { get; set; } = null;
+        public double? FirstNumber { get; set; }
+        public double? SecondNumber { get; set; }
+        public double? Result { get; set; }
         public OperationType OperationType { get; set; } = OperationType.None;
 
-        // check at which moment of program we are, which members of Calculator do we have and which are null (we dont have)
+        /// <summary>
+        /// Check at which moment of program we are, which members of Calculator do we have and which are null (we dont have)
+        /// </summary>
+        /// <returns> Returns moment in the program in enum </returns>
         public OperationProgress CheckOperationProgress()
         {
             if (FirstNumber.HasValue)
@@ -31,64 +34,71 @@
                 return OperationProgress.None;
         }
 
-        // executes operation and returns type of operation result in enum number 
+        //  
+        /// <summary> 
+        /// Executes operation and returns type of operation result in enum number
+        /// </summary>
         public OperationResult ExecuteOperation()
         {
-            OperationProgress currentProgress = CheckOperationProgress();
+            var currentProgress = CheckOperationProgress();
             if (currentProgress == OperationProgress.None)
                 return OperationResult.None;
+            if (currentProgress == OperationProgress.OnFirstNumber || currentProgress == OperationProgress.OnOperationType)
+            {
+                Result = FirstNumber;
+                return OperationResult.Good;
+            }
             else
             {
-                if (currentProgress == OperationProgress.OnFirstNumber || currentProgress == OperationProgress.OnOperationType)                
+                switch (OperationType)
                 {
-                    Result = FirstNumber;
-                    return OperationResult.Good;
-                } 
-                else // OnSecondNumber || OnResult
-                {
-                    switch (OperationType)
-                    {
-                        case OperationType.Addition:
-                            Result = FirstNumber + SecondNumber;
-                            return OperationResult.Good;
+                    case OperationType.Addition:
+                        Result = FirstNumber + SecondNumber;
+                        return OperationResult.Good;
 
-                        case OperationType.Substraction:
-                            Result = FirstNumber - SecondNumber;
-                            return OperationResult.Good;
+                    case OperationType.Substraction:
+                        Result = FirstNumber - SecondNumber;
+                        return OperationResult.Good;
 
-                        case OperationType.Multiplication:
-                            Result = FirstNumber * SecondNumber;
-                            return OperationResult.Good;
+                    case OperationType.Multiplication:
+                        Result = FirstNumber * SecondNumber;
+                        return OperationResult.Good;
 
-                        case OperationType.Division:
-                            if (FirstNumber == 0 && SecondNumber == 0)
-                                return OperationResult.Undefined;
-                            else if (SecondNumber == 0)
-                                return OperationResult.Infinity;     
-                            Result = FirstNumber / SecondNumber;
-                            return OperationResult.Good;
-                    }
+                    case OperationType.Division:
+                        if (FirstNumber == 0 && SecondNumber == 0)
+                            return OperationResult.Undefined;
+                        else if (SecondNumber == 0)
+                            return OperationResult.Infinity;
+                        Result = FirstNumber / SecondNumber;
+                        return OperationResult.Good;
                 }
-            }
+            }       
             return OperationResult.None;
         }
 
+        /// <summary>
+        /// Clears the properties on different cases of result of operation
+        /// </summary>
+        /// <param name="operationResult"></param>
         public void Clear(OperationResult operationResult)
         {            
-            if (operationResult == OperationResult.Good)
+            switch (operationResult)
             {
-                FirstNumber = Result;
-            }
-            else if (operationResult == OperationResult.Infinity || operationResult == OperationResult.Undefined)
-            {
-                ClearEverything();
-            }
-            else if (operationResult == OperationResult.None)
-            {
-                // nothing else here in this condition
+                case OperationResult.Good:
+                    FirstNumber = Result;
+                    break;
+                case OperationResult.Infinity:
+                    ClearEverything();
+                    break;
+                case OperationResult.Undefined:
+                    ClearEverything();
+                    break;
             }
         }
 
+        /// <summary>
+        /// Clears all the properties
+        /// </summary>
         public void ClearEverything()
         {
             FirstNumber = null;
@@ -96,6 +106,9 @@
             OperationType = OperationType.None;
         }
 
+        /// <summary>
+        /// Clears only SecondNumber and Result number
+        /// </summary>
         public void ClearSecondNumberAndResult()
         {
             SecondNumber = null;

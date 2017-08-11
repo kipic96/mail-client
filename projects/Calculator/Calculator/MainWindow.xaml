@@ -6,40 +6,8 @@
         xmlns:sys="clr-namespace:System.Text;assembly=mscorlib"
         xmlns:local="clr-namespace:SimpleCalculator"
         mc:Ignorable="d"
-        Title="Calculator" Height="400" Width="265" MinHeight="400" MinWidth="265" SizeToContent="WidthAndHeight">
-    <Grid Name="MainGrid" Margin="0" Background="LightGray">
-        <Grid.Resources>
-            <Style x:Key="NumericButton" TargetType="Button">
-                <Setter Property="FontSize" Value="28"></Setter>
-                <Setter Property="Margin" Value="1"></Setter>
-            </Style>
-            <Style x:Key="OperationButton" TargetType="Button">
-                <Setter Property="FontSize" Value="30"></Setter>
-                <Setter Property="Margin" Value="1"></Setter>
-            </Style>
-            <Style x:Key="OperationBox" TargetType="TextBox">
-                <Setter Property="FontSize" Value="20"></Setter>
-                <Setter Property="Margin" Value="2,2,2,0"></Setter>
-                <Setter Property="IsEnabled" Value="False"></Setter>
-                <Setter Property="Grid.Row" Value="0"></Setter>
-                <Setter Property="Grid.Column" Value="0"></Setter>
-                <Setter Property="Grid.ColumnSpan" Value="4"></Setter>
-                <Setter Property="BorderThickness" Value="0"></Setter>
-                <Setter Property="TextAlignment" Value="Right"></Setter>
-                <Setter Property="Background" Value="LightGray"></Setter>
-            </Style>
-            <Style x:Key="ResultBox" TargetType="TextBox">
-                <Setter Property="FontSize" Value="32"></Setter>
-                <Setter Property="Margin" Value="2"></Setter>
-                <Setter Property="IsEnabled" Value="False"></Setter>
-                <Setter Property="Grid.Row" Value="1"></Setter>
-                <Setter Property="Grid.Column" Value="0"></Setter>
-                <Setter Property="Grid.ColumnSpan" Value="4"></Setter>
-                <Setter Property="BorderThickness" Value="0"></Setter>
-                <Setter Property="TextAlignment" Value="Right"></Setter>
-                <Setter Property="Background" Value="LightGray"></Setter>
-            </Style>            
-        </Grid.Resources>
+        Style="{StaticResource Window}">
+    <Grid Name="MainGrid" Style="{StaticResource Grid}">             
         <Grid.RowDefinitions>
             <RowDefinition Height="0.7*" />
             <RowDefinition Height="*" />
@@ -73,7 +41,7 @@
         <Button Content="{Binding Source={x:Static local:MathSymbols.MinusSign}}" Style="{StaticResource OperationButton}" Grid.Row="2" Grid.Column="3" Click="buttonSubstract_Click"/>
         <Button Content="{Binding Source={x:Static local:MathSymbols.PlusSign}}" Style="{StaticResource OperationButton}" Grid.Row="3" Grid.RowSpan="2" Grid.Column="3" Click="buttonAdd_Click"/>
         <Button Content="{Binding Source={x:Static local:MathSymbols.ClearSign}}" Style="{StaticResource OperationButton}" Grid.Row="2" Grid.Column="0" Click="buttonClear_Click"/>
-        <TextBox Name="_boxOperation" Style="{StaticResource OperationBox}"></TextBox>
-        <TextBox Name="_boxResult" Style="{StaticResource ResultBox}">0</TextBox>
+        <TextBox Name="boxOperation" Style="{StaticResource OperationBox}"></TextBox>
+        <TextBox Name="boxResult" Style="{StaticResource ResultBox}">0</TextBox>
     </Grid> 
 </Window>
