@@ -1,0 +1,5 @@
+tutorial do azura i tworzenia baz danych w sql server
+https://docs.microsoft.com/en-us/azure/sql-database/sql-database-design-first-database#create-tables-in-the-database
+
+³¹czenie sie z baza danych na azuru
+https://www.codeproject.com/Articles/823854/How-to-connect-SQL-Database-to-your-Csharp-program

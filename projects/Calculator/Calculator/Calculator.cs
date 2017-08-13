@@ -34,7 +34,6 @@
                 return OperationProgress.None;
         }
 
-        //  
         /// <summary> 
         /// Executes operation and returns type of operation result in enum number
         /// </summary>
