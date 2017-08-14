@@ -1,4 +1,4 @@
-﻿namespace SimpleCalculator
+﻿namespace SimpleCalculator.Enums
 {
     public enum OperationType
     {

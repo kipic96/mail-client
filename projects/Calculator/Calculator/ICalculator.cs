@@ -1,4 +1,6 @@
-﻿namespace SimpleCalculator
+﻿using SimpleCalculator.Enums;
+
+namespace SimpleCalculator
 {
     interface ICalculator
     {

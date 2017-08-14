@@ -1,4 +1,6 @@
-﻿namespace SimpleCalculator
+﻿using SimpleCalculator.Enums;
+
+namespace SimpleCalculator
 {
     class Calculator : ICalculator
     {
@@ -106,7 +108,7 @@
         }
 
         /// <summary>
-        /// Clears only SecondNumber and Result number
+        /// Clears only SecondNumber and ResultNumber properties
         /// </summary>
         public void ClearSecondNumberAndResult()
         {
