@@ -29,13 +29,16 @@ namespace SimpleCalculator
         /// Gets the string from the TextBox boxResult and converts it to double
         /// </summary>
         /// <returns> Returns number from TextBox boxrResult
-        /// If it contains comments that operation is infinity or undefined it return null </returns>
+        /// If it contains comments that operation is infinity or undefined it returns null </returns>
         private double? GetNumberFromBoxResult()
         {
+            var currentProgress = _calculator.CheckOperationProgress();
+            if (currentProgress == OperationProgress.OnOperationType && boxResult.Text == string.Empty)
+                return null;
             if (!boxResult.Text.Contains(MathSymbols.Infinity) 
                 && !boxResult.Text.Contains(MathSymbols.ResultUndefined))
                 return double.Parse(boxResult.Text);
-            else
+            else 
                 return null;
         }
 
@@ -51,7 +54,8 @@ namespace SimpleCalculator
                 case OperationProgress.None:
                     goto case OperationProgress.OnOperationType;
                 case OperationProgress.OnOperationType:
-                    if ((boxResult.Text == MathSymbols.ZeroSign && char.IsDigit(numberToAdd))
+                    if ((boxResult.Text == MathSymbols.ZeroSign 
+                        && char.IsDigit(numberToAdd))
                         || boxResult.Text == MathSymbols.Infinity
                         || boxResult.Text == MathSymbols.ResultUndefined)
                     {
@@ -72,7 +76,7 @@ namespace SimpleCalculator
         }
 
         /// <summary>
-        /// Only update the operation type
+        /// Only update the operation type and prepare for writing next number
         /// </summary>
         /// <param name="operationSign"></param>
         /// <param name="operationTypeToSet"></param>
@@ -83,7 +87,7 @@ namespace SimpleCalculator
             {
                 _calculator.OperationType = operationTypeToSet;
                 boxOperation.Text = _calculator.FirstNumber.ToString() + " " + operationSign;
-                boxResult.Text = MathSymbols.ZeroSign;
+                boxResult.Text = string.Empty;
             }
         }
 
@@ -102,7 +106,7 @@ namespace SimpleCalculator
                     break;
                 case OperationProgress.OnOperationType:
                     _calculator.SecondNumber = GetNumberFromBoxResult();
-                    //TryToExecuteOperation();
+                    TryToExecuteOperation();
                     _calculator.ClearSecondNumberAndResult();
                     break;
                 case OperationProgress.OnSecondNumber:
@@ -151,9 +155,6 @@ namespace SimpleCalculator
                 case OperationResult.Undefined:
                     boxResult.Text = MathSymbols.ResultUndefined;
                     break;
-                case OperationResult.None:
-                    // nothing else here in this condition
-                    break;
             }
             _calculator.Clear(operationResult);
         }
@@ -173,7 +174,9 @@ namespace SimpleCalculator
         private void AddDotToNumber()
         {
             var operationProgress = _calculator.CheckOperationProgress();
-            if (!boxResult.Text.Contains(MathSymbols.Dot)
+            if (boxResult.Text == string.Empty)
+                boxResult.Text = MathSymbols.ZeroSign + MathSymbols.Dot;
+            else if (!boxResult.Text.Contains(MathSymbols.Dot)
                 && operationProgress != OperationProgress.OnResult
                 && operationProgress != OperationProgress.OnFirstNumber
                 && boxResult.Text != MathSymbols.Infinity
