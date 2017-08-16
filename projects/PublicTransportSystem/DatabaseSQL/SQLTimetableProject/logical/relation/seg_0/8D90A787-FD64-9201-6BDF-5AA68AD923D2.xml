@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Line LineType FK" directorySegmentName="seg_0" id="8D90A787-FD64-9201-6BDF-5AA68AD923D2">
+<createdBy>Marcin</createdBy>
+<createdTime>2017-08-14 13:10:40 UTC</createdTime>
+<ownerDesignName>SQLTimetableProject</ownerDesignName>
+<engineerTo>
+<item key="AA7233B8-9E06-0071-FDB2-20FD0F9808E7" value="true"/>
+</engineerTo>
+<sourcePk>89455F11-2AD6-786E-61F5-FA97B18B5BFE</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>25C3841C-C33C-EB9B-11F3-7FFF16646739</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>00F5CC71-EE8E-06E9-351D-823DF89E21BB</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

@@ -1,0 +1,64 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="300C1108-2BCD-2C01-79E8-36B4891C57EC" name="DepartureLine">
+<createdBy>Marcin</createdBy>
+<createdTime>2017-08-14 14:31:39 UTC</createdTime>
+<ownerDesignName>SQLTimetableProject</ownerDesignName>
+<engineerTo>
+<item key="AA7233B8-9E06-0071-FDB2-20FD0F9808E7" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="IDLine" id="E2C3B0E5-F76D-2E5D-BEE8-F8D76DF378D6">
+<createdBy>Marcin</createdBy>
+<createdTime>2017-08-14 14:32:15 UTC</createdTime>
+<generatorID>884E8FE6-3CF9-7E07-82EE-1D097AAB9390</generatorID>
+<ownerDesignName>SQLTimetableProject</ownerDesignName>
+<engineerTo>
+<item key="AA7233B8-9E06-0071-FDB2-20FD0F9808E7" value="true"/>
+</engineerTo>
+<referedAttribute>2E1EA720-077B-731C-9DBA-FD747DB6357A</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="IDDeparture" id="920891D0-B42D-EA1E-674F-791DF6132455">
+<createdBy>Marcin</createdBy>
+<createdTime>2017-08-14 14:32:30 UTC</createdTime>
+<generatorID>1031BAC5-7E38-4BFE-8869-7C0EB01A4B7B</generatorID>
+<ownerDesignName>SQLTimetableProject</ownerDesignName>
+<engineerTo>
+<item key="AA7233B8-9E06-0071-FDB2-20FD0F9808E7" value="true"/>
+</engineerTo>
+<referedAttribute>6C3FC1C3-8BEF-7C13-46BA-E8DF2BAD3678</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="89B2F1F6-1C78-827D-91DC-3C98DF8C5AAE" name="DepartureLine PK">
+<createdBy>Marcin</createdBy>
+<createdTime>2017-08-14 15:06:33 UTC</createdTime>
+<ownerDesignName>SQLTimetableProject</ownerDesignName>
+<engineerTo>
+<item key="AA7233B8-9E06-0071-FDB2-20FD0F9808E7" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>920891D0-B42D-EA1E-674F-791DF6132455</attributeRef>
+<attributeRef>E2C3B0E5-F76D-2E5D-BEE8-F8D76DF378D6</attributeRef>
+<attributeRef>E2C3B0E5-F76D-2E5D-BEE8-F8D76DF378D6</attributeRef>
+<attributeRef>920891D0-B42D-EA1E-674F-791DF6132455</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

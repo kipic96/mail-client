@@ -1,0 +1,60 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="25C3841C-C33C-EB9B-11F3-7FFF16646739" name="LineType">
+<createdBy>Marcin</createdBy>
+<createdTime>2017-08-14 11:21:01 UTC</createdTime>
+<ownerDesignName>SQLTimetableProject</ownerDesignName>
+<engineerTo>
+<item key="AA7233B8-9E06-0071-FDB2-20FD0F9808E7" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="IDLineType" id="327E14C6-17F6-B9C0-393C-F42A3ABB4F22">
+<createdBy>Marcin</createdBy>
+<createdTime>2017-08-14 11:21:07 UTC</createdTime>
+<ownerDesignName>SQLTimetableProject</ownerDesignName>
+<engineerTo>
+<item key="AA7233B8-9E06-0071-FDB2-20FD0F9808E7" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Name" id="2CECE713-8C70-4066-8E6A-8EA1B9340E16">
+<createdBy>Marcin</createdBy>
+<createdTime>2017-08-14 11:21:16 UTC</createdTime>
+<ownerDesignName>SQLTimetableProject</ownerDesignName>
+<engineerTo>
+<item key="AA7233B8-9E06-0071-FDB2-20FD0F9808E7" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="89455F11-2AD6-786E-61F5-FA97B18B5BFE" name="LineType PK">
+<createdBy>Marcin</createdBy>
+<createdTime>2017-08-14 11:21:13 UTC</createdTime>
+<ownerDesignName>SQLTimetableProject</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="AA7233B8-9E06-0071-FDB2-20FD0F9808E7" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>327E14C6-17F6-B9C0-393C-F42A3ABB4F22</attributeRef>
+<attributeRef>C3818FF6-FB90-1A5A-12F4-93FE6D27A97A</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

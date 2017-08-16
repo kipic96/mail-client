@@ -7,11 +7,21 @@ namespace PublicTransportSystem
     /// </summary>
     public partial class MainWindow : Window
     {
+        TimetableDatabase _database;
+
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
+        public void InitializeDatabase()
+        {
+            _database = new TimetableDatabase();
+        }
 
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            InitializeDatabase();
+        }
     }
 }

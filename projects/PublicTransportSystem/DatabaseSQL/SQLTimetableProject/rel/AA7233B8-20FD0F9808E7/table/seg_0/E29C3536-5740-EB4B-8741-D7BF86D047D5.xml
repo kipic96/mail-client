@@ -1,0 +1,52 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E29C3536-5740-EB4B-8741-D7BF86D047D5" name="line_type">
+<createdBy>Marcin</createdBy>
+<createdTime>2017-08-14 11:30:29 UTC</createdTime>
+<comment>d</comment>
+<commentInRDBMS>The type of vehicles on given line</commentInRDBMS>
+<generatorID>25C3841C-C33C-EB9B-11F3-7FFF16646739</generatorID>
+<ownerDesignName>SQLTimetableProject</ownerDesignName>
+<ordsAlias>linetype</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="A8CAB74E-261A-E6E7-9153-DD2E5574D0A5">
+<createdBy>Marcin</createdBy>
+<createdTime>2017-08-14 11:30:29 UTC</createdTime>
+<generatorID>327E14C6-17F6-B9C0-393C-F42A3ABB4F22</generatorID>
+<ownerDesignName>SQLTimetableProject</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="name" id="5A45BEA5-C95B-CF26-4480-6CDC8FDFD07C">
+<createdBy>Marcin</createdBy>
+<createdTime>2017-08-14 11:30:29 UTC</createdTime>
+<generatorID>2CECE713-8C70-4066-8E6A-8EA1B9340E16</generatorID>
+<ownerDesignName>SQLTimetableProject</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>50 CHAR</dataTypeSize>
+<ownDataTypeParameters>50 CHAR,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="7D2DBA1B-8A10-43C9-438A-3C06BC0814D8" name="line_type_pkey">
+<createdBy>Marcin</createdBy>
+<createdTime>2017-08-14 11:30:29 UTC</createdTime>
+<generatorID>89455F11-2AD6-786E-61F5-FA97B18B5BFE</generatorID>
+<ownerDesignName>SQLTimetableProject</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A8CAB74E-261A-E6E7-9153-DD2E5574D0A5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

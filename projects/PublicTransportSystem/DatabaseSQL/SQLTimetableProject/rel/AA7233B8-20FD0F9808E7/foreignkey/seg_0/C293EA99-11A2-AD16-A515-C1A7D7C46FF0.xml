@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="C293EA99-11A2-AD16-A515-C1A7D7C46FF0" containerWithKeyObject="598FCBAB-7178-C83A-932A-EBB278FB92E8" localFKIndex="15FAE402-6408-DF3D-818A-50C3CBDC190C" name="day_type_id_fkey">
+<createdBy>Marcin</createdBy>
+<createdTime>2017-08-14 14:36:27 UTC</createdTime>
+<comment>d</comment>
+<generatorID>8773D30E-9A6B-B155-DFA1-A4E4571B6B15</generatorID>
+<ownerDesignName>SQLTimetableProject</ownerDesignName>
+<referredTableLongName>day_type</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>2E4CDB05-07E6-51EA-97D2-42AF0648551B</referredTableID>
+<keyObject>86DFB8A6-0336-2C1F-2C90-CA31A4BC77D0</keyObject>
+<referredKeyID>86DFB8A6-0336-2C1F-2C90-CA31A4BC77D0</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>
