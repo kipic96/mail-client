@@ -15,3 +15,8 @@ http://www.wpf-tutorial.com/about-wpf/what-is-wpf/
 
 zasady programowania
 https://www.p-programowanie.pl/paradygmaty-programowania/zasady-solid/
+
+duzo materialow o wpf i mvvm
+https://stackoverflow.com/questions/1405739/mvvm-tutorial-from-start-to-finish
+https://msdn.microsoft.com/en-us/magazine/dd419663.aspx
+https://msdn.microsoft.com/magazine/cc700358
