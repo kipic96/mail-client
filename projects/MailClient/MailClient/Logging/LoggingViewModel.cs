@@ -2,7 +2,6 @@
 using Prism.Mvvm;
 using System.Security;
 using System.Windows.Input;
-using MailClient.Enums;
 
 namespace MailClient.Logging
 {
