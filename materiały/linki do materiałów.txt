@@ -20,3 +20,4 @@ duzo materialow o wpf i mvvm
 https://stackoverflow.com/questions/1405739/mvvm-tutorial-from-start-to-finish
 https://msdn.microsoft.com/en-us/magazine/dd419663.aspx
 https://msdn.microsoft.com/magazine/cc700358
+https://www.codeproject.com/Articles/819294/WPF-MVVM-step-by-step-Basics-to-Advance-Level
