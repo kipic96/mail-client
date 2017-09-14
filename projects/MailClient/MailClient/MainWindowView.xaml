@@ -3,19 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MailClient"
-        xmlns:view="clr-namespace:MailClient.View"
-        xmlns:vm="clr-namespace:MailClient.ViewModel"
+        xmlns:local="clr-namespace:MailClient"       
+        
         mc:Ignorable="d"
         Title="MailBox" Height="600" Width="800">
-    <Window.Resources>
+    <!--<Window.Resources>
         <DataTemplate DataType="{x:Type vm:LoggingViewModel}">
             <view:LoggingView/>
         </DataTemplate>
     </Window.Resources>
     <Window.DataContext>
         <local:MainWindowViewModel/>
-    </Window.DataContext>
+    </Window.DataContext>-->
 
     <DockPanel>
         <Border DockPanel.Dock="Left" BorderBrush="Black" BorderThickness="0,0,1,0">
