@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailClient"
-        xmlns:logging="clr-namespace:MailClient.Logging"
+        xmlns:view="clr-namespace:MailClient.View"
+        xmlns:vm="clr-namespace:MailClient.ViewModel"
         mc:Ignorable="d"
         Title="MailBox" Height="600" Width="800">
     <Window.Resources>
-        <DataTemplate DataType="{x:Type logging:LoggingViewModel}">
-            <logging:LoggingView/>
+        <DataTemplate DataType="{x:Type vm:LoggingViewModel}">
+            <view:LoggingView/>
         </DataTemplate>
     </Window.Resources>
     <Window.DataContext>
