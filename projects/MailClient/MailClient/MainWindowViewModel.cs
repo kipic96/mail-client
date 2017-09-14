@@ -18,6 +18,7 @@ namespace MailClient
 
             // TODO: Add next Pages here
 
+            // TODO: something shuts down the program here
             // Set starting page
             CurrentPageViewModel = homePage;
         }
