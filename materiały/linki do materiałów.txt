@@ -21,3 +21,5 @@ https://stackoverflow.com/questions/1405739/mvvm-tutorial-from-start-to-finish
 https://msdn.microsoft.com/en-us/magazine/dd419663.aspx
 https://msdn.microsoft.com/magazine/cc700358
 https://www.codeproject.com/Articles/819294/WPF-MVVM-step-by-step-Basics-to-Advance-Level
+http://pasja-programowania.blog.pl/2015/12/05/kurs-mvvm-1-wprowadzenie/
+https://rachel53461.wordpress.com/2011/12/18/navigation-with-mvvm-2/ 

@@ -5,16 +5,15 @@ using System.Windows.Input;
 
 namespace MailClient.Logging
 {
-    class LoggingViewModel : BindableBase
+    class LoggingViewModel : BindableBase, IPageViewModel
     {
         #region properties 
 
+        public string PageName { get; } = "Logging";
+
         public string Login
         {
-            get
-            {
-                return Login;
-            }
+            get { return Login; }
             set
             {
                 Login = value;
@@ -24,7 +23,17 @@ namespace MailClient.Logging
 
         public SecureString SecurePassword { private get; set; }
 
-        public bool[] EmailModeTable { get; } = new bool[] { false, false, false };
+        public bool[] EmailModeTable
+        {
+            get { return EmailModeTable; }
+            set
+            {
+                EmailModeTable = value;
+                RaisePropertyChanged(nameof(EmailModeTable));
+            }
+        } 
+
+
         public EmailMode EmailMode
         {
             get
@@ -49,6 +58,7 @@ namespace MailClient.Logging
         public LoggingViewModel()
         {
             ValidateCommand = new DelegateCommand(ValidateAction);
+            //EmailModeTable = new bool[] { false, false, false };
         }
 
         #endregion

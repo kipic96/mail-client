@@ -6,7 +6,7 @@ namespace MailClient.Logging
     /// <summary>
     /// Interaction logic for LoggingView.xaml
     /// </summary>
-    public partial class LoggingView : Page
+    public partial class LoggingView : UserControl
     {
         public LoggingView()
         {
