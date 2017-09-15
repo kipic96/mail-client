@@ -10,16 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 
 namespace MailClient
 {
     /// <summary>
-    /// Interaction logic for MainWindowView.xaml
+    /// Interaction logic for ApplicationView.xaml
     /// </summary>
-    public partial class MainWindowView : Window
+    public partial class ApplicationView : Window
     {
-        public MainWindowView()
+        public ApplicationView()
         {
             InitializeComponent();
         }

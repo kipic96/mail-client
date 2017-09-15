@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace MailClient
+namespace MailClient.Interface
 {
-    interface IPageViewModel
+    public interface IPageViewModel
     {
         string PageName { get; }
     }

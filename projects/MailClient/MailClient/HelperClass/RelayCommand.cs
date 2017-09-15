@@ -4,7 +4,14 @@ using System.Windows.Input;
 
 namespace MailClient.HelperClass
 {
-    class RelayCommand : ICommand
+    /// <summary>
+    /// A command whose sole purpose is to 
+    /// relay its functionality to other
+    /// objects by invoking delegates. The
+    /// default return value for the CanExecute
+    /// method is 'true'.
+    /// </summary>
+    public class RelayCommand : ICommand
     {
         #region Fields
 
@@ -60,5 +67,5 @@ namespace MailClient.HelperClass
         }
 
         #endregion // ICommand Members
-    }
+    }    
 }
