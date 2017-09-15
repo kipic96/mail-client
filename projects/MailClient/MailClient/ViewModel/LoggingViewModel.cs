@@ -90,7 +90,7 @@ namespace MailClient.ViewModel
         public bool LogInValidation()
         {
             // TODO Validation of logging
-            return true;
+            return false;
         }
         #endregion
     }
