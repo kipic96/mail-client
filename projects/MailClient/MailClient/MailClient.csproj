@@ -61,6 +61,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -81,14 +83,25 @@
     </ApplicationDefinition>
     <Compile Include="HelperClass\BindableClass.cs" />
     <Compile Include="HelperClass\RelayCommand.cs" />
+    <Compile Include="Interface\IMailOperationsStrategy.cs" />
     <Compile Include="Interface\IPageViewModel.cs" />
+    <Compile Include="Model\Mail.cs" />
+    <Compile Include="Model\MailBox.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Operation\GmailOperation.cs" />
+    <Compile Include="Operation\OperationFactory.cs" />
+    <Compile Include="Operation\OutlookOperation.cs" />
+    <Compile Include="Operation\WpOperation.cs" />
     <Compile Include="ViewModel\LoggingViewModel.cs" />
     <Compile Include="ViewStyle\MarginSetterViewStyle.cs" />
-    <Compile Include="ViewStyle\ViewStyle.cs" />
     <Compile Include="View\LoggingView.xaml.cs">
       <DependentUpon>LoggingView.xaml</DependentUpon>
     </Compile>
-    <Page Include="ApplicationView.xaml">
+    <Compile Include="ViewModel\ReceivedViewModel.cs" />
+    <Compile Include="View\ReceivedView.xaml.cs">
+      <DependentUpon>ReceivedView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\ApplicationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -96,7 +109,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ApplicationView.xaml.cs">
+    <Compile Include="View\ApplicationView.xaml.cs">
       <DependentUpon>ApplicationView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -104,13 +117,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ViewStyle\ReceivedViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoggingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReceivedView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationViewModel.cs" />
+    <Compile Include="ViewModel\ApplicationViewModel.cs" />
     <Compile Include="Enum\EmailMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -138,9 +159,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

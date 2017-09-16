@@ -3,6 +3,7 @@ using MailClient.HelperClass;
 using System.Security;
 using System.Windows.Input;
 using MailClient.Enum;
+using MailClient;
 
 namespace MailClient.ViewModel
 {
@@ -73,7 +74,6 @@ namespace MailClient.ViewModel
                         p => LogIn(),
                         p => LogInValidation());
                 }
-
                 return _logInCommand;
             }
         }
@@ -85,12 +85,13 @@ namespace MailClient.ViewModel
         public void LogIn()
         {
             //TODO LogIn to the email, or should be in model?
+            
         }
 
         public bool LogInValidation()
         {
             // TODO Validation of logging
-            return false;
+            return true;
         }
         #endregion
     }

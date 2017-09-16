@@ -3,9 +3,8 @@ using System.Linq;
 using MailClient.HelperClass;
 using MailClient.Interface;
 using System.Windows.Input;
-using MailClient.ViewModel;
 
-namespace MailClient
+namespace MailClient.ViewModel
 {
     class ApplicationViewModel : BindableClass
     {
@@ -22,9 +21,9 @@ namespace MailClient
         {
             // Add available pages
             PageViewModels.Add(new LoggingViewModel());
-          //  PageViewModels.Add(new ProductsViewModel());
+            PageViewModels.Add(new ReceivedViewModel());
 
-            //TODO add new viewmodels here and uncomment these
+            //TODO add new viewmodels
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[0];
@@ -39,8 +38,8 @@ namespace MailClient
                 if (_changePageCommand == null)
                 {
                     _changePageCommand = new RelayCommand(
-                        p => ChangeViewModel((IPageViewModel)p),
-                        p => p is IPageViewModel);
+                        page => ChangeViewModel((IPageViewModel)page),
+                        page => ValidateChangeViewModel((IPageViewModel)page));
                 }
 
                 return _changePageCommand;
@@ -86,6 +85,11 @@ namespace MailClient
 
             CurrentPageViewModel = PageViewModels
                 .FirstOrDefault(vm => vm == viewModel);
+        }
+
+        private bool ValidateChangeViewModel(IPageViewModel page)
+        {
+            return !(CurrentPageViewModel is LoggingViewModel && !(page is LoggingViewModel));
         }
 
         #endregion
