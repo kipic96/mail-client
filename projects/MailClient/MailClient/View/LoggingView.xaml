@@ -11,6 +11,7 @@
 
     <UserControl.DataContext>
         <viewmodel:LoggingViewModel/>
+        <!-- <viewmodel:ApplicationViewModel/> -->
     </UserControl.DataContext> 
     
     <UserControl.Resources>
@@ -21,17 +22,17 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <StackPanel viewstyle:MarginSetterViewStyle.Margin="0,3">
-        <TextBlock Style="{StaticResource TextBlock}" IsEnabled="False" Height="Auto" Width="Auto" TextAlignment="Center" TextWrapping="WrapWithOverflow">Please insert your email login, password and choose email client type</TextBlock>
-        <Label Style="{StaticResource Label}">_Login</Label>
-        <TextBox Name="boxLogin" Text="{Binding Path=Login}" Style="{StaticResource Login}" Grid.Row="1" Grid.Column="1"/>
-        <Label Style="{StaticResource Label}">_Password</Label>
+    <StackPanel viewstyle:MarginSetterViewStyle.Margin="0,0,0,0">
+        <TextBlock Style="{StaticResource TextBlock}" >Please insert your email login, password and choose email client type</TextBlock>
+        <Label Style="{StaticResource Label}">Login</Label>
+        <TextBox Name="boxLogin" Style="{StaticResource Login}" Text="{Binding Login}" Grid.Row="1" Grid.Column="1"/>
+        <Label Style="{StaticResource Label}">Password</Label>
         <PasswordBox Name="boxPassword" FontSize="14" Width="300" Height="25" PasswordChanged="boxPassword_PasswordChanged" Grid.Row="2" Grid.Column="1"/>
         <Label Style="{StaticResource Label}">Email type</Label>
-        <RadioButton Style="{StaticResource RadioButton}" Content="Gmail" GroupName="Mode" IsChecked="{Binding Path=EmailModeTable[0], Mode=TwoWay}"/>
-        <RadioButton Style="{StaticResource RadioButton}" Content="WP" GroupName="Mode" IsChecked="{Binding Path=EmailModeTable[1], Mode=TwoWay}"/>
-        <RadioButton Style="{StaticResource RadioButton}" Content="Outlook" GroupName="Mode" IsChecked="{Binding Path=EmailModeTable[2], Mode=TwoWay}"/>
-        <Button Content="Log in" Style="{StaticResource LoginButton}" Command="{Binding LogInCommand}"/>
+        <RadioButton Style="{StaticResource RadioButton}" Content="Gmail" IsChecked="{Binding EmailModeTable[0], Mode=TwoWay}"/>
+        <RadioButton Style="{StaticResource RadioButton}" Content="WP" IsChecked="{Binding EmailModeTable[1], Mode=TwoWay}"/>
+        <RadioButton Style="{StaticResource RadioButton}" Content="Outlook" IsChecked="{Binding EmailModeTable[2], Mode=TwoWay}"/>
+        <Button Content="Try" Command="{Binding Try}"/>
     </StackPanel>
 
 </UserControl>

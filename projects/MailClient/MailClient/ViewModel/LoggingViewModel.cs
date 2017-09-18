@@ -3,7 +3,7 @@ using MailClient.HelperClass;
 using System.Security;
 using System.Windows.Input;
 using MailClient.Enum;
-using MailClient;
+using System.Windows;
 
 namespace MailClient.ViewModel
 {
@@ -14,13 +14,16 @@ namespace MailClient.ViewModel
         private string _login = string.Empty;
         private EmailMode _emailMode = EmailMode.Undefined;
         private bool[] _emailModeTable = new bool[] { false, false, false };
-        private ICommand _logInCommand;
+        private ICommand _try;
+        
+
+        
 
         #endregion
 
         #region properties 
 
-        public string PageName { get; } = "Logging";
+        public string PageName { get; } = Dictionary.PageName.Logging;
 
         public string Login
         {
@@ -51,7 +54,7 @@ namespace MailClient.ViewModel
             {
                 for (int i = 0; i < EmailModeTable.Length; i++)
                     if (EmailModeTable[i])
-                        return (EmailMode)i;
+                        return (EmailMode)(i + 1);
                 return EmailMode.Undefined;
             }
             set
@@ -60,21 +63,23 @@ namespace MailClient.ViewModel
             }
         }
 
+
+
         #endregion
 
         #region commands
 
-        public ICommand LogInCommand
+        public ICommand Try
         {
             get
             {
-                if (_logInCommand == null)
+                if (_try == null)
                 {
-                    _logInCommand = new RelayCommand(
-                        p => LogIn(),
-                        p => LogInValidation());
+                    _try = new RelayCommand(
+                        p => TryIt(),
+                        p => TryValidation());
                 }
-                return _logInCommand;
+                return _try;
             }
         }
 
@@ -82,17 +87,18 @@ namespace MailClient.ViewModel
 
         #region methods
 
-        public void LogIn()
+        private void TryIt()
         {
-            //TODO LogIn to the email, or should be in model?
-            
+            MessageBox.Show(Login);
+            MessageBox.Show(((int)EmailMode).ToString());
+
         }
 
-        public bool LogInValidation()
+        private bool TryValidation()
         {
-            // TODO Validation of logging
             return true;
         }
+
         #endregion
     }
 }

@@ -81,6 +81,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dictionary\PageName.cs" />
+    <Compile Include="Enum\PageName.cs" />
     <Compile Include="HelperClass\BindableClass.cs" />
     <Compile Include="HelperClass\RelayCommand.cs" />
     <Compile Include="Interface\IMailOperationsStrategy.cs" />
@@ -101,6 +103,10 @@
     <Compile Include="View\ReceivedView.xaml.cs">
       <DependentUpon>ReceivedView.xaml</DependentUpon>
     </Compile>
+    <Page Include="ViewStyle\ApplicationViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ApplicationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

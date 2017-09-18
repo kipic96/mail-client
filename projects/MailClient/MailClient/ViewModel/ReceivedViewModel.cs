@@ -10,6 +10,6 @@ namespace MailClient.ViewModel
 {
     class ReceivedViewModel : BindableClass, IPageViewModel
     {
-        public string PageName { get; } = "Received";
+        public string PageName { get; } = Dictionary.PageName.Received;
     }
 }
