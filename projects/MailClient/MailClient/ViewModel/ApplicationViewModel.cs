@@ -15,6 +15,7 @@ namespace MailClient.ViewModel
         private IList<IPageViewModel> _pageViewModels;
         private ICommand _logInCommand;
 
+        // TODO Create singleton with controlling the application, transition of pages and stuff
         #endregion
 
         #region constructors
@@ -43,8 +44,8 @@ namespace MailClient.ViewModel
                 if (_changePageCommand == null)
                 {
                     _changePageCommand = new RelayCommand(
-                        page => ChangeViewModel((IPageViewModel)page),
-                        page => ValidateChangeViewModel((IPageViewModel)page));
+                        p => ChangeViewModel((IPageViewModel)p),
+                        p => ValidateChangeViewModel((IPageViewModel)p));
                 }
                 return _changePageCommand;
             }

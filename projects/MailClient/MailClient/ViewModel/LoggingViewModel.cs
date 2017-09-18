@@ -15,7 +15,6 @@ namespace MailClient.ViewModel
         private EmailMode _emailMode = EmailMode.Undefined;
         private bool[] _emailModeTable = new bool[] { false, false, false };
         private ICommand _try;
-        
 
         
 
