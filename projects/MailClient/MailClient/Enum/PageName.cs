@@ -1,6 +1,6 @@
 ﻿namespace MailClient.Enum
 {
-    enum PageName
+    public enum PageNumber
     {
         Logging = 0,
         Received,

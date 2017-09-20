@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using MailClient.View;
+﻿using System.Windows;
 using MailClient.ViewModel;
 
 namespace MailClient
@@ -17,8 +10,6 @@ namespace MailClient
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            //base.OnStartup(e);
-
             ApplicationView app = new ApplicationView();
             ApplicationViewModel context = new ApplicationViewModel();
             app.DataContext = context;

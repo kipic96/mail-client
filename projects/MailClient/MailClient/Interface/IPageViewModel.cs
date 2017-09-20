@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MailClient.Enum;
 
 namespace MailClient.Interface
 {
     public interface IPageViewModel
     {
         string PageName { get; }
+        PageNumber PageNumber { get; }
     }
 }

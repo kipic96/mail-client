@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using MailClient.Enum;
 using MailClient.HelperClass;
 using MailClient.Interface;
+using System;
+using System.Collections.Generic;
 using System.Windows.Input;
-using System.Windows;
 
 namespace MailClient.ViewModel
 {
@@ -12,25 +13,25 @@ namespace MailClient.ViewModel
 
         private ICommand _changePageCommand;
         private IPageViewModel _currentPageViewModel;
-        private IList<IPageViewModel> _pageViewModels;
-        private ICommand _logInCommand;
-
-        // TODO Create singleton with controlling the application, transition of pages and stuff
+        private IList<IPageViewModel> _pageViewModels = new List<IPageViewModel>();
+        
         #endregion
 
         #region constructors
 
         public ApplicationViewModel()
         {
-            // Add available pages in order such as in Enum.PageName
-
-            _pageViewModels = new List<IPageViewModel> { new LoggingViewModel(), new ReceivedViewModel() };
-            // information of viewmodels are saved in other instances of logging and received viewmodels
+            IPageViewModel logging = new LoggingViewModel();
+            // subsribing to event of changing the page 
+            LoggingViewModel.ChangePage += ChangeViewModelEventHandler;
+            _pageViewModels.Add(logging);
+            _pageViewModels.Add(new ReceivedViewModel());
+            // error is here, two loggingViewModels are created
 
             //TODO add new viewmodels
 
             // Set starting page
-            CurrentPageViewModel = _pageViewModels[(int)Enum.PageName.Logging];
+            _currentPageViewModel = FindPageWithPageNumber(PageNumber.Logging);
         }
 
         #endregion
@@ -59,9 +60,6 @@ namespace MailClient.ViewModel
         {
             get
             {
-                if (_pageViewModels == null)
-                    _pageViewModels = new List<IPageViewModel>();
-
                 return _pageViewModels;
             }
         }
@@ -71,7 +69,6 @@ namespace MailClient.ViewModel
             get
             {
                 return _currentPageViewModel;
-
             }
             set
             {
@@ -81,25 +78,21 @@ namespace MailClient.ViewModel
                     RaisePropertyChanged(nameof(CurrentPageViewModel));
                 }
             }
-        }
-
-        public ICommand LogInCommand
-        {
-            get
-            {
-                if (_logInCommand == null)
-                {
-                    _logInCommand = new RelayCommand(
-                        p => LogIn(),
-                        p => LogInValidation());
-                }
-                return _logInCommand;
-            }
-        }
+        }        
 
         #endregion
 
         #region methods
+
+        private IPageViewModel FindPageWithPageNumber(PageNumber pageNumber)
+        {
+            foreach (IPageViewModel page in _pageViewModels)
+            {
+                if (page.PageNumber == pageNumber)
+                    return page;
+            }
+            return null;
+        }
 
         private void ChangeViewModel(IPageViewModel viewModel)
         {
@@ -110,23 +103,11 @@ namespace MailClient.ViewModel
         private bool ValidateChangeViewModel(IPageViewModel viewModel)
         {
             return true;//!(CurrentPageViewModel is LoggingViewModel && !(page is LoggingViewModel));
-        }
+        }       
 
-        private void LogIn()
+        private void ChangeViewModelEventHandler(object sender, EventArgs pageNumber)
         {
-            //TODO LogIn to the email, or should be in model?
-            // Check if login and password for chosen email are good
-            // Go to Received Page and receive email
-            MessageBox.Show(((LoggingViewModel)PageViewModels[(int)Enum.PageName.Logging]).Login);
-            MessageBox.Show(((int)((LoggingViewModel)PageViewModels[(int)Enum.PageName.Logging]).EmailMode).ToString());
-            // _applicationViewModel.ChangeViewModel(_applicationViewModel.PageViewModels[(int)Enum.PageName.Received]);
-        }
-
-        private bool LogInValidation()
-        {
-            // TODO Validation of logging
-            // Check if all fields are completed
-            return true;
+            ChangeViewModel(FindPageWithPageNumber(((PageNumberEventArg)pageNumber).PageNumber));
         }
 
         #endregion

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MailClient.Enum;
+﻿using MailClient.Enum;
 using MailClient.Interface;
 
 namespace MailClient.Operation

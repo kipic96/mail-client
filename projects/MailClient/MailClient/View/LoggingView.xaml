@@ -11,7 +11,6 @@
 
     <UserControl.DataContext>
         <viewmodel:LoggingViewModel/>
-        <!-- <viewmodel:ApplicationViewModel/> -->
     </UserControl.DataContext> 
     
     <UserControl.Resources>
@@ -31,7 +30,8 @@
         <Label Style="{StaticResource Label}">Email type</Label>
         <RadioButton Style="{StaticResource RadioButton}" Content="Gmail" IsChecked="{Binding EmailModeTable[0], Mode=TwoWay}"/>
         <RadioButton Style="{StaticResource RadioButton}" Content="WP" IsChecked="{Binding EmailModeTable[1], Mode=TwoWay}"/>
-        <RadioButton Style="{StaticResource RadioButton}" Content="Outlook" IsChecked="{Binding EmailModeTable[2], Mode=TwoWay}"/>
+        <RadioButton Style="{StaticResource RadioButton}" Content="Outlook" IsChecked="{Binding EmailModeTable[2], Mode=TwoWay}"/>        
+        <Button Content="Log in" Style="{StaticResource LoginButton}" Command="{Binding LogInCommand}"/>
         <Button Content="Try" Command="{Binding Try}"/>
     </StackPanel>
 

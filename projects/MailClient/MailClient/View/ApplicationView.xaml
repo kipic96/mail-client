@@ -34,6 +34,6 @@
         </Border>
 
         <ContentControl Content="{Binding  CurrentPageViewModel}" />
-        <Button Content="Log in" Style="{StaticResource LoginButton}" Command="{Binding LogInCommand}"/>
+        <!--<Button Content="Log in" Style="{StaticResource LoginButton}" Command="{Binding LogInCommand}"/>-->
     </DockPanel>
 </Window>
