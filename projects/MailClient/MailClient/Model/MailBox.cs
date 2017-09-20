@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using MailClient.Interface;
 using MailClient.Operation;
+using System.Windows;
 
 namespace MailClient.Model
 {
@@ -39,6 +40,7 @@ namespace MailClient.Model
 
         public IEnumerable<Mail> Receive()
         {
+            MessageBox.Show("Receiving emails");
             return MailOperationStrategy.Receive(_user);
         }
 

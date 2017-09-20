@@ -13,5 +13,16 @@ namespace MailClient.Model
 
         #endregion
 
+        #region constructors
+
+        public User(string login, SecureString password, EmailMode emailMode)
+        {
+            Login = login;
+            Password = password;
+            EmailMode = emailMode;
+        }
+
+        #endregion
+
     }
 }

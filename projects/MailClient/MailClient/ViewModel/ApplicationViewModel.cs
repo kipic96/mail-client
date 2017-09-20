@@ -1,9 +1,10 @@
 ﻿using MailClient.Enum;
 using MailClient.HelperClass;
 using MailClient.Interface;
-using System;
+using MailClient.Model;
 using System.Collections.Generic;
 using System.Windows.Input;
+
 
 namespace MailClient.ViewModel
 {
@@ -14,21 +15,20 @@ namespace MailClient.ViewModel
         private ICommand _changePageCommand;
         private IPageViewModel _currentPageViewModel;
         private IList<IPageViewModel> _pageViewModels = new List<IPageViewModel>();
-        
+        private MailBox _mailBox;
+
         #endregion
 
         #region constructors
 
         public ApplicationViewModel()
         {
-            IPageViewModel logging = new LoggingViewModel();
-            // subsribing to event of changing the page 
-            LoggingViewModel.ChangePage += ChangeViewModelEventHandler;
-            _pageViewModels.Add(logging);
+            _pageViewModels.Add(new LoggingViewModel());
             _pageViewModels.Add(new ReceivedViewModel());
-            // error is here, two loggingViewModels are created
-
             //TODO add new viewmodels
+
+            LoggingViewModel.LogInAction += ChangePageAction;
+            LoggingViewModel.LogInUserAction += ReceiveEmailAction;            
 
             // Set starting page
             _currentPageViewModel = FindPageWithPageNumber(PageNumber.Logging);
@@ -80,6 +80,8 @@ namespace MailClient.ViewModel
             }
         }        
 
+        public MailBox MailBox { get { return _mailBox; } set { _mailBox = value; } }   
+
         #endregion
 
         #region methods
@@ -102,12 +104,32 @@ namespace MailClient.ViewModel
 
         private bool ValidateChangeViewModel(IPageViewModel viewModel)
         {
-            return true;//!(CurrentPageViewModel is LoggingViewModel && !(page is LoggingViewModel));
-        }       
+            return !(CurrentPageViewModel is LoggingViewModel && !(viewModel is LoggingViewModel));
+        }
 
-        private void ChangeViewModelEventHandler(object sender, EventArgs pageNumber)
+        private void ChangePageAction(PageNumber pageNumber)
         {
-            ChangeViewModel(FindPageWithPageNumber(((PageNumberEventArg)pageNumber).PageNumber));
+            ChangeViewModel(FindPageWithPageNumber(pageNumber));
+        }
+
+        private void ReceiveEmailAction(User user)
+        {
+            MailBox = new MailBox(user); // do i need to construct it here or maybe i can do it earlier
+            // TO DO do something with received emails, maybe with events, they need to go to ReceivedViewModel
+            SendEmailAction(user, new Mail());
+            //MailBox.Receive();
+        }
+
+        private void SendEmailAction(User user, Mail mail)
+        {
+            // testing mail
+            mail.Message = "no siema 2 :D";
+            mail.Title = "elo";
+            mail.Receiver = "kipic96@gmail.com";
+            // testing mail
+
+            MailBox = new MailBox(user);
+            MailBox.Send(mail);
         }
 
         #endregion

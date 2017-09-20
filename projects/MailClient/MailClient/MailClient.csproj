@@ -84,10 +84,11 @@
     <Compile Include="Dictionary\PageName.cs" />
     <Compile Include="Enum\PageName.cs" />
     <Compile Include="HelperClass\BindableClass.cs" />
-    <Compile Include="HelperClass\PageNumberEventArg.cs" />
     <Compile Include="HelperClass\RelayCommand.cs" />
+    <Compile Include="HelperClass\ServerCredentials.cs" />
     <Compile Include="Interface\IMailOperationsStrategy.cs" />
     <Compile Include="Interface\IPageViewModel.cs" />
+    <Compile Include="Interface\IServerCredentials.cs" />
     <Compile Include="Model\Mail.cs" />
     <Compile Include="Model\MailBox.cs" />
     <Compile Include="Model\User.cs" />

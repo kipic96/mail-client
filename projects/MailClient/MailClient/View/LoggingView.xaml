@@ -22,7 +22,7 @@
     </UserControl.Resources>
 
     <StackPanel viewstyle:MarginSetterViewStyle.Margin="0,0,0,0">
-        <TextBlock Style="{StaticResource TextBlock}" >Please insert your email login, password and choose email client type</TextBlock>
+        <TextBlock Style="{StaticResource TextBlock}" Text="{Binding PageName}"></TextBlock>
         <Label Style="{StaticResource Label}">Login</Label>
         <TextBox Name="boxLogin" Style="{StaticResource Login}" Text="{Binding Login}" Grid.Row="1" Grid.Column="1"/>
         <Label Style="{StaticResource Label}">Password</Label>
@@ -30,9 +30,8 @@
         <Label Style="{StaticResource Label}">Email type</Label>
         <RadioButton Style="{StaticResource RadioButton}" Content="Gmail" IsChecked="{Binding EmailModeTable[0], Mode=TwoWay}"/>
         <RadioButton Style="{StaticResource RadioButton}" Content="WP" IsChecked="{Binding EmailModeTable[1], Mode=TwoWay}"/>
-        <RadioButton Style="{StaticResource RadioButton}" Content="Outlook" IsChecked="{Binding EmailModeTable[2], Mode=TwoWay}"/>        
+        <RadioButton Style="{StaticResource RadioButton}" Content="Outlook" IsChecked="{Binding EmailModeTable[2], Mode=TwoWay}"/>
         <Button Content="Log in" Style="{StaticResource LoginButton}" Command="{Binding LogInCommand}"/>
-        <Button Content="Try" Command="{Binding Try}"/>
     </StackPanel>
 
 </UserControl>
