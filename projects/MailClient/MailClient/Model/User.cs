@@ -3,7 +3,7 @@ using MailClient.Enum;
 
 namespace MailClient.Model
 {
-    class User
+    public class User
     {
         #region properties
 

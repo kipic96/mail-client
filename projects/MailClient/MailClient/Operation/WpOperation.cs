@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using MailClient.Interface;
 using MailClient.Model;
+using MailClient.HelperClass;
 
 namespace MailClient.Operation
 {    
     class WpOperation : IMailOperationStrategy
     {
-        private IServerCredentials _sendingCredentials;
-        private IServerCredentials _receivingCredentials;
+        private IServerCredentials _sendingCredentials = new ServerCredentials();
+        private IServerCredentials _receivingCredentials = new ServerCredentials();
 
         public WpOperation()
         {
@@ -22,6 +23,7 @@ namespace MailClient.Operation
 
         public IServerCredentials ReceivingCredentials { get { return _receivingCredentials; } }
 
+        public bool UseSsl { get; } = true;
 
         public IEnumerable<Mail> Receive(User user)
         {

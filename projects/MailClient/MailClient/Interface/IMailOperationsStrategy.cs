@@ -3,10 +3,11 @@ using MailClient.Model;
 
 namespace MailClient.Interface
 {
-    interface IMailOperationStrategy
+    public interface IMailOperationStrategy
     {
         IServerCredentials SendingCredentials { get; }
         IServerCredentials ReceivingCredentials { get; }
+        bool UseSsl { get; }
 
         void Send(User user, Mail mail);
         IEnumerable<Mail> Receive(User user);

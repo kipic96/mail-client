@@ -1,7 +1,7 @@
 ﻿namespace MailClient.Enum
 {
 
-    enum EmailMode
+    public enum EmailMode
     {
         Undefined = 0,
         Gmail,

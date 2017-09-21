@@ -1,6 +1,6 @@
 ﻿namespace MailClient.Interface
 {
-    interface IServerCredentials
+    public interface IServerCredentials
     {
         string ServerName { get; set; }
         int ServerPort { get; set; }

@@ -116,8 +116,8 @@ namespace MailClient.ViewModel
         {
             MailBox = new MailBox(user); // do i need to construct it here or maybe i can do it earlier
             // TO DO do something with received emails, maybe with events, they need to go to ReceivedViewModel
-            SendEmailAction(user, new Mail());
-            //MailBox.Receive();
+            //SendEmailAction(user, new Mail());
+            MailBox.Receive();
         }
 
         private void SendEmailAction(User user, Mail mail)

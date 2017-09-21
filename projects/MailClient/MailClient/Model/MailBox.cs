@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace MailClient.Model
 {
-    class MailBox
+    public class MailBox
     {
         #region constructors
 
