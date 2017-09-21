@@ -40,7 +40,8 @@ namespace MailClient.Tests
         [TestMethod()]
         public void ReceiveTest()
         {
-            Assert.Fail();
+            MailBox mailBox = new MailBox(new User(mailBad, passwordGood, Enum.EmailMode.Gmail));
+            Assert.IsNotNull(mailBox.Receive());
         }
     }
 }

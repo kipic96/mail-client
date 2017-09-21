@@ -23,9 +23,10 @@ namespace MailClient.ViewModel
 
         public ApplicationViewModel()
         {
+            //TODO add new viewmodels and add subsrictions to events 
             _pageViewModels.Add(new LoggingViewModel());
             _pageViewModels.Add(new ReceivedViewModel());
-            //TODO add new viewmodels
+            
 
             LoggingViewModel.LogInAction += ChangePageAction;
             LoggingViewModel.LogInUserAction += ReceiveEmailAction;            
@@ -60,7 +61,14 @@ namespace MailClient.ViewModel
         {
             get
             {
+                if (_pageViewModels == null)
+                    return new List<IPageViewModel>();
                 return _pageViewModels;
+            }
+            private set
+            {
+                _pageViewModels = value;
+                RaisePropertyChanged(nameof(PageViewModels));
             }
         }
 
@@ -70,7 +78,7 @@ namespace MailClient.ViewModel
             {
                 return _currentPageViewModel;
             }
-            set
+            private set
             {
                 if (_currentPageViewModel != value)
                 {
@@ -78,9 +86,7 @@ namespace MailClient.ViewModel
                     RaisePropertyChanged(nameof(CurrentPageViewModel));
                 }
             }
-        }        
-
-        public MailBox MailBox { get { return _mailBox; } set { _mailBox = value; } }   
+        }          
 
         #endregion
 
@@ -98,13 +104,13 @@ namespace MailClient.ViewModel
 
         private void ChangeViewModel(IPageViewModel viewModel)
         {
-            if (CurrentPageViewModel != viewModel)
-                CurrentPageViewModel = viewModel;
+            if (_currentPageViewModel != viewModel)
+                _currentPageViewModel = viewModel;
         }
 
         private bool ValidateChangeViewModel(IPageViewModel viewModel)
         {
-            return !(CurrentPageViewModel is LoggingViewModel && !(viewModel is LoggingViewModel));
+            return !(_currentPageViewModel is LoggingViewModel && !(viewModel is LoggingViewModel));
         }
 
         private void ChangePageAction(PageNumber pageNumber)
@@ -114,10 +120,15 @@ namespace MailClient.ViewModel
 
         private void ReceiveEmailAction(User user)
         {
-            MailBox = new MailBox(user); // do i need to construct it here or maybe i can do it earlier
+            _mailBox = new MailBox(user); // do i need to construct it here or maybe i can do it earlier
             // TO DO do something with received emails, maybe with events, they need to go to ReceivedViewModel
-            //SendEmailAction(user, new Mail());
-            MailBox.Receive();
+            
+            var receivedEmails = _mailBox.Receive();
+            if (receivedEmails != null)
+            {
+                ((ReceivedViewModel)FindPageWithPageNumber(PageNumber.Received)).ReceivedEmails = receivedEmails;
+                ChangeViewModel(FindPageWithPageNumber(PageNumber.Received));
+            }            
         }
 
         private void SendEmailAction(User user, Mail mail)
@@ -128,8 +139,8 @@ namespace MailClient.ViewModel
             mail.Receiver = "kipic96@gmail.com";
             // testing mail
 
-            MailBox = new MailBox(user);
-            MailBox.Send(mail);
+            _mailBox = new MailBox(user);
+            _mailBox.Send(mail);
         }
 
         #endregion

@@ -24,21 +24,6 @@ namespace MailClient.Operation
             _sendingCredentials.ServerPort = 587;
             _receivingCredentials.ServerName = "pop.gmail.com";
             _receivingCredentials.ServerPort = 995;
-
-        }
-
-        public IServerCredentials SendingCredentials
-        { get
-            { return _sendingCredentials; }
-          private set
-            { _sendingCredentials = value; }
-        }
-
-        public IServerCredentials ReceivingCredentials
-        { get
-            { return _receivingCredentials; }
-          private set
-            { _sendingCredentials = value; }
         }
 
         public bool UseSsl { get; } = true;
@@ -47,45 +32,57 @@ namespace MailClient.Operation
         {
             using (Pop3Client client = new Pop3Client())
             {
-                // Connect to the server
-                client.Connect(
-                    _receivingCredentials.ServerName, 
-                    _receivingCredentials.ServerPort, 
-                    UseSsl);
-
-                // Authenticate ourselves towards the server
-                client.Authenticate(
-                    user.Login, 
+                try
+                {
+                    client.Connect(
+                        _receivingCredentials.ServerName,
+                        _receivingCredentials.ServerPort,
+                        UseSsl);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return null;
+                }
+                try
+                {
+                    // password not secure string anymore
+                    client.Authenticate(
+                    user.Login,
                     new NetworkCredential(string.Empty, user.Password).Password);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    // normal throw; doesnt work 
+                    return null;
+                }
 
-                // Get the number of messages in the inbox
                 int messageCount = client.GetMessageCount();
 
-                // We want to download all messages
-                IList<Mail> allMessages = new List<Mail>(messageCount);
+                IList<Mail> receivedEmails = new List<Mail>(messageCount);
 
                 Message tempMessage;
-                StringBuilder builder = new StringBuilder();
+                StringBuilder messageTextBuilder = new StringBuilder();
 
                 // Messages are numbered in the interval: [1, messageCount]
-                // Ergo: message numbers are 1-based.
                 // Most servers give the latest message the highest number
                 for (int i = messageCount; i > 0; i--)
                 {
                     tempMessage = client.GetMessage(i);
-                    OpenPop.Mime.MessagePart plainText = tempMessage.FindFirstPlainTextVersion();
+                    MessagePart plainText = tempMessage.FindFirstPlainTextVersion();
                     if (plainText != null)
                     {
-                        builder.Append(plainText.GetBodyAsText());
+                        messageTextBuilder.Append(plainText.GetBodyAsText());
                     }
                     Mail mail = new Mail(
                         tempMessage.Headers.From.ToString(),
                         tempMessage.Headers.To[0].ToString(), 
                         tempMessage.Headers.Subject,
-                        builder.ToString());
-                    allMessages.Add(mail);
+                        messageTextBuilder.ToString());
+                    receivedEmails.Add(mail);
                 }
-                return allMessages;
+                return receivedEmails;
 
             }
         }
@@ -97,8 +94,8 @@ namespace MailClient.Operation
             message.Body = mail.Message;
 
             SmtpClient mailer = new SmtpClient
-                (SendingCredentials.ServerName, 
-                SendingCredentials.ServerPort);
+                (_sendingCredentials.ServerName, 
+                _sendingCredentials.ServerPort);
             mailer.Credentials = new NetworkCredential(user.Login, user.Password);
             mailer.EnableSsl = UseSsl;
             try

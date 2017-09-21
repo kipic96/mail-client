@@ -2,6 +2,7 @@
 using MailClient.Interface;
 using MailClient.Operation;
 using System.Windows;
+using System;
 
 namespace MailClient.Model
 {
@@ -24,24 +25,19 @@ namespace MailClient.Model
 
         #endregion
 
-        #region properties
-
-        public IMailOperationStrategy MailOperationStrategy { get { return _mailOperationStrategy; } set { _mailOperationStrategy = value; } }
-        public User User { get { return _user; } set { _user = value; } }
-
-        #endregion
-
         #region methods
 
         public void Send(Mail mail)
         {
-            MailOperationStrategy.Send(_user, mail);            
+            _mailOperationStrategy.Send(_user, mail);            
         }
 
         public IEnumerable<Mail> Receive()
         {
             MessageBox.Show("Receiving emails");
-            return MailOperationStrategy.Receive(_user);
+            IEnumerable<Mail> receivedEmails;
+            receivedEmails = _mailOperationStrategy.Receive(_user);
+            return receivedEmails;
         }
 
         #endregion
