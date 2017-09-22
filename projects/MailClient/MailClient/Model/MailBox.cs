@@ -2,7 +2,6 @@
 using MailClient.Interface;
 using MailClient.Operation;
 using System.Windows;
-using System;
 
 namespace MailClient.Model
 {
@@ -14,6 +13,11 @@ namespace MailClient.Model
         {
             _user = user;
             _mailOperationStrategy = OperationFactory.Create(user.EmailMode);
+        }
+
+        private MailBox()
+        {
+
         }
 
         #endregion

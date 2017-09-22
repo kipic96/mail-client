@@ -3,6 +3,7 @@ using MailClient.HelperClass;
 using MailClient.Interface;
 using MailClient.Model;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 
@@ -126,7 +127,8 @@ namespace MailClient.ViewModel
             var receivedEmails = _mailBox.Receive();
             if (receivedEmails != null)
             {
-                ((ReceivedViewModel)FindPageWithPageNumber(PageNumber.Received)).ReceivedEmails = receivedEmails;
+                ((ReceivedViewModel)FindPageWithPageNumber(PageNumber.Received)).ReceivedEmails 
+                    = new ObservableCollection<Mail>(receivedEmails);
                 ChangeViewModel(FindPageWithPageNumber(PageNumber.Received));
             }            
         }

@@ -17,6 +17,7 @@ namespace MailClient.Operation
     {
         private IServerCredentials _sendingCredentials = new ServerCredentials();
         private IServerCredentials _receivingCredentials = new ServerCredentials();
+        private bool _useSsl = true;
 
         public GmailOperation()
         {
@@ -24,9 +25,7 @@ namespace MailClient.Operation
             _sendingCredentials.ServerPort = 587;
             _receivingCredentials.ServerName = "pop.gmail.com";
             _receivingCredentials.ServerPort = 995;
-        }
-
-        public bool UseSsl { get; } = true;
+        }        
 
         public IEnumerable<Mail> Receive(User user)
         {
@@ -37,15 +36,8 @@ namespace MailClient.Operation
                     client.Connect(
                         _receivingCredentials.ServerName,
                         _receivingCredentials.ServerPort,
-                        UseSsl);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    return null;
-                }
-                try
-                {
+                        _useSsl);
+
                     // password not secure string anymore
                     client.Authenticate(
                     user.Login,
@@ -54,7 +46,7 @@ namespace MailClient.Operation
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-                    // normal throw; doesnt work 
+                    // normal throw doesnt work so returns null
                     return null;
                 }
 
@@ -83,7 +75,6 @@ namespace MailClient.Operation
                     receivedEmails.Add(mail);
                 }
                 return receivedEmails;
-
             }
         }
 
@@ -97,7 +88,7 @@ namespace MailClient.Operation
                 (_sendingCredentials.ServerName, 
                 _sendingCredentials.ServerPort);
             mailer.Credentials = new NetworkCredential(user.Login, user.Password);
-            mailer.EnableSsl = UseSsl;
+            mailer.EnableSsl = _useSsl;
             try
             {
                 mailer.Send(message);

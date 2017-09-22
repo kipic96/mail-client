@@ -13,9 +13,11 @@ namespace MailClient.ViewModel
     {
         #region fields     
 
-        private string _login = string.Empty;
+        // delete it after testing
+        private string _login = "testingemail10002@gmail.com";
         private EmailMode _emailMode = EmailMode.Undefined;
-        private bool[] _emailModeTable = new bool[] { false, false, false };
+        // go to false all of them after testing
+        private bool[] _emailModeTable = new bool[] { true, false, false };
         private ICommand _logInCommand;
 
         #endregion
@@ -33,9 +35,10 @@ namespace MailClient.ViewModel
                 _login = value;
                 RaisePropertyChanged(nameof(Login));
             }
-        } 
+        }
 
-        public SecureString SecurePassword { private get; set; }
+        public SecureString SecurePassword { private get; set; } = new SecureString();
+
 
         public bool[] EmailModeTable
         {

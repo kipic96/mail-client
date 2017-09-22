@@ -21,6 +21,19 @@
     </UserControl.Resources>
 
     <Grid>
-        
+        <StackPanel Margin="50 0 0 40">
+            <ItemsControl x:Name="received" ItemsSource="{Binding DataContext.ReceivedEmails}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="10" Orientation="Horizontal" >
+                            <StackPanel Margin="10 0 0 0" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Sender}" FontSize="12" />
+                                <TextBlock Text="{Binding Title}" FontSize="10" />
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
     </Grid>
 </UserControl>

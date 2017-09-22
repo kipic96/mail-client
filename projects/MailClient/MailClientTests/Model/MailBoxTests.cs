@@ -2,7 +2,6 @@
 using MailClient.Model;
 using System.Security;
 using System.Net;
-using System;
 
 namespace MailClient.Tests
 {

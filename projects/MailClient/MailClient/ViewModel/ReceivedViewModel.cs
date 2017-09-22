@@ -4,17 +4,18 @@ using MailClient.Enum;
 using System.Collections.Generic;
 using MailClient.Model;
 using System;
+using System.Collections.ObjectModel;
 
 namespace MailClient.ViewModel
 {
     class ReceivedViewModel : BindableClass, IPageViewModel
     {
-        private IEnumerable<Mail> _receivedEmails = new List<Mail>();
+        private ObservableCollection<Mail> _receivedEmails;
 
         public string PageName { get; } = Dictionary.PageName.Received;
         public PageNumber PageNumber { get; } = PageNumber.Received;
 
-        public IEnumerable<Mail> ReceivedEmails
+        public ObservableCollection<Mail> ReceivedEmails
         {
             get
             {
