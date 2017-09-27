@@ -1,21 +1,20 @@
 ﻿using MailClient.Enum;
 using MailClient.Interface;
 
-namespace MailClient.Operation
+namespace MailClient.Connection
 {
-    static class OperationFactory
+    static class ConnectionFactory
     {
-        public static IMailOperationStrategy Create(EmailMode emailMode)
+        public static IMailConnection Create(EmailMode emailMode)
         {
             switch (emailMode)
             {
-                // TODO all reactions
                 case EmailMode.Gmail:
-                    return new GmailOperation();
+                    return new GmailConnection();
                 case EmailMode.Outlook:
-                    return new OutlookOperation();
+                    return new OnetConnection();
                 case EmailMode.WP:
-                    return new WpOperation();
+                    return new WpConnection();
                 case EmailMode.Undefined:
                     return null;
                 default:

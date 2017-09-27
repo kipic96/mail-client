@@ -1,7 +1,6 @@
 ﻿using MailClient.HelperClass;
 using MailClient.Interface;
 using MailClient.Enum;
-using System.Collections.Generic;
 using MailClient.Model;
 using System;
 using System.Collections.ObjectModel;

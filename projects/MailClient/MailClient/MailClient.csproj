@@ -59,6 +59,10 @@
     <StartupObject>MailClient.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AE.Net.Mail, Version=1.7.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AE.Net.Mail.1.7.10.0\lib\net45\AE.Net.Mail.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="OpenPop, Version=2.0.6.1120, Culture=neutral, PublicKeyToken=6bdb97f144b7efc8, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenPop.NET.2.0.6.1120\lib\net40\OpenPop.dll</HintPath>
       <Private>True</Private>
@@ -89,17 +93,21 @@
     <Compile Include="Enum\PageName.cs" />
     <Compile Include="HelperClass\BindableClass.cs" />
     <Compile Include="HelperClass\RelayCommand.cs" />
-    <Compile Include="HelperClass\ServerCredentials.cs" />
-    <Compile Include="Interface\IMailOperationsStrategy.cs" />
+    <Compile Include="InterfaceImplementation\MailCredentials.cs" />
+    <Compile Include="InterfaceImplementation\ServerCredentials.cs" />
+    <Compile Include="Interface\IMailConnection.cs" />
+    <Compile Include="Interface\IMailCredentials.cs" />
+    <Compile Include="Interface\IMailMechanism.cs" />
     <Compile Include="Interface\IPageViewModel.cs" />
     <Compile Include="Interface\IServerCredentials.cs" />
     <Compile Include="Model\Mail.cs" />
     <Compile Include="Model\MailBox.cs" />
+    <Compile Include="Mechanism\MailMechanism.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="Operation\GmailOperation.cs" />
-    <Compile Include="Operation\OperationFactory.cs" />
-    <Compile Include="Operation\OutlookOperation.cs" />
-    <Compile Include="Operation\WpOperation.cs" />
+    <Compile Include="Connection\GmailConnection.cs" />
+    <Compile Include="Connection\ConnectionFactory.cs" />
+    <Compile Include="Connection\OnetConnection.cs" />
+    <Compile Include="Connection\WpConnection.cs" />
     <Compile Include="ViewModel\LoggingViewModel.cs" />
     <Compile Include="ViewStyle\MarginSetterViewStyle.cs" />
     <Compile Include="View\LoggingView.xaml.cs">

@@ -137,8 +137,8 @@ namespace MailClient.ViewModel
         {
             // testing mail
             mail.Message = "no siema 2 :D";
-            mail.Title = "elo";
-            mail.Receiver = "kipic96@gmail.com";
+            mail.Subject = "elo";
+            mail.To = "kipic96@gmail.com";
             // testing mail
 
             _mailBox = new MailBox(user);

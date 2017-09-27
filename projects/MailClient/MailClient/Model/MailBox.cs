@@ -1,50 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using MailClient.Connection;
 using MailClient.Interface;
-using MailClient.Operation;
-using System.Windows;
+using MailClient.Mechanism;
+using System.Collections.Generic;
 
 namespace MailClient.Model
 {
-    public class MailBox
+    public class MailBox 
     {
-        #region constructors
-
         public MailBox(User user)
         {
-            _user = user;
-            _mailOperationStrategy = OperationFactory.Create(user.EmailMode);
+            _mailMechanism = new MailMechanism(user, ConnectionFactory.Create(user.EmailMode));
         }
 
-        private MailBox()
-        {
-
-        }
-
-        #endregion
-
-        #region fields
-
-        private User _user;
-        private IMailOperationStrategy _mailOperationStrategy;
-
-        #endregion
-
-        #region methods
+        private IMailMechanism _mailMechanism;
+        
 
         public void Send(Mail mail)
         {
-            _mailOperationStrategy.Send(_user, mail);            
+            _mailMechanism.Send(mail);            
         }
 
         public IEnumerable<Mail> Receive()
         {
-            MessageBox.Show("Receiving emails");
-            IEnumerable<Mail> receivedEmails;
-            receivedEmails = _mailOperationStrategy.Receive(_user);
-            return receivedEmails;
+            return _mailMechanism.Receive();
         }
 
-        #endregion
-
+        public void ChangeUser(User user)
+        {
+            _mailMechanism = new MailMechanism(user, ConnectionFactory.Create(user.EmailMode));
+        }
     }
 }
