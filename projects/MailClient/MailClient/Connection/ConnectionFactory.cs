@@ -11,10 +11,10 @@ namespace MailClient.Connection
             {
                 case EmailMode.Gmail:
                     return new GmailConnection();
-                case EmailMode.Outlook:
-                    return new OnetConnection();
-                case EmailMode.WP:
-                    return new WpConnection();
+                case EmailMode.O2:
+                    return new O2Connection();
+                case EmailMode.Interia:
+                    return new InteriaConnection();
                 case EmailMode.Undefined:
                     return null;
                 default:

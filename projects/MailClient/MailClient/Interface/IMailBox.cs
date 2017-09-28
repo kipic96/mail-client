@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace MailClient.Interface
 {
-    interface IMailMechanism
+    interface IMailBox
     {
-        IUser User { get; }
-        IMailConnection MailConnection { get; }
-
         void Send(Mail mail);
         IEnumerable<Mail> Receive();
+        void ChangeUser(User user);
     }
 }

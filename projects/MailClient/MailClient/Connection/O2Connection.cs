@@ -3,18 +3,22 @@ using MailClient.InterfaceImplementation;
 
 namespace MailClient.Connection
 {
-    class WpConnection : IMailConnection
+    class O2Connection : IMailConnection
     {
         public IMailCredentials Credentials { get; } = new MailCredentials();
         public bool UseSsl { get; }
+        public string MailboxName { get; }
+        public bool HeadersOnly { get; }
 
-        public WpConnection()
+        public O2Connection()
         {
-            Credentials.Sending.ServerName = "smtp.wp.pl";
+            Credentials.Sending.ServerName = "poczta.o2.pl";
             Credentials.Sending.ServerPort = 465;
-            Credentials.Receiving.ServerName = "imap.wp.pl";
+            Credentials.Receiving.ServerName = "poczta.o2.pl";
             Credentials.Receiving.ServerPort = 993;
             UseSsl = true;
+            MailboxName = "INBOX";
+            HeadersOnly = false; 
         }
     }
 }

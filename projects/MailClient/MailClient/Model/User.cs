@@ -1,9 +1,10 @@
 ﻿using System.Security;
 using MailClient.Enum;
+using MailClient.Interface;
 
 namespace MailClient.Model
 {
-    public class User
+    public class User : IUser
     {
         #region properties
 

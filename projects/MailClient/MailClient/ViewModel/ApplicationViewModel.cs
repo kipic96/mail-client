@@ -4,6 +4,7 @@ using MailClient.Interface;
 using MailClient.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 
@@ -15,8 +16,8 @@ namespace MailClient.ViewModel
 
         private ICommand _changePageCommand;
         private IPageViewModel _currentPageViewModel;
-        private IList<IPageViewModel> _pageViewModels = new List<IPageViewModel>();
-        private MailBox _mailBox;
+        private PageViewModels _pageViewModels = new PageViewModels();
+        private IMailBox _mailBox;
 
         #endregion
 
@@ -24,16 +25,11 @@ namespace MailClient.ViewModel
 
         public ApplicationViewModel()
         {
-            //TODO add new viewmodels and add subsrictions to events 
-            _pageViewModels.Add(new LoggingViewModel());
-            _pageViewModels.Add(new ReceivedViewModel());
-            
-
+            //TODO add subsrictions to events         
             LoggingViewModel.LogInAction += ChangePageAction;
             LoggingViewModel.LogInUserAction += ReceiveEmailAction;            
 
-            // Set starting page
-            _currentPageViewModel = FindPageWithPageNumber(PageNumber.Logging);
+            _currentPageViewModel = _pageViewModels.FindPage(PageNumber.Logging);
         }
 
         #endregion
@@ -58,12 +54,12 @@ namespace MailClient.ViewModel
 
         #region properties
 
-        public IList<IPageViewModel> PageViewModels
+        public PageViewModels PageViewModels
         {
             get
             {
                 if (_pageViewModels == null)
-                    return new List<IPageViewModel>();
+                    return new PageViewModels();
                 return _pageViewModels;
             }
             private set
@@ -91,17 +87,7 @@ namespace MailClient.ViewModel
 
         #endregion
 
-        #region methods
-
-        private IPageViewModel FindPageWithPageNumber(PageNumber pageNumber)
-        {
-            foreach (IPageViewModel page in _pageViewModels)
-            {
-                if (page.PageNumber == pageNumber)
-                    return page;
-            }
-            return null;
-        }
+        #region methods        
 
         private void ChangeViewModel(IPageViewModel viewModel)
         {
@@ -116,7 +102,7 @@ namespace MailClient.ViewModel
 
         private void ChangePageAction(PageNumber pageNumber)
         {
-            ChangeViewModel(FindPageWithPageNumber(pageNumber));
+            ChangeViewModel(_pageViewModels.FindPage(pageNumber));
         }
 
         private void ReceiveEmailAction(User user)
@@ -127,22 +113,24 @@ namespace MailClient.ViewModel
             var receivedEmails = _mailBox.Receive();
             if (receivedEmails != null)
             {
-                ((ReceivedViewModel)FindPageWithPageNumber(PageNumber.Received)).ReceivedEmails 
-                    = new ObservableCollection<Mail>(receivedEmails);
-                ChangeViewModel(FindPageWithPageNumber(PageNumber.Received));
+                /*((ReceivedViewModel)_pageViewModels.FindPage(PageNumber.Received)).ReceivedMails 
+                    = (new ObservableCollection<Mail>(receivedEmails)).Cast<ReceivedMails>();*/
+               (ReceivedViewModel) _pageViewModels.FindPage(PageNumber.Received) = new ReceivedViewModel(receivedEmails);
+
+                ChangeViewModel(_pageViewModels.FindPage(PageNumber.Received));
             }            
         }
 
         private void SendEmailAction(User user, Mail mail)
         {
-            // testing mail
+            /*// testing mail
             mail.Message = "no siema 2 :D";
             mail.Subject = "elo";
             mail.To = "kipic96@gmail.com";
             // testing mail
 
             _mailBox = new MailBox(user);
-            _mailBox.Send(mail);
+            _mailBox.Send(mail);*/
         }
 
         #endregion

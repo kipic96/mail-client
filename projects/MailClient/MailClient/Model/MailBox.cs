@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MailClient.Model
 {
-    public class MailBox 
+    public class MailBox : IMailBox
     {
         public MailBox(User user)
         {

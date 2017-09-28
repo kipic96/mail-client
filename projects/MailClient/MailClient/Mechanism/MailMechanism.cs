@@ -20,7 +20,7 @@ namespace MailClient.Mechanism
 
         public IMailConnection MailConnection { get; }
 
-        public User User { get; }
+        public IUser User { get; }
 
         public IEnumerable<Mail> Receive()
         {
@@ -34,15 +34,12 @@ namespace MailClient.Mechanism
                 MailConnection.Credentials.Receiving.ServerPort, 
                 MailConnection.UseSsl))
             {
-                var mailboxName = "INBOX";
-                var headersOnly = false;
-                imapClient.SelectMailbox(mailboxName);
-                var mailMessages = imapClient.GetMessages(0, imapClient.GetMessageCount(), headersOnly);
+                imapClient.SelectMailbox(MailConnection.MailboxName);
+                var mailMessages = imapClient.GetMessages(0, imapClient.GetMessageCount(), MailConnection.HeadersOnly);
                 foreach (var mailMessage in mailMessages)
                 {
                     receivedMails.Add(Mail.Parse(mailMessage));
-                }
-                
+                }                
             }
             return receivedMails;
         }

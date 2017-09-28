@@ -34,7 +34,10 @@ namespace MailClient.Model
             var mail = new Mail();
             mail.From = mailMessage.From.ToString();
             IList mailAdressesTo = mailMessage.To as IList;
-            mail.To = mailAdressesTo[0].ToString();
+            if (mailAdressesTo.Count > 0)
+                mail.To = mailAdressesTo[0].ToString();
+            else
+                mail.To = null;
             mail.Subject = mailMessage.Subject;
             mail.Message = mailMessage.Body;
             return mail;

@@ -14,6 +14,7 @@
     
     <UserControl.Resources>
         <ResourceDictionary>
+            <viewmodel:ReceivedMails x:Key="ReceivedMails"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../ViewStyle/ReceivedViewStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>

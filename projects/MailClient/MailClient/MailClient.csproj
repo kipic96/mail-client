@@ -95,20 +95,24 @@
     <Compile Include="HelperClass\RelayCommand.cs" />
     <Compile Include="InterfaceImplementation\MailCredentials.cs" />
     <Compile Include="InterfaceImplementation\ServerCredentials.cs" />
+    <Compile Include="Interface\IMailBox.cs" />
     <Compile Include="Interface\IMailConnection.cs" />
     <Compile Include="Interface\IMailCredentials.cs" />
     <Compile Include="Interface\IMailMechanism.cs" />
     <Compile Include="Interface\IPageViewModel.cs" />
     <Compile Include="Interface\IServerCredentials.cs" />
+    <Compile Include="Interface\IUser.cs" />
     <Compile Include="Model\Mail.cs" />
     <Compile Include="Model\MailBox.cs" />
     <Compile Include="Mechanism\MailMechanism.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Connection\GmailConnection.cs" />
     <Compile Include="Connection\ConnectionFactory.cs" />
-    <Compile Include="Connection\OnetConnection.cs" />
-    <Compile Include="Connection\WpConnection.cs" />
+    <Compile Include="Connection\O2Connection.cs" />
+    <Compile Include="Connection\InteriaConnection.cs" />
     <Compile Include="ViewModel\LoggingViewModel.cs" />
+    <Compile Include="ViewModel\PageViewModels.cs" />
+    <Compile Include="ViewModel\ReceivedMails.cs" />
     <Compile Include="ViewStyle\MarginSetterViewStyle.cs" />
     <Compile Include="View\LoggingView.xaml.cs">
       <DependentUpon>LoggingView.xaml</DependentUpon>

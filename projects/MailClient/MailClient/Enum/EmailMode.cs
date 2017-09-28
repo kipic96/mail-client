@@ -5,7 +5,7 @@
     {
         Undefined = 0,
         Gmail,
-        WP,
-        Outlook
+        Interia,
+        O2
     }
 }
