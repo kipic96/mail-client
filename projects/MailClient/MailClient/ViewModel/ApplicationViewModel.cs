@@ -28,7 +28,8 @@ namespace MailClient.ViewModel
             //TODO add subsrictions to events         
             LoggingViewModel.LogInAction += ChangePageAction;
             LoggingViewModel.LogInUserAction += LogInUserAction;
-            ReceivedViewModel.ReceiveMails += ReceiveEmailAction;        
+            ReceivedViewModel.ReceiveMails += ReceiveMailsAction;
+            ReceivedViewModel.MailChoosen += MailChoosenAction;  
 
             _currentPageViewModel = _pageViewModels.FindPage(PageNumber.Logging);
         }
@@ -107,7 +108,7 @@ namespace MailClient.ViewModel
             ChangeViewModel(_pageViewModels.FindPage(pageNumber));
         }
 
-        private IEnumerable<Mail> ReceiveEmailAction()
+        private IEnumerable<Mail> ReceiveMailsAction()
         {            
             return _mailBox.Receive();           
         }
@@ -120,6 +121,11 @@ namespace MailClient.ViewModel
         private void SendEmailAction(Mail mail)
         {
             _mailBox.Send(mail);
+        }
+
+        private void MailChoosenAction(int mailId)
+        {
+
         }
 
         #endregion
