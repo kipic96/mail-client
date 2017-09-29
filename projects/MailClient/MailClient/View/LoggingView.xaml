@@ -21,7 +21,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <StackPanel viewstyle:MarginSetterViewStyle.Margin="0,0,0,0">
+    <StackPanel>
         <TextBlock Style="{StaticResource TextBlock}" Text="{Binding PageName}"></TextBlock>
         <Label Style="{StaticResource Label}">Login</Label>
         <TextBox Name="boxLogin" Style="{StaticResource Login}" Text="{Binding Login}" Grid.Row="1" Grid.Column="1"/>

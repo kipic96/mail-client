@@ -125,7 +125,9 @@ namespace MailClient.ViewModel
 
         private void MailChoosenAction(int mailId)
         {
-
+            // TODO error from null ReceivedEmails because all the ReceivedViewModel page is cleared from any data
+            Mail mail = (_pageViewModels.FindPage(PageNumber.Received) as ReceivedViewModel).ReceivedMails.ElementAt(mailId);
+            ChangeViewModel(new MailViewModel(mail));
         }
 
         #endregion

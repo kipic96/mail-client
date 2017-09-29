@@ -4,6 +4,7 @@
     {
         Logging = 0,
         Received,
-        Send
+        Send,
+        Mail       
     }
 }

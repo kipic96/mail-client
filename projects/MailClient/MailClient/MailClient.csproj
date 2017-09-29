@@ -90,7 +90,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Dictionary\PageName.cs" />
-    <Compile Include="Enum\PageName.cs" />
+    <Compile Include="Enum\PageNumber.cs" />
     <Compile Include="HelperClass\BindableClass.cs" />
     <Compile Include="HelperClass\DataContextSpy.cs" />
     <Compile Include="HelperClass\RelayCommand.cs" />
@@ -112,8 +112,9 @@
     <Compile Include="Connection\O2Connection.cs" />
     <Compile Include="Connection\InteriaConnection.cs" />
     <Compile Include="ViewModel\LoggingViewModel.cs" />
+    <Compile Include="ViewModel\MailViewModel.cs" />
     <Compile Include="ViewModel\PageViewModels.cs" />
-    <Compile Include="ViewStyle\MarginSetterViewStyle.cs" />
+    <Compile Include="ViewStyle\ViewStyleNamespace.cs" />
     <Compile Include="View\LoggingView.xaml.cs">
       <DependentUpon>LoggingView.xaml</DependentUpon>
     </Compile>
