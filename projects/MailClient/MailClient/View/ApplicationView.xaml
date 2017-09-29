@@ -16,6 +16,9 @@
             <DataTemplate DataType="{x:Type viewmodel:ReceivedViewModel}">
                 <local:ReceivedView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:PageViewModels}">
+                <local:ReceivedView />
+            </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../ViewStyle/ApplicationViewStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
@@ -24,7 +27,7 @@
 
     <DockPanel>
         <Border Style="{StaticResource Border}">
-            <ItemsControl ItemsSource="{Binding PageViewModels}">
+            <ItemsControl ItemsSource="{Binding PageViewModels.Pages}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button Style="{StaticResource PageButton}"/>

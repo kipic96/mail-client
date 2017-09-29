@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MailClient.ViewModel
 {
-    class PageViewModels
+    class PageViewModels 
     {
         private IList<IPageViewModel> _pages { get; set; } = new List<IPageViewModel>();
 
@@ -17,6 +17,19 @@ namespace MailClient.ViewModel
             _pages.Add(new LoggingViewModel());
             _pages.Add(new ReceivedViewModel());
             // TODO here add new viewModels
+        }
+
+        public IList<IPageViewModel> Pages
+        {
+            get
+            {
+                return _pages;
+            }
+            set
+            {
+                _pages = value;
+
+            }
         }
 
         public IPageViewModel FindPage(PageNumber pageNumber)

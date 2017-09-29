@@ -92,6 +92,7 @@
     <Compile Include="Dictionary\PageName.cs" />
     <Compile Include="Enum\PageName.cs" />
     <Compile Include="HelperClass\BindableClass.cs" />
+    <Compile Include="HelperClass\DataContextSpy.cs" />
     <Compile Include="HelperClass\RelayCommand.cs" />
     <Compile Include="InterfaceImplementation\MailCredentials.cs" />
     <Compile Include="InterfaceImplementation\ServerCredentials.cs" />
@@ -112,7 +113,6 @@
     <Compile Include="Connection\InteriaConnection.cs" />
     <Compile Include="ViewModel\LoggingViewModel.cs" />
     <Compile Include="ViewModel\PageViewModels.cs" />
-    <Compile Include="ViewModel\ReceivedMails.cs" />
     <Compile Include="ViewStyle\MarginSetterViewStyle.cs" />
     <Compile Include="View\LoggingView.xaml.cs">
       <DependentUpon>LoggingView.xaml</DependentUpon>

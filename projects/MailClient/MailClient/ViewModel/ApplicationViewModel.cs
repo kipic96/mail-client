@@ -27,7 +27,8 @@ namespace MailClient.ViewModel
         {
             //TODO add subsrictions to events         
             LoggingViewModel.LogInAction += ChangePageAction;
-            LoggingViewModel.LogInUserAction += ReceiveEmailAction;            
+            LoggingViewModel.LogInUserAction += LogInUserAction;
+            ReceivedViewModel.ReceiveMails += ReceiveEmailAction;        
 
             _currentPageViewModel = _pageViewModels.FindPage(PageNumber.Logging);
         }
@@ -91,8 +92,9 @@ namespace MailClient.ViewModel
 
         private void ChangeViewModel(IPageViewModel viewModel)
         {
-            if (_currentPageViewModel != viewModel)
-                _currentPageViewModel = viewModel;
+            //TODO something is wrong with changing view models
+            if (CurrentPageViewModel != viewModel)
+                CurrentPageViewModel = viewModel;
         }
 
         private bool ValidateChangeViewModel(IPageViewModel viewModel)
@@ -105,32 +107,19 @@ namespace MailClient.ViewModel
             ChangeViewModel(_pageViewModels.FindPage(pageNumber));
         }
 
-        private void ReceiveEmailAction(User user)
-        {
-            _mailBox = new MailBox(user); // do i need to construct it here or maybe i can do it earlier
-            // TO DO do something with received emails, maybe with events, they need to go to ReceivedViewModel
-            
-            var receivedEmails = _mailBox.Receive();
-            if (receivedEmails != null)
-            {
-                /*((ReceivedViewModel)_pageViewModels.FindPage(PageNumber.Received)).ReceivedMails 
-                    = (new ObservableCollection<Mail>(receivedEmails)).Cast<ReceivedMails>();*/
-               (ReceivedViewModel) _pageViewModels.FindPage(PageNumber.Received) = new ReceivedViewModel(receivedEmails);
-
-                ChangeViewModel(_pageViewModels.FindPage(PageNumber.Received));
-            }            
+        private IEnumerable<Mail> ReceiveEmailAction()
+        {            
+            return _mailBox.Receive();           
         }
 
-        private void SendEmailAction(User user, Mail mail)
+        private void LogInUserAction(IUser user)
         {
-            /*// testing mail
-            mail.Message = "no siema 2 :D";
-            mail.Subject = "elo";
-            mail.To = "kipic96@gmail.com";
-            // testing mail
+            _mailBox = new MailBox(user as User);
+        }
 
-            _mailBox = new MailBox(user);
-            _mailBox.Send(mail);*/
+        private void SendEmailAction(Mail mail)
+        {
+            _mailBox.Send(mail);
         }
 
         #endregion

@@ -36,9 +36,13 @@ namespace MailClient.Mechanism
             {
                 imapClient.SelectMailbox(MailConnection.MailboxName);
                 var mailMessages = imapClient.GetMessages(0, imapClient.GetMessageCount(), MailConnection.HeadersOnly);
+                int mailCount = 0;
                 foreach (var mailMessage in mailMessages)
                 {
-                    receivedMails.Add(Mail.Parse(mailMessage));
+                    Mail mail = Mail.Parse(mailMessage);
+                    mail.Id = mailCount;
+                    receivedMails.Add(mail);
+                    mailCount++;
                 }                
             }
             return receivedMails;

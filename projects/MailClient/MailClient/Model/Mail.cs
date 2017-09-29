@@ -6,6 +6,7 @@ namespace MailClient.Model
     {
         #region properties
 
+        public int Id { get; set; }
         public string From { get; set; }
         public string To { get; set; }
         public string Subject { get; set; }
@@ -18,7 +19,16 @@ namespace MailClient.Model
         public Mail() { }
 
         public Mail(string from, string to, string subject, string message)
+        { 
+            From = from;
+            To = to;
+            Subject = subject;
+            Message = message;
+        }
+
+        public Mail(int id, string from, string to, string subject, string message)
         {
+            Id = id;
             From = from;
             To = to;
             Subject = subject;

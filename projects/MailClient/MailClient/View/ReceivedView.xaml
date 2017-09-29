@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:MailClient.View"
              xmlns:viewmodel="clr-namespace:MailClient.ViewModel" 
              xmlns:viewstyle="clr-namespace:MailClient.ViewStyle"
+             xmlns:helper="clr-namespace:MailClient.HelperClass"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
@@ -14,27 +15,41 @@
     
     <UserControl.Resources>
         <ResourceDictionary>
-            <viewmodel:ReceivedMails x:Key="ReceivedMails"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../ViewStyle/ReceivedViewStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid>
-        <StackPanel Margin="50 0 0 40">
-            <ItemsControl x:Name="received" ItemsSource="{Binding DataContext.ReceivedEmails}">
-                <ItemsControl.ItemTemplate>
+    <StackPanel>
+        <TextBlock Text="{Binding PageName}" Margin="0 15 0 10" HorizontalAlignment="Center"/>
+        <Button Content="Receive" Command="{Binding Path=ReceiveMailsCommand}" Margin="75 0 0 10" Width="75" HorizontalAlignment="Left"/> 
+        <StackPanel Margin="50 0 0 0">
+            <ListBox x:Name="Received" ItemsSource="{Binding ReceivedMails}" BorderThickness="0">
+                <ListBox.Resources>
+                    <helper:DataContextSpy x:Key="dataContextSpy"/>
+                </ListBox.Resources>
+                
+                <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="10" Orientation="Horizontal" >
-                            <StackPanel Margin="10 0 0 0" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Sender}" FontSize="12" />
-                                <TextBlock Text="{Binding Title}" FontSize="10" />
-                            </StackPanel>
+                        <StackPanel Margin="10" Orientation="Horizontal">
+                            <TextBlock>
+                                <Hyperlink 
+                                    Command="{Binding Source={StaticResource dataContextSpy}, Path=DataContext.MailChooseCommand}" 
+                                    CommandParameter="{Binding Id}"
+                                    Foreground="Black"
+                                    TextDecorations="None">
+                                    <StackPanel Margin="10 0 0 0" VerticalAlignment="Center" >
+                                            <TextBlock Text="{Binding From}" FontSize="12" />
+                                            <TextBlock Text="{Binding Subject}" FontSize="10"/>                                        
+                                    </StackPanel>
+                                </Hyperlink>
+                            </TextBlock>                            
                         </StackPanel>
                     </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </StackPanel>
-    </Grid>
+    </StackPanel>
+
 </UserControl>

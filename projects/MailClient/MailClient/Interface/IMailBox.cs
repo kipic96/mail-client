@@ -11,6 +11,6 @@ namespace MailClient.Interface
     {
         void Send(Mail mail);
         IEnumerable<Mail> Receive();
-        void ChangeUser(User user);
+        void ChangeUser(IUser user);
     }
 }

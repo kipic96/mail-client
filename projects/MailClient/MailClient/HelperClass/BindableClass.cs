@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace MailClient.HelperClass
 {
-    class BindableClass : INotifyPropertyChanged
+    public class BindableClass : INotifyPropertyChanged
     {
         #region Debugging Aides
 

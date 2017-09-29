@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MailClient.Interface
 {
-    interface IUser
+    public interface IUser
     {
         string Login { get; set; }
         SecureString Password { get; set; }

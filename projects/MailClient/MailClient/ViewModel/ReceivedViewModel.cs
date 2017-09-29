@@ -5,17 +5,26 @@ using System;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using MailClient.Model;
+using System.Windows.Input;
+using System.Windows;
 
 namespace MailClient.ViewModel
 {
-    class ReceivedViewModel : BindableClass, IPageViewModel
+    public class ReceivedViewModel : BindableClass, IPageViewModel
     {
-        private ReceivedMails _receivedMails;
+        private ObservableCollection<Mail> _receivedMails;
+        private ICommand _receivedMailsCommand;
+        private ICommand _mailChooseCommand;
 
         public string PageName { get; } = Dictionary.PageName.Received;
         public PageNumber PageNumber { get; } = PageNumber.Received;
 
-        public ReceivedMails ReceivedMails
+        public ReceivedViewModel()
+        {
+
+        }
+
+        public ObservableCollection<Mail> ReceivedMails
         {
             get
             {
@@ -28,11 +37,56 @@ namespace MailClient.ViewModel
             }
         }
 
-        public ReceivedViewModel(IEnumerable<Mail> collection)
+        public ICommand ReceiveMailsCommand
         {
-            _receivedMails = collection;
+            get
+            {
+                if (_mailChooseCommand == null)
+                {
+                    _mailChooseCommand = new RelayCommand(
+                        p => ReceiveMailsAndSafe(),
+                        p => ValidateReceiveMailsAndSafe());
+                }
+                return _mailChooseCommand;
+            }
         }
 
-        public static Action ReceiveEmails { get; set; }
+        public ICommand MailChooseCommand
+        {
+            get
+            {
+                if (_receivedMailsCommand == null)
+                {
+                    _receivedMailsCommand = new RelayCommand(
+                        mail => MailChoose((int)mail),
+                        mail => ValidateMailChoose());
+                }
+                return _receivedMailsCommand;
+            }
+        }
+
+        private void MailChoose(int mailId)
+        {
+            MailChoosen(mailId);
+        }
+
+        private bool ValidateMailChoose()
+        {
+            return true;
+        }
+
+        private void ReceiveMailsAndSafe()
+        {
+            IEnumerable<Mail> receivedMails = ReceiveMails();
+            ReceivedMails = new ObservableCollection<Mail>(receivedMails);
+        }
+
+        private bool ValidateReceiveMailsAndSafe()
+        {
+            return true;
+        }
+
+        public static Func<IEnumerable<Mail>> ReceiveMails { get; set; }
+        public static Action<int> MailChoosen { get; set; }
     }
 }

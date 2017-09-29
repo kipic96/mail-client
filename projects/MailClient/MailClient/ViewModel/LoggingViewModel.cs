@@ -71,7 +71,7 @@ namespace MailClient.ViewModel
         #region events
 
         public static Action<PageNumber> LogInAction { get; set; }
-        public static Action<User> LogInUserAction { get; set; }
+        public static Action<IUser> LogInUserAction { get; set; }
 
         #endregion
 
@@ -99,11 +99,7 @@ namespace MailClient.ViewModel
         {
             LogInActions();
 
-            //TODO LogIn to the email, or should be in model?
-            // Check if login and password for chosen email are good
-            // Go to Received Page and receive email
-            
-
+            // Check if login and password for chosen email are good 
         }
 
         private bool LogInValidation()

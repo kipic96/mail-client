@@ -25,9 +25,9 @@ namespace MailClient.Model
             return _mailMechanism.Receive();
         }
 
-        public void ChangeUser(User user)
+        public void ChangeUser(IUser user)
         {
-            _mailMechanism = new MailMechanism(user, ConnectionFactory.Create(user.EmailMode));
+            _mailMechanism = new MailMechanism(user as User, ConnectionFactory.Create(user.EmailMode));
         }
     }
 }
