@@ -2,15 +2,17 @@
 using MailClient.Interface;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MailClient.ViewModel
 {
-    class PageViewModels 
+    public class PageViewModels 
     {
-        private IList<IPageViewModel> _pages { get; set; } = new List<IPageViewModel>();
+        private IList<IPageViewModel> _pages { get; set; } = new ObservableCollection<IPageViewModel>();
 
         public PageViewModels()
         {
@@ -27,9 +29,8 @@ namespace MailClient.ViewModel
             }
             set
             {
-                _pages = value;
-
-            // Its not observable collection, not seen changes in the GUI
+                _pages = value;                
+                 // Its observable collection, but dont know if seen changes in the GUI
             }
         }
 

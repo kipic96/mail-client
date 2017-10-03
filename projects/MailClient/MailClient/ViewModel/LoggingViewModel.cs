@@ -3,7 +3,9 @@ using MailClient.HelperClass;
 using MailClient.Interface;
 using MailClient.Model;
 using System;
+using System.Diagnostics;
 using System.Security;
+using System.Windows;
 using System.Windows.Input;
 
 
@@ -11,18 +13,12 @@ namespace MailClient.ViewModel
 {
     class LoggingViewModel : BindableClass, IPageViewModel
     {
-        #region fields     
-
         // delete it after testing
         private string _login = "testingemail10002@gmail.com";
         private EmailMode _emailMode = EmailMode.Undefined;
         // go to false all of them after testing
         private bool[] _emailModeTable = new bool[] { true, false, false };
         private ICommand _logInCommand;
-
-        #endregion
-
-        #region properties 
 
         public PageNumber PageNumber { get; } = PageNumber.Logging;
         public string PageName { get; private set; } = Dictionary.PageName.Logging;
@@ -66,16 +62,9 @@ namespace MailClient.ViewModel
             }
         }
 
-        #endregion
-
-        #region events
-
         public static Action<PageNumber> LogInAction { get; set; }
         public static Action<IUser> LogInUserAction { get; set; }
 
-        #endregion
-
-        #region commands
 
         public ICommand LogInCommand
         {
@@ -90,10 +79,6 @@ namespace MailClient.ViewModel
                 return _logInCommand;
             }
         }
-
-        #endregion
-
-        #region methods
 
         private void LogIn()
         {
@@ -112,7 +97,5 @@ namespace MailClient.ViewModel
             LogInUserAction(new User(Login, SecurePassword, EmailMode));
             LogInAction(PageNumber.Received);
         }
-
-        #endregion
     }
 }

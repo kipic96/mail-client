@@ -31,6 +31,7 @@ namespace MailClient.ViewModel
             ReceivedViewModel.ReceiveMails += ReceiveMailsAction;
             ReceivedViewModel.MailChoosen += MailChoosenAction;  
 
+
             _currentPageViewModel = _pageViewModels.FindPage(PageNumber.Logging);
         }
 

@@ -25,11 +25,12 @@ namespace MailClient.Mechanism
         public IEnumerable<Mail> Receive()
         {
             IList<Mail> receivedMails = new List<Mail>();
-            string password = new NetworkCredential(string.Empty, User.Password).Password;
+            // converting SecureString to string
+            string userPassword = new NetworkCredential(string.Empty, User.Password).Password;
             using (var imapClient = new ImapClient(
                 MailConnection.Credentials.Receiving.ServerName, 
                 User.Login, 
-                password,
+                userPassword,
                 AuthMethods.Login, 
                 MailConnection.Credentials.Receiving.ServerPort, 
                 MailConnection.UseSsl))
@@ -39,8 +40,7 @@ namespace MailClient.Mechanism
                 int mailCount = 0;
                 foreach (var mailMessage in mailMessages)
                 {
-                    Mail mail = Mail.Parse(mailMessage);
-                    mail.Id = mailCount;
+                    Mail mail = Mail.Parse(mailMessage, mailCount);
                     receivedMails.Add(mail);
                     mailCount++;
                 }                

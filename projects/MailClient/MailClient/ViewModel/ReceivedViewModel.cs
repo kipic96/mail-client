@@ -19,11 +19,6 @@ namespace MailClient.ViewModel
         public string PageName { get; } = Dictionary.PageName.Received;
         public PageNumber PageNumber { get; } = PageNumber.Received;
 
-        public ReceivedViewModel()
-        {
-
-        }
-
         public ObservableCollection<Mail> ReceivedMails
         {
             get

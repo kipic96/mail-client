@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using MailClient.ViewModel;
+using System;
+using System.Diagnostics;
 
 namespace MailClient
 {
@@ -10,15 +12,20 @@ namespace MailClient
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            ApplicationView app = new ApplicationView();
-            ApplicationViewModel context = new ApplicationViewModel();
-            app.DataContext = context;
-            app.Show();
-        }
+            base.OnStartup(e);
 
-        private void Application_Startup(object sender, StartupEventArgs e)
-        {
-
+            try
+            {
+                var app = new ApplicationView();
+                ApplicationViewModel context = new ApplicationViewModel();
+                app.Show();
+                app.DataContext = context;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.GetBaseException().Message);
+            }
+            
         }
     }
 }

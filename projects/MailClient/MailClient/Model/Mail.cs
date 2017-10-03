@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using AE.Net.Mail;
 
 namespace MailClient.Model
 {
@@ -50,6 +52,13 @@ namespace MailClient.Model
                 mail.To = null;
             mail.Subject = mailMessage.Subject;
             mail.Message = mailMessage.Body;
+            return mail;
+        }
+
+        internal static Mail Parse(MailMessage mailMessage, int mailCount)
+        {
+            Mail mail = Parse(mailMessage);
+            mail.Id = mailCount;
             return mail;
         }
 
