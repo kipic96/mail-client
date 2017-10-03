@@ -20,6 +20,9 @@
             <DataTemplate DataType="{x:Type viewmodel:ReceivedViewModel}">
                 <local:ReceivedView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:MailViewModel}">
+                <local:MailView/>
+            </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../ViewStyle/ApplicationViewStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
