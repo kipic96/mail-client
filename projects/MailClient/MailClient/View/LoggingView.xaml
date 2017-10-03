@@ -9,9 +9,9 @@
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="600">
 
-    <UserControl.DataContext>
+  <!--  <UserControl.DataContext>
         <viewmodel:LoggingViewModel/>
-    </UserControl.DataContext> 
+    </UserControl.DataContext>  -->
     
     <UserControl.Resources>
         <ResourceDictionary>

@@ -9,9 +9,9 @@
              xmlns:helper="clr-namespace:MailClient.HelperClass"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.DataContext>
+   <!-- <UserControl.DataContext>
         <viewmodel:ReceivedViewModel/>
-    </UserControl.DataContext>
+    </UserControl.DataContext> -->
     
     <UserControl.Resources>
         <ResourceDictionary>
