@@ -23,6 +23,9 @@
             <DataTemplate DataType="{x:Type viewmodel:MailViewModel}">
                 <local:MailView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:SendViewModel}">
+                <local:SendView/>
+            </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../ViewStyle/ApplicationViewStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>

@@ -18,6 +18,7 @@ namespace MailClient.ViewModel
         {
             _pages.Add(new LoggingViewModel());
             _pages.Add(new ReceivedViewModel());
+            _pages.Add(new SendViewModel());
             // TODO here add new viewModels
         }
 

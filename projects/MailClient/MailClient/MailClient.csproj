@@ -125,6 +125,7 @@
     <Compile Include="ViewModel\LoggingViewModel.cs" />
     <Compile Include="ViewModel\MailViewModel.cs" />
     <Compile Include="ViewModel\PageViewModels.cs" />
+    <Compile Include="ViewModel\SendViewModel.cs" />
     <Compile Include="ViewStyle\ViewStyleNamespace.cs" />
     <Compile Include="View\LoggingView.xaml.cs">
       <DependentUpon>LoggingView.xaml</DependentUpon>
@@ -136,11 +137,18 @@
     <Compile Include="View\ReceivedView.xaml.cs">
       <DependentUpon>ReceivedView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SendView.xaml.cs">
+      <DependentUpon>SendView.xaml</DependentUpon>
+    </Compile>
     <Page Include="ViewStyle\ApplicationViewStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewStyle\MailViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewStyle\SendViewStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -173,6 +181,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ReceivedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SendView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

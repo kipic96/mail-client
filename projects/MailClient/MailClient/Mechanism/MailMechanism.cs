@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
 using System.Windows;
 
 namespace MailClient.Mechanism
@@ -45,6 +44,7 @@ namespace MailClient.Mechanism
                     mailCount++;
                 }                
             }
+            (receivedMails as List<Mail>).Reverse();
             return receivedMails;
         }
 

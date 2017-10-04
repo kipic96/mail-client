@@ -62,8 +62,8 @@ namespace MailClient.ViewModel
             }
         }
 
-        public static Action<PageNumber> LogInAction { get; set; }
-        public static Action<IUser> LogInUserAction { get; set; }
+        public Action<PageNumber> LogInAction { get; set; }
+        public Action<IUser> LogInUserAction { get; set; }
 
 
         public ICommand LogInCommand

@@ -81,7 +81,7 @@ namespace MailClient.ViewModel
             return true;
         }
 
-        public static Func<IEnumerable<Mail>> ReceiveMails { get; set; }
-        public static Action<int> MailChoosen { get; set; }
+        public Func<IEnumerable<Mail>> ReceiveMails { get; set; }
+        public Action<int> MailChoosen { get; set; }
     }
 }

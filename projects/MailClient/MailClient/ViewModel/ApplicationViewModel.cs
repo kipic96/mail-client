@@ -25,11 +25,17 @@ namespace MailClient.ViewModel
 
         public ApplicationViewModel()
         {
-            //TODO add subsrictions to events         
-            LoggingViewModel.LogInAction += ChangePageAction;
-            LoggingViewModel.LogInUserAction += LogInUserAction;
-            ReceivedViewModel.ReceiveMails += ReceiveMailsAction;
-            ReceivedViewModel.MailChoosen += MailChoosenAction;  
+            //TODO add subsrictions to events  
+            (_pageViewModels.FindPage(PageNumber.Logging) as LoggingViewModel)
+                .LogInAction += ChangePageAction;
+            (_pageViewModels.FindPage(PageNumber.Logging) as LoggingViewModel)
+                .LogInUserAction += LogInUserAction;
+            (_pageViewModels.FindPage(PageNumber.Received) as ReceivedViewModel)
+                .ReceiveMails += ReceiveMailsAction;
+            (_pageViewModels.FindPage(PageNumber.Received) as ReceivedViewModel)
+                .MailChoosen += MailChoosenAction;
+            (_pageViewModels.FindPage(PageNumber.Send) as SendViewModel)
+                .SendMail += SendMailAction;
 
 
             _currentPageViewModel = _pageViewModels.FindPage(PageNumber.Logging);
@@ -119,9 +125,10 @@ namespace MailClient.ViewModel
             _mailBox = new MailBox(user as User);
         }
 
-        private void SendEmailAction(Mail mail)
+        private void SendMailAction(Mail mail)
         {
             _mailBox.Send(mail);
+            ChangeViewModel(_pageViewModels.FindPage(PageNumber.Received));
         }
 
         private void MailChoosenAction(int mailId)
