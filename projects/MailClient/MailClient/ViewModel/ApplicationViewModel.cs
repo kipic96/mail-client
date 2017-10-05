@@ -1,9 +1,9 @@
 ﻿using MailClient.Enum;
 using MailClient.HelperClass;
-using MailClient.Interface;
 using MailClient.Model;
+using MailClient.Model.Interface;
+using MailClient.ViewModel.Interface;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 
@@ -27,9 +27,7 @@ namespace MailClient.ViewModel
         {
             //TODO add subsrictions to events  
             (_pageViewModels.FindPage(PageNumber.Logging) as LoggingViewModel)
-                .LogInAction += ChangePageAction;
-            (_pageViewModels.FindPage(PageNumber.Logging) as LoggingViewModel)
-                .LogInUserAction += LogInUserAction;
+                .LogInAction += LogInAction;
             (_pageViewModels.FindPage(PageNumber.Received) as ReceivedViewModel)
                 .ReceiveMails += ReceiveMailsAction;
             (_pageViewModels.FindPage(PageNumber.Received) as ReceivedViewModel)
@@ -99,10 +97,22 @@ namespace MailClient.ViewModel
         #region methods        
 
         private void ChangeViewModel(IPageViewModel viewModel)
-        {
-            //TODO something is wrong with changing view models
+        {            
             if (CurrentPageViewModel != viewModel)
+            {
+                if (viewModel is LoggingViewModel)
+                {
+                    LogOut();
+                }
                 CurrentPageViewModel = viewModel;
+            }                
+        }
+
+        private void LogOut()
+        {
+            _mailBox = new MailBox();
+            _pageViewModels.Clear();
+            int t = 2;
         }
 
         private bool ValidateChangeViewModel(IPageViewModel viewModel)
@@ -115,17 +125,26 @@ namespace MailClient.ViewModel
             ChangeViewModel(_pageViewModels.FindPage(pageNumber));
         }
 
-        private IEnumerable<Mail> ReceiveMailsAction()
+        private IEnumerable<IMail> ReceiveMailsAction()
         {            
             return _mailBox.Receive();           
         }
 
-        private void LogInUserAction(IUser user)
+        private void LogInAction(IUser user)
         {
             _mailBox = new MailBox(user as User);
+            if (Model.Security.AuthenticationValidator.Authenticate(_mailBox))
+            {
+                ChangeViewModel(_pageViewModels.FindPage(PageNumber.Received));
+            }
+            else
+            {
+                _mailBox = new MailBox();
+                Log.LogMessage.Show(Dictionary.LogMessage.WrongLoginOrPassword);
+            }            
         }
 
-        private void SendMailAction(Mail mail)
+        private void SendMailAction(IMail mail)
         {
             _mailBox.Send(mail);
             ChangeViewModel(_pageViewModels.FindPage(PageNumber.Received));
@@ -134,7 +153,7 @@ namespace MailClient.ViewModel
         private void MailChoosenAction(int mailId)
         {
             // TODO error from null ReceivedEmails because all the ReceivedViewModel page is cleared from any data
-            Mail mail = (_pageViewModels.FindPage(PageNumber.Received) as ReceivedViewModel).ReceivedMails.ElementAt(mailId);
+            IMail mail = (_pageViewModels.FindPage(PageNumber.Received) as ReceivedViewModel).ReceivedMails.ElementAt(mailId);
             ChangeViewModel(new MailViewModel(mail));
         }
 

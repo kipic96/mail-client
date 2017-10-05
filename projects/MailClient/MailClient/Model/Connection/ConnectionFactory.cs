@@ -1,7 +1,7 @@
 ﻿using MailClient.Enum;
-using MailClient.Interface;
+using MailClient.Model.Interface;
 
-namespace MailClient.Connection
+namespace MailClient.Model.Connection
 {
     static class ConnectionFactory
     {

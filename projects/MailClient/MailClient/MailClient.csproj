@@ -100,31 +100,37 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dictionary\LogMessage.cs" />
     <Compile Include="Dictionary\PageName.cs" />
     <Compile Include="Enum\PageNumber.cs" />
     <Compile Include="HelperClass\BindableClass.cs" />
     <Compile Include="HelperClass\DataContextSpy.cs" />
     <Compile Include="HelperClass\RelayCommand.cs" />
-    <Compile Include="InterfaceImplementation\MailCredentials.cs" />
-    <Compile Include="InterfaceImplementation\ServerCredentials.cs" />
-    <Compile Include="Interface\IMailBox.cs" />
-    <Compile Include="Interface\IMailConnection.cs" />
-    <Compile Include="Interface\IMailCredentials.cs" />
-    <Compile Include="Interface\IMailMechanism.cs" />
-    <Compile Include="Interface\IPageViewModel.cs" />
-    <Compile Include="Interface\IServerCredentials.cs" />
-    <Compile Include="Interface\IUser.cs" />
+    <Compile Include="Model\InterfaceImplementation\MailCredentials.cs" />
+    <Compile Include="Model\InterfaceImplementation\ServerCredentials.cs" />
+    <Compile Include="Model\Interface\IMailBox.cs" />
+    <Compile Include="Model\Interface\IMailConnection.cs" />
+    <Compile Include="Model\Interface\IMailCredentials.cs" />
+    <Compile Include="Model\Interface\IMailMechanism.cs" />
+    <Compile Include="ViewModel\Interface\IPageViewModel.cs" />
+    <Compile Include="Model\Interface\IServerCredentials.cs" />
+    <Compile Include="Model\Interface\IUser.cs" />
+    <Compile Include="Log\LogMessage.cs" />
+    <Compile Include="Model\Interface\IMail.cs" />
     <Compile Include="Model\Mail.cs" />
     <Compile Include="Model\MailBox.cs" />
     <Compile Include="Mechanism\MailMechanism.cs" />
+    <Compile Include="Model\Security\AuthenticationValidator.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="Connection\GmailConnection.cs" />
-    <Compile Include="Connection\ConnectionFactory.cs" />
-    <Compile Include="Connection\O2Connection.cs" />
-    <Compile Include="Connection\InteriaConnection.cs" />
+    <Compile Include="Model\Connection\GmailConnection.cs" />
+    <Compile Include="Model\Connection\ConnectionFactory.cs" />
+    <Compile Include="Model\Connection\O2Connection.cs" />
+    <Compile Include="Model\Connection\InteriaConnection.cs" />
+    <Compile Include="ViewModel\Interface\IPageClearable.cs" />
     <Compile Include="ViewModel\LoggingViewModel.cs" />
     <Compile Include="ViewModel\MailViewModel.cs" />
     <Compile Include="ViewModel\PageViewModels.cs" />
+    <Compile Include="Security\EmailValidator.cs" />
     <Compile Include="ViewModel\SendViewModel.cs" />
     <Compile Include="ViewStyle\ViewStyleNamespace.cs" />
     <Compile Include="View\LoggingView.xaml.cs">
@@ -231,6 +237,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

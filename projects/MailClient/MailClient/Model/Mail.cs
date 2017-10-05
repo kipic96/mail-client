@@ -1,10 +1,10 @@
-﻿using System;
+﻿using AE.Net.Mail;
+using MailClient.Model.Interface;
 using System.Collections;
-using AE.Net.Mail;
 
 namespace MailClient.Model
 {
-    public class Mail
+    public class Mail : IMail
     {
         #region properties
 
@@ -20,9 +20,8 @@ namespace MailClient.Model
 
         public Mail() { }
 
-        public Mail(string from, string to, string subject, string message)
+        public Mail(string to, string subject, string message)
         { 
-            From = from;
             To = to;
             Subject = subject;
             Message = message;
@@ -55,11 +54,21 @@ namespace MailClient.Model
             return mail;
         }
 
-        internal static Mail Parse(MailMessage mailMessage, int mailCount)
+        public static Mail Parse(MailMessage mailMessage, int mailCount)
         {
             Mail mail = Parse(mailMessage);
             mail.Id = mailCount;
             return mail;
+        }
+
+        public void Clear()
+        {
+            Id = 0;
+            From = string.Empty;
+            To = string.Empty;
+            Subject = string.Empty;
+            Message = string.Empty;
+
         }
 
         #endregion

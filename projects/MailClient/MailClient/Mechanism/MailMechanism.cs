@@ -1,11 +1,10 @@
 ﻿using AE.Net.Mail;
-using MailClient.Interface;
 using MailClient.Model;
+using MailClient.Model.Interface;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
-using System.Windows;
 
 namespace MailClient.Mechanism
 {
@@ -27,22 +26,22 @@ namespace MailClient.Mechanism
             // converting SecureString to string
             string userPassword = new NetworkCredential(string.Empty, User.Password).Password;
             using (var imapClient = new ImapClient(
-                MailConnection.Credentials.Receiving.ServerName, 
-                User.Login, 
+                MailConnection.Credentials.Receiving.ServerName,
+                User.Login,
                 userPassword,
-                AuthMethods.Login, 
-                MailConnection.Credentials.Receiving.ServerPort, 
+                AuthMethods.Login,
+                MailConnection.Credentials.Receiving.ServerPort,
                 MailConnection.UseSsl))
             {
                 imapClient.SelectMailbox(MailConnection.MailboxName);
                 var mailMessages = imapClient.GetMessages(0, imapClient.GetMessageCount(), MailConnection.HeadersOnly);
-                int mailCount = 0;
+                int mailCount = imapClient.GetMessageCount() - 1;
                 foreach (var mailMessage in mailMessages)
                 {
-                    Mail mail = Mail.Parse(mailMessage, mailCount);
+                   Mail mail = Mail.Parse(mailMessage, mailCount);
                     receivedMails.Add(mail);
-                    mailCount++;
-                }                
+                    mailCount--;
+                }
             }
             (receivedMails as List<Mail>).Reverse();
             return receivedMails;
@@ -65,9 +64,31 @@ namespace MailClient.Mechanism
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Log.LogMessage.Show(ex.Message);
             }
+        }
 
+        public bool Authenticate()
+        {
+            string userPassword = new NetworkCredential(string.Empty, User.Password).Password;
+            try
+            {
+                using (var imapClient = new ImapClient(
+                MailConnection.Credentials.Receiving.ServerName,
+                User.Login,
+                userPassword,
+                AuthMethods.Login,
+                MailConnection.Credentials.Receiving.ServerPort,
+                MailConnection.UseSsl))
+                {
+
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

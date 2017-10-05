@@ -17,12 +17,12 @@
         <TextBlock Style="{StaticResource PageTitle}" Text="{Binding PageName}"/>
         <StackPanel Margin="50 0 50 0">
             <TextBlock Text="To:" FontSize="14"/>
-            <TextBox Text="{Binding Mail.To}" Margin="0 0 0 12" FontSize="14" MinWidth="500" Width="Auto" HorizontalAlignment="Left"></TextBox>
+            <TextBox Text="{Binding Path=Mail.To, Mode=TwoWay}" Margin="0 0 0 12" FontSize="14" MinWidth="500" Width="Auto" HorizontalAlignment="Left"></TextBox>
             <TextBlock Text="Subject:" FontSize="14"/>
-            <TextBox Text="{Binding Mail.Subject}" Margin="0 0 0 12" FontSize="14" MinWidth="500" Width="Auto" HorizontalAlignment="Left"></TextBox>
+            <TextBox Text="{Binding Mail.Subject, Mode=TwoWay}" Margin="0 0 0 12" FontSize="14" MinWidth="500" Width="Auto" HorizontalAlignment="Left"></TextBox>
             <TextBlock Text="Message:" FontSize="14"/>
             <TextBox                 
-                    Text="{Binding Mail.Message}"
+                    Text="{Binding Mail.Message, Mode=TwoWay}"
                     TextWrapping="Wrap"
                     MinWidth="500"         
                     Width="500"

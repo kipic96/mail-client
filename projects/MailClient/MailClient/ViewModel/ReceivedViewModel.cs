@@ -1,25 +1,24 @@
 ﻿using MailClient.HelperClass;
-using MailClient.Interface;
 using MailClient.Enum;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
-using MailClient.Model;
 using System.Windows.Input;
-using System.Windows;
+using MailClient.Model.Interface;
+using MailClient.ViewModel.Interface;
 
 namespace MailClient.ViewModel
 {
-    public class ReceivedViewModel : BindableClass, IPageViewModel
+    public class ReceivedViewModel : BindableClass, IPageViewModel, IPageClearable
     {
-        private ObservableCollection<Mail> _receivedMails;
+        private ObservableCollection<IMail> _receivedMails;
         private ICommand _receivedMailsCommand;
         private ICommand _mailChooseCommand;
 
         public string PageName { get; } = Dictionary.PageName.Received;
         public PageNumber PageNumber { get; } = PageNumber.Received;
 
-        public ObservableCollection<Mail> ReceivedMails
+        public ObservableCollection<IMail> ReceivedMails
         {
             get
             {
@@ -60,6 +59,11 @@ namespace MailClient.ViewModel
             }
         }
 
+        public void Clear()
+        {
+            ReceivedMails.Clear();
+        }
+
         private void MailChoose(int mailId)
         {
             MailChoosen(mailId);
@@ -72,8 +76,8 @@ namespace MailClient.ViewModel
 
         private void ReceiveMailsAndSafe()
         {
-            IEnumerable<Mail> receivedMails = ReceiveMails();
-            ReceivedMails = new ObservableCollection<Mail>(receivedMails);
+            IEnumerable<IMail> receivedMails = ReceiveMails();
+            ReceivedMails = new ObservableCollection<IMail>(receivedMails);
         }
 
         private bool ValidateReceiveMailsAndSafe()
@@ -81,7 +85,7 @@ namespace MailClient.ViewModel
             return true;
         }
 
-        public Func<IEnumerable<Mail>> ReceiveMails { get; set; }
+        public Func<IEnumerable<IMail>> ReceiveMails { get; set; }
         public Action<int> MailChoosen { get; set; }
     }
 }

@@ -1,15 +1,16 @@
 ﻿using MailClient.Enum;
 using MailClient.HelperClass;
-using MailClient.Interface;
 using MailClient.Model;
+using MailClient.Model.Interface;
+using MailClient.ViewModel.Interface;
 
 namespace MailClient.ViewModel
 {
     public class MailViewModel : BindableClass, IPageViewModel
     {
-        private Mail _mail;
+        private IMail _mail;
 
-        public Mail Mail
+        public IMail Mail
         {
             get
             {
@@ -22,9 +23,9 @@ namespace MailClient.ViewModel
             }
         }
 
-        public MailViewModel(Mail mail)
+        public MailViewModel(IMail mail)
         {
-            Mail = mail;
+           _mail = mail;
         }
 
         public string PageName
@@ -41,6 +42,11 @@ namespace MailClient.ViewModel
             {
                 return PageNumber.Mail;
             }
+        }
+
+        public void Clear()
+        {
+            (_mail as Mail).Clear();
         }
     }
 }

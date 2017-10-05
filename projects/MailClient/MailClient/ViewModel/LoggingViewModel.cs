@@ -1,17 +1,16 @@
 ﻿using MailClient.Enum;
 using MailClient.HelperClass;
-using MailClient.Interface;
 using MailClient.Model;
+using MailClient.Model.Interface;
+using MailClient.ViewModel.Interface;
 using System;
-using System.Diagnostics;
 using System.Security;
-using System.Windows;
 using System.Windows.Input;
 
 
 namespace MailClient.ViewModel
 {
-    class LoggingViewModel : BindableClass, IPageViewModel
+    class LoggingViewModel : BindableClass, IPageViewModel, IPageClearable
     {
         // delete it after testing
         private string _login = "testingemail10002@gmail.com";
@@ -62,8 +61,7 @@ namespace MailClient.ViewModel
             }
         }
 
-        public Action<PageNumber> LogInAction { get; set; }
-        public Action<IUser> LogInUserAction { get; set; }
+        public Action<IUser> LogInAction { get; set; }
 
 
         public ICommand LogInCommand
@@ -80,22 +78,29 @@ namespace MailClient.ViewModel
             }
         }
 
+        public void Clear()
+        {
+            _login = string.Empty;
+            _emailModeTable = new bool[] { false, false, false };
+            _emailMode = EmailMode.Undefined;
+            SecurePassword.Clear();
+        }
+
         private void LogIn()
         {
-            LogInActions();
-
-            // Check if login and password for chosen email are good 
+            if (Security.EmailValidator.Validate(Login))
+            {
+                LogInAction(new User(Login, SecurePassword, EmailMode));
+            }
+            else
+            {
+                Log.LogMessage.Show(Dictionary.LogMessage.WrongEmailAdress);
+            }      
         }
 
         private bool LogInValidation()
         {
             return (EmailMode != EmailMode.Undefined && Login != string.Empty && SecurePassword.Length != 0);
-        }
-
-        private void LogInActions()
-        {
-            LogInUserAction(new User(Login, SecurePassword, EmailMode));
-            LogInAction(PageNumber.Received);
         }
     }
 }

@@ -5,6 +5,6 @@
         Logging = 0,
         Received,
         Send,
-        Mail       
+        Mail      
     }
 }

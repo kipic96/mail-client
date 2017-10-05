@@ -1,12 +1,7 @@
 ﻿using MailClient.Enum;
-using MailClient.Interface;
-using System;
+using MailClient.ViewModel.Interface;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace MailClient.ViewModel
 {
@@ -43,6 +38,14 @@ namespace MailClient.ViewModel
                     return page;
             }
             return null;
+        }
+
+        public void Clear()
+        {
+            foreach (var page in Pages)
+            {
+                page.Clear();
+            }
         }
     }
 }

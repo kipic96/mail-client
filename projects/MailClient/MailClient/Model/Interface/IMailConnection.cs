@@ -1,6 +1,6 @@
-﻿namespace MailClient.Interface
+﻿namespace MailClient.Model.Interface
 {
-    interface IMailConnection
+    public interface IMailConnection
     {
         IMailCredentials Credentials { get; }
         bool UseSsl { get; }

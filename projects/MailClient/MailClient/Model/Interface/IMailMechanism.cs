@@ -1,11 +1,6 @@
-﻿using MailClient.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace MailClient.Interface
+namespace MailClient.Model.Interface
 {
     interface IMailMechanism
     {
@@ -14,5 +9,6 @@ namespace MailClient.Interface
 
         void Send(Mail mail);
         IEnumerable<Mail> Receive();
+        bool Authenticate();
     }
 }

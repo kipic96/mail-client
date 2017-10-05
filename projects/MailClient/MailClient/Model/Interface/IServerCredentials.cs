@@ -1,4 +1,4 @@
-﻿namespace MailClient.Interface
+﻿namespace MailClient.Model.Interface
 {
     public interface IServerCredentials
     {

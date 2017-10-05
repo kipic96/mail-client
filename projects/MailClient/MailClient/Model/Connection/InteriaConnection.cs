@@ -1,8 +1,7 @@
-﻿using System;
-using MailClient.Interface;
-using MailClient.InterfaceImplementation;
+﻿using MailClient.Model.Interface;
+using MailClient.Model.InterfaceImplementation;
 
-namespace MailClient.Connection
+namespace MailClient.Model.Connection
 {
     class InteriaConnection : IMailConnection
     {

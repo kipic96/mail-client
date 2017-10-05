@@ -1,6 +1,6 @@
-﻿using MailClient.Interface;
+﻿using MailClient.Model.Interface;
 
-namespace MailClient.InterfaceImplementation
+namespace MailClient.Model.InterfaceImplementation
 {
     class MailCredentials : IMailCredentials
     {
