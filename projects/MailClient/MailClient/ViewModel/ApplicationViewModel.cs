@@ -1,5 +1,4 @@
-﻿using MailClient.Enum;
-using MailClient.HelperClass;
+﻿using MailClient.HelperClass;
 using MailClient.Model;
 using MailClient.Model.Interface;
 using MailClient.ViewModel.Interface;
@@ -25,18 +24,17 @@ namespace MailClient.ViewModel
 
         public ApplicationViewModel()
         {
-            //TODO add subsrictions to events  
-            (_pageViewModels.FindPage(PageNumber.Logging) as LoggingViewModel)
+            (_pageViewModels.FindPage(Enum.PageNumber.Logging) as LoggingViewModel)
                 .LogInAction += LogInAction;
-            (_pageViewModels.FindPage(PageNumber.Received) as ReceivedViewModel)
+            (_pageViewModels.FindPage(Enum.PageNumber.Received) as ReceivedViewModel)
                 .ReceiveMails += ReceiveMailsAction;
-            (_pageViewModels.FindPage(PageNumber.Received) as ReceivedViewModel)
+            (_pageViewModels.FindPage(Enum.PageNumber.Received) as ReceivedViewModel)
                 .MailChoosen += MailChoosenAction;
-            (_pageViewModels.FindPage(PageNumber.Send) as SendViewModel)
+            (_pageViewModels.FindPage(Enum.PageNumber.Send) as SendViewModel)
                 .SendMail += SendMailAction;
 
 
-            _currentPageViewModel = _pageViewModels.FindPage(PageNumber.Logging);
+            _currentPageViewModel = _pageViewModels.FindPage(Enum.PageNumber.Logging);
         }
 
         #endregion
@@ -90,7 +88,23 @@ namespace MailClient.ViewModel
                     RaisePropertyChanged(nameof(CurrentPageViewModel));
                 }
             }
-        }          
+        }       
+        
+        public string UserLogin
+        {
+            // TODO make it work
+            get
+            {
+                if (_mailBox == null)
+                    return string.Empty;
+                return (_mailBox as MailBox).UserLogin;
+            }
+            private set
+            {
+                UserLogin = (_mailBox as MailBox).UserLogin;
+                RaisePropertyChanged(nameof(UserLogin));
+            }
+        }   
 
         #endregion
 
@@ -112,15 +126,14 @@ namespace MailClient.ViewModel
         {
             _mailBox = new MailBox();
             _pageViewModels.Clear();
-            int t = 2;
         }
 
         private bool ValidateChangeViewModel(IPageViewModel viewModel)
         {
-            return !(_currentPageViewModel is LoggingViewModel && !(viewModel is LoggingViewModel));
+            return !(_currentPageViewModel is LoggingViewModel);
         }
 
-        private void ChangePageAction(PageNumber pageNumber)
+        private void ChangePageAction(Enum.PageNumber pageNumber)
         {
             ChangeViewModel(_pageViewModels.FindPage(pageNumber));
         }
@@ -135,7 +148,7 @@ namespace MailClient.ViewModel
             _mailBox = new MailBox(user as User);
             if (Model.Security.AuthenticationValidator.Authenticate(_mailBox))
             {
-                ChangeViewModel(_pageViewModels.FindPage(PageNumber.Received));
+                ChangeViewModel(_pageViewModels.FindPage(Enum.PageNumber.Received));
             }
             else
             {
@@ -147,13 +160,13 @@ namespace MailClient.ViewModel
         private void SendMailAction(IMail mail)
         {
             _mailBox.Send(mail);
-            ChangeViewModel(_pageViewModels.FindPage(PageNumber.Received));
+            ChangeViewModel(_pageViewModels.FindPage(Enum.PageNumber.Received));
+            Log.LogMessage.Show(Dictionary.LogMessage.MailSent);
         }
 
         private void MailChoosenAction(int mailId)
         {
-            // TODO error from null ReceivedEmails because all the ReceivedViewModel page is cleared from any data
-            IMail mail = (_pageViewModels.FindPage(PageNumber.Received) as ReceivedViewModel).ReceivedMails.ElementAt(mailId);
+            IMail mail = (_pageViewModels.FindPage(Enum.PageNumber.Received) as ReceivedViewModel).ReceivedMails.ElementAt(mailId);
             ChangeViewModel(new MailViewModel(mail));
         }
 

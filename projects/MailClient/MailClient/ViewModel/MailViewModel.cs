@@ -46,7 +46,8 @@ namespace MailClient.ViewModel
 
         public void Clear()
         {
-            (_mail as Mail).Clear();
+            if (_mail != null)
+             (_mail as Mail).Clear();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using MailClient.Enum;
-using MailClient.ViewModel.Interface;
+﻿using MailClient.ViewModel.Interface;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -30,7 +29,7 @@ namespace MailClient.ViewModel
             }
         }
 
-        public IPageViewModel FindPage(PageNumber pageNumber)
+        public IPageViewModel FindPage(Enum.PageNumber pageNumber)
         {
             foreach (var page in _pages)
             {

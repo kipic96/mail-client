@@ -1,5 +1,4 @@
-﻿using MailClient.Enum;
-using MailClient.HelperClass;
+﻿using MailClient.HelperClass;
 using MailClient.Model;
 using MailClient.Model.Interface;
 using MailClient.ViewModel.Interface;
@@ -14,13 +13,15 @@ namespace MailClient.ViewModel
     {
         // delete it after testing
         private string _login = "testingemail10002@gmail.com";
-        private EmailMode _emailMode = EmailMode.Undefined;
+        private Enum.EmailMode _emailMode = Enum.EmailMode.Undefined;
         // go to false all of them after testing
         private bool[] _emailModeTable = new bool[] { true, false, false };
         private ICommand _logInCommand;
 
-        public PageNumber PageNumber { get; } = PageNumber.Logging;
-        public string PageName { get; private set; } = Dictionary.PageName.Logging;
+        public Enum.PageNumber PageNumber { get; } = Enum.PageNumber.Logging;
+        public string PageNameLogIn { get; private set; } = Dictionary.PageName.Logging;
+        public string PageName { get; private set; } = Dictionary.PageName.LogOut;
+
 
         public string Login
         {
@@ -46,14 +47,14 @@ namespace MailClient.ViewModel
         }
 
 
-        public EmailMode EmailMode
+        public Enum.EmailMode EmailMode
         {
             get
             {
                 for (int i = 0; i < EmailModeTable.Length; i++)
                     if (EmailModeTable[i])
-                        return (EmailMode)(i + 1);
-                return EmailMode.Undefined;
+                        return (Enum.EmailMode)(i + 1);
+                return Enum.EmailMode.Undefined;
             }
             set
             {
@@ -82,7 +83,7 @@ namespace MailClient.ViewModel
         {
             _login = string.Empty;
             _emailModeTable = new bool[] { false, false, false };
-            _emailMode = EmailMode.Undefined;
+            _emailMode = Enum.EmailMode.Undefined;
             SecurePassword.Clear();
         }
 
@@ -100,7 +101,7 @@ namespace MailClient.ViewModel
 
         private bool LogInValidation()
         {
-            return (EmailMode != EmailMode.Undefined && Login != string.Empty && SecurePassword.Length != 0);
+            return (EmailMode != Enum.EmailMode.Undefined && Login != string.Empty && SecurePassword.Length != 0);
         }
     }
 }

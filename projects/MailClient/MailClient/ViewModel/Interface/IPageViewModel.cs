@@ -1,10 +1,8 @@
-﻿using MailClient.Enum;
-
-namespace MailClient.ViewModel.Interface
+﻿namespace MailClient.ViewModel.Interface
 {
     public interface IPageViewModel : IPageClearable
     {
         string PageName { get; }
-        PageNumber PageNumber { get; }        
+        Enum.PageNumber PageNumber { get; }        
     }
 }

@@ -7,6 +7,16 @@ namespace MailClient.Model
 {
     public class MailBox : IMailBox
     {
+        public string UserLogin
+        {
+            get
+            {
+                if (_mailMechanism == null)
+                    return string.Empty;
+                return _mailMechanism.User.Login;
+            }
+        }
+
         public MailBox(IUser user)
         {
             _mailMechanism = new MailMechanism(user as User, ConnectionFactory.Create(user.EmailMode));

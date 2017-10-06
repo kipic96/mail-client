@@ -1,5 +1,4 @@
-﻿using MailClient.Enum;
-using MailClient.HelperClass;
+﻿using MailClient.HelperClass;
 using MailClient.Model;
 using MailClient.Model.Interface;
 using MailClient.ViewModel.Interface;
@@ -15,7 +14,7 @@ namespace MailClient.ViewModel
 
         public string PageName { get; } = Dictionary.PageName.Send;
 
-        public PageNumber PageNumber { get; } = Enum.PageNumber.Send;
+        public Enum.PageNumber PageNumber { get; } = Enum.PageNumber.Send;
 
         public IMail Mail
         {
@@ -49,7 +48,8 @@ namespace MailClient.ViewModel
 
         public void Clear()
         {
-            (_mail as Mail).Clear();
+            if (_mail != null)
+                (_mail as Mail).Clear();
         }
 
         public Action<IMail> SendMail { get; set; }
@@ -69,8 +69,7 @@ namespace MailClient.ViewModel
 
         private bool ValidateSend()
         {
-            return (Mail.To != string.Empty && Mail.Subject != string.Empty && Mail.Message != string.Empty);
+            return ((Mail.To != null && Mail.To != string.Empty) && (Mail.Subject != null && Mail.Subject != string.Empty) && (Mail.Message != null && Mail.Message != string.Empty)) ;
         }
-
     }
 }

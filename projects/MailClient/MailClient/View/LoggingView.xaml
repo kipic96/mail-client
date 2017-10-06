@@ -18,7 +18,7 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <TextBlock Style="{StaticResource TextBlock}" Text="{Binding PageName}"></TextBlock>
+        <TextBlock Style="{StaticResource TextBlock}" Text="{Binding PageNameLogIn}"></TextBlock>
         <Label Style="{StaticResource Label}">Login</Label>
         <TextBox Name="boxLogin" Style="{StaticResource Login}" Text="{Binding Login}"/>
         <Label Style="{StaticResource Label}">Password</Label>

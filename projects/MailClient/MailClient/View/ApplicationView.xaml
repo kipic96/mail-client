@@ -42,7 +42,9 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Border>
-
-        <ContentControl Content="{Binding  CurrentPageViewModel}" />
+        <StackPanel>
+            <TextBlock Text="{Binding UserLogin}"/>
+            <ContentControl Content="{Binding  CurrentPageViewModel}" />
+        </StackPanel>
     </DockPanel>
 </Window>

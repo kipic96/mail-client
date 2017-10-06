@@ -1,5 +1,4 @@
 ﻿using MailClient.HelperClass;
-using MailClient.Enum;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ namespace MailClient.ViewModel
         private ICommand _mailChooseCommand;
 
         public string PageName { get; } = Dictionary.PageName.Received;
-        public PageNumber PageNumber { get; } = PageNumber.Received;
+        public Enum.PageNumber PageNumber { get; } = Enum.PageNumber.Received;
 
         public ObservableCollection<IMail> ReceivedMails
         {
@@ -61,7 +60,8 @@ namespace MailClient.ViewModel
 
         public void Clear()
         {
-            ReceivedMails.Clear();
+            if (ReceivedMails != null)
+                ReceivedMails.Clear();
         }
 
         private void MailChoose(int mailId)
