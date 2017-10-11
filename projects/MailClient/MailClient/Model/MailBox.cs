@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MailClient.Model
 {
-    public class MailBox : IMailBox
+    public class MailBox 
     {
         public string UserLogin
         {
@@ -17,9 +17,9 @@ namespace MailClient.Model
             }
         }
 
-        public MailBox(IUser user)
+        public MailBox(User user)
         {
-            _mailMechanism = new MailMechanism(user as User, ConnectionFactory.Create(user.EmailMode));
+            _mailMechanism = new MailMechanism(user, ConnectionFactory.Create(user.EmailMode));
         }
 
         public MailBox()
@@ -29,19 +29,19 @@ namespace MailClient.Model
         private IMailMechanism _mailMechanism;
         
 
-        public void Send(IMail mail)
+        public void Send(Mail mail)
         {
             _mailMechanism.Send(mail as Mail);            
         }
 
-        public IEnumerable<IMail> Receive()
+        public IEnumerable<Mail> Receive()
         {
             return _mailMechanism.Receive();
         }
 
-        public void ChangeUser(IUser user)
+        public void ChangeUser(User user)
         {
-            _mailMechanism = new MailMechanism(user as User, ConnectionFactory.Create(user.EmailMode));
+            _mailMechanism = new MailMechanism(user, ConnectionFactory.Create(user.EmailMode));
         }
 
         public bool Authenticate()

@@ -10,13 +10,13 @@ namespace MailClient.ViewModel
     class SendViewModel : BindableClass, IPageViewModel, IPageClearable
     {
         private ICommand _sendCommand;
-        private IMail _mail;
+        private Mail _mail;
 
         public string PageName { get; } = Dictionary.PageName.Send;
 
         public Enum.PageNumber PageNumber { get; } = Enum.PageNumber.Send;
 
-        public IMail Mail
+        public Mail Mail
         {
             get
             {
@@ -49,10 +49,10 @@ namespace MailClient.ViewModel
         public void Clear()
         {
             if (_mail != null)
-                (_mail as Mail).Clear();
+                _mail.Clear();
         }
 
-        public Action<IMail> SendMail { get; set; }
+        public Action<Mail> SendMail { get; set; }
 
         private void Send()
         {

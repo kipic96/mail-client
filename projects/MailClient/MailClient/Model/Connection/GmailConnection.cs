@@ -1,4 +1,5 @@
-﻿using MailClient.Model.Interface;
+﻿using System;
+using MailClient.Model.Interface;
 using MailClient.Model.InterfaceImplementation;
 
 namespace MailClient.Model.Connection
@@ -9,6 +10,7 @@ namespace MailClient.Model.Connection
         public bool UseSsl { get; }
         public string MailboxName { get; }
         public bool HeadersOnly { get; }
+        public int MaxNumberOfReceivedMails { get; }
 
         public GmailConnection()
         {
@@ -19,6 +21,7 @@ namespace MailClient.Model.Connection
             UseSsl = true;
             MailboxName = "INBOX";
             HeadersOnly = false;
+            MaxNumberOfReceivedMails = 100;
         }        
     }
 }

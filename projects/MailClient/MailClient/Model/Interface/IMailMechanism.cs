@@ -4,7 +4,7 @@ namespace MailClient.Model.Interface
 {
     interface IMailMechanism
     {
-        IUser User { get; }
+        User User { get; }
         IMailConnection MailConnection { get; }
 
         void Send(Mail mail);

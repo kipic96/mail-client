@@ -9,6 +9,7 @@ namespace MailClient.Model.Connection
         public bool UseSsl { get; }
         public string MailboxName { get; }
         public bool HeadersOnly { get; }
+        public int MaxNumberOfReceivedMails { get; }
 
         public O2Connection()
         {
@@ -18,7 +19,8 @@ namespace MailClient.Model.Connection
             Credentials.Receiving.ServerPort = 993;
             UseSsl = true;
             MailboxName = "INBOX";
-            HeadersOnly = false; 
-        }
+            HeadersOnly = false;
+            MaxNumberOfReceivedMails = 100;
+    }
     }
 }

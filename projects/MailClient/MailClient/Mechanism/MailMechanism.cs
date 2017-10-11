@@ -18,11 +18,11 @@ namespace MailClient.Mechanism
 
         public IMailConnection MailConnection { get; }
 
-        public IUser User { get; }
+        public User User { get; }
 
         public IEnumerable<Mail> Receive()
         {
-            IList<Mail> receivedMails = new List<Mail>();
+            List<Mail> receivedMails = new List<Mail>();
             // converting SecureString to string
             string userPassword = new NetworkCredential(string.Empty, User.Password).Password;
             using (var imapClient = new ImapClient(
@@ -34,16 +34,19 @@ namespace MailClient.Mechanism
                 MailConnection.UseSsl))
             {
                 imapClient.SelectMailbox(MailConnection.MailboxName);
-                var mailMessages = imapClient.GetMessages(0, imapClient.GetMessageCount(), MailConnection.HeadersOnly);
-                int mailCount = imapClient.GetMessageCount() - 1;
+                // max number of received mails is default 100
+                int messageCount = Math.Min(imapClient.GetMessageCount(), MailConnection.MaxNumberOfReceivedMails);
+                var mailMessages = imapClient.GetMessages(0, messageCount, MailConnection.HeadersOnly);
+                int mailIndex = messageCount - 1;
+
                 foreach (var mailMessage in mailMessages)
                 {
-                   Mail mail = Mail.Parse(mailMessage, mailCount);
+                    Mail mail = Mail.Parse(mailMessage, mailIndex);
                     receivedMails.Add(mail);
-                    mailCount--;
+                    mailIndex--;
                 }
             }
-            (receivedMails as List<Mail>).Reverse();
+            receivedMails.Reverse();
             return receivedMails;
         }
 
@@ -53,7 +56,7 @@ namespace MailClient.Mechanism
             message.Subject = mail.Subject;
             message.Body = mail.Message;
 
-            SmtpClient mailer = new SmtpClient
+            var mailer = new SmtpClient
                 (MailConnection.Credentials.Sending.ServerName,
                  MailConnection.Credentials.Sending.ServerPort);
             mailer.Credentials = new NetworkCredential(User.Login, User.Password);
@@ -81,7 +84,7 @@ namespace MailClient.Mechanism
                 MailConnection.Credentials.Receiving.ServerPort,
                 MailConnection.UseSsl))
                 {
-
+                    // if no exception thrown authetication positive
                 }
             }
             catch (Exception)

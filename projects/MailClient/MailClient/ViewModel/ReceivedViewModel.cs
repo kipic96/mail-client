@@ -3,21 +3,21 @@ using System;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Windows.Input;
-using MailClient.Model.Interface;
+using MailClient.Model;
 using MailClient.ViewModel.Interface;
 
 namespace MailClient.ViewModel
 {
     public class ReceivedViewModel : BindableClass, IPageViewModel, IPageClearable
     {
-        private ObservableCollection<IMail> _receivedMails;
+        private ObservableCollection<Mail> _receivedMails;
         private ICommand _receivedMailsCommand;
         private ICommand _mailChooseCommand;
 
         public string PageName { get; } = Dictionary.PageName.Received;
         public Enum.PageNumber PageNumber { get; } = Enum.PageNumber.Received;
 
-        public ObservableCollection<IMail> ReceivedMails
+        public ObservableCollection<Mail> ReceivedMails
         {
             get
             {
@@ -76,8 +76,8 @@ namespace MailClient.ViewModel
 
         private void ReceiveMailsAndSafe()
         {
-            IEnumerable<IMail> receivedMails = ReceiveMails();
-            ReceivedMails = new ObservableCollection<IMail>(receivedMails);
+            IEnumerable<Mail> receivedMails = ReceiveMails();
+            ReceivedMails = new ObservableCollection<Mail>(receivedMails);
         }
 
         private bool ValidateReceiveMailsAndSafe()
@@ -85,7 +85,7 @@ namespace MailClient.ViewModel
             return true;
         }
 
-        public Func<IEnumerable<IMail>> ReceiveMails { get; set; }
+        public Func<IEnumerable<Mail>> ReceiveMails { get; set; }
         public Action<int> MailChoosen { get; set; }
     }
 }

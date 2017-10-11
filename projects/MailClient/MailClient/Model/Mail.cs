@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace MailClient.Model
 {
-    public class Mail : IMail
+    public class Mail 
     {
         #region properties
 

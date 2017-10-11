@@ -9,6 +9,7 @@ namespace MailClient.Model.Connection
         public bool UseSsl { get; }
         public string MailboxName { get; }
         public bool HeadersOnly { get; }
+        public int MaxNumberOfReceivedMails { get; }
 
         public InteriaConnection()
         {
@@ -19,6 +20,7 @@ namespace MailClient.Model.Connection
             UseSsl = true;
             MailboxName = "INBOX";
             HeadersOnly = false;
+            MaxNumberOfReceivedMails = 100;
         }
     }
 }

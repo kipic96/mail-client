@@ -16,7 +16,7 @@ namespace MailClient.ViewModel
         private ICommand _changePageCommand;
         private IPageViewModel _currentPageViewModel;
         private PageViewModels _pageViewModels = new PageViewModels();
-        private IMailBox _mailBox;
+        private MailBox _mailBox;
 
         #endregion
 
@@ -97,11 +97,11 @@ namespace MailClient.ViewModel
             {
                 if (_mailBox == null)
                     return string.Empty;
-                return (_mailBox as MailBox).UserLogin;
+                return _mailBox.UserLogin;
             }
             private set
             {
-                UserLogin = (_mailBox as MailBox).UserLogin;
+                UserLogin = _mailBox.UserLogin;
                 RaisePropertyChanged(nameof(UserLogin));
             }
         }   
@@ -138,12 +138,12 @@ namespace MailClient.ViewModel
             ChangeViewModel(_pageViewModels.FindPage(pageNumber));
         }
 
-        private IEnumerable<IMail> ReceiveMailsAction()
+        private IEnumerable<Mail> ReceiveMailsAction()
         {            
             return _mailBox.Receive();           
         }
 
-        private void LogInAction(IUser user)
+        private void LogInAction(User user)
         {
             _mailBox = new MailBox(user as User);
             if (Model.Security.AuthenticationValidator.Authenticate(_mailBox))
@@ -157,7 +157,7 @@ namespace MailClient.ViewModel
             }            
         }
 
-        private void SendMailAction(IMail mail)
+        private void SendMailAction(Mail mail)
         {
             _mailBox.Send(mail);
             ChangeViewModel(_pageViewModels.FindPage(Enum.PageNumber.Received));
@@ -166,7 +166,7 @@ namespace MailClient.ViewModel
 
         private void MailChoosenAction(int mailId)
         {
-            IMail mail = (_pageViewModels.FindPage(Enum.PageNumber.Received) as ReceivedViewModel).ReceivedMails.ElementAt(mailId);
+            Mail mail = (_pageViewModels.FindPage(Enum.PageNumber.Received) as ReceivedViewModel).ReceivedMails.ElementAt(mailId);
             ChangeViewModel(new MailViewModel(mail));
         }
 

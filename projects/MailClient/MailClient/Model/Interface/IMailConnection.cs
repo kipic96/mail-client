@@ -6,5 +6,6 @@
         bool UseSsl { get; }
         string MailboxName { get; }
         bool HeadersOnly { get; }
+        int MaxNumberOfReceivedMails { get; }
     }
 }

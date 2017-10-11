@@ -8,9 +8,9 @@ namespace MailClient.ViewModel
 {
     public class MailViewModel : BindableClass, IPageViewModel
     {
-        private IMail _mail;
+        private Mail _mail;
 
-        public IMail Mail
+        public Mail Mail
         {
             get
             {
@@ -23,7 +23,7 @@ namespace MailClient.ViewModel
             }
         }
 
-        public MailViewModel(IMail mail)
+        public MailViewModel(Mail mail)
         {
            _mail = mail;
         }
@@ -47,7 +47,7 @@ namespace MailClient.ViewModel
         public void Clear()
         {
             if (_mail != null)
-             (_mail as Mail).Clear();
+             _mail.Clear();
         }
     }
 }

@@ -4,36 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailClient.View"
-        xmlns:viewmodel="clr-namespace:MailClient.ViewModel"
         mc:Ignorable="d"
         Title="MailClient"
         Height="600"
         Width="800"
         MinHeight="600"
-        MinWidth="800"
-        >
-    <Window.Resources>
-        <ResourceDictionary>
-            <DataTemplate DataType="{x:Type viewmodel:LoggingViewModel}">
-                <local:LoggingView />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodel:ReceivedViewModel}">
-                <local:ReceivedView />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodel:MailViewModel}">
-                <local:MailView/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodel:SendViewModel}">
-                <local:SendView/>
-            </DataTemplate>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../ViewStyle/ApplicationViewStyle.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+        MinWidth="800">
+    
 
     <DockPanel>
-        <Border Style="{StaticResource Border}">
+        <Border Style="{StaticResource PageListBorder}">
             <ItemsControl ItemsSource="{Binding PageViewModels.Pages}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

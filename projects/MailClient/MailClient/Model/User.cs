@@ -4,7 +4,7 @@ using MailClient.Model.Interface;
 
 namespace MailClient.Model
 {
-    public class User : IUser
+    public class User
     {
         #region properties
 

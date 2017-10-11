@@ -108,15 +108,12 @@
     <Compile Include="HelperClass\RelayCommand.cs" />
     <Compile Include="Model\InterfaceImplementation\MailCredentials.cs" />
     <Compile Include="Model\InterfaceImplementation\ServerCredentials.cs" />
-    <Compile Include="Model\Interface\IMailBox.cs" />
     <Compile Include="Model\Interface\IMailConnection.cs" />
     <Compile Include="Model\Interface\IMailCredentials.cs" />
     <Compile Include="Model\Interface\IMailMechanism.cs" />
     <Compile Include="ViewModel\Interface\IPageViewModel.cs" />
     <Compile Include="Model\Interface\IServerCredentials.cs" />
-    <Compile Include="Model\Interface\IUser.cs" />
     <Compile Include="Log\LogMessage.cs" />
-    <Compile Include="Model\Interface\IMail.cs" />
     <Compile Include="Model\Mail.cs" />
     <Compile Include="Model\MailBox.cs" />
     <Compile Include="Mechanism\MailMechanism.cs" />
@@ -132,7 +129,7 @@
     <Compile Include="ViewModel\PageViewModels.cs" />
     <Compile Include="Security\EmailValidator.cs" />
     <Compile Include="ViewModel\SendViewModel.cs" />
-    <Compile Include="ViewStyle\ViewStyleNamespace.cs" />
+    <Compile Include="View\Dictionary\ViewTexts.cs" />
     <Compile Include="View\LoggingView.xaml.cs">
       <DependentUpon>LoggingView.xaml</DependentUpon>
     </Compile>
@@ -146,15 +143,7 @@
     <Compile Include="View\SendView.xaml.cs">
       <DependentUpon>SendView.xaml</DependentUpon>
     </Compile>
-    <Page Include="ViewStyle\ApplicationViewStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ViewStyle\MailViewStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ViewStyle\SendViewStyle.xaml">
+    <Page Include="View\ViewStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -170,14 +159,6 @@
       <DependentUpon>ApplicationView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ViewStyle\LoggingViewStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ViewStyle\ReceivedViewStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\LoggingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

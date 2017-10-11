@@ -62,7 +62,7 @@ namespace MailClient.ViewModel
             }
         }
 
-        public Action<IUser> LogInAction { get; set; }
+        public Action<User> LogInAction { get; set; }
 
 
         public ICommand LogInCommand

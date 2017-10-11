@@ -4,36 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MailClient.View"
+             xmlns:dictionary="clr-namespace:MailClient.View.Dictionary"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="600">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../ViewStyle/SendViewStyle.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
+    
     <StackPanel>
-        <TextBlock Style="{StaticResource PageTitle}" Text="{Binding PageName}"/>
-        <StackPanel Margin="50 0 50 0">
-            <TextBlock Text="To:" FontSize="14"/>
-            <TextBox Text="{Binding Path=Mail.To, Mode=TwoWay}" Margin="0 0 0 12" FontSize="14" MinWidth="500" Width="Auto" HorizontalAlignment="Left"></TextBox>
-            <TextBlock Text="Subject:" FontSize="14"/>
-            <TextBox Text="{Binding Mail.Subject, Mode=TwoWay}" Margin="0 0 0 12" FontSize="14" MinWidth="500" Width="Auto" HorizontalAlignment="Left"></TextBox>
-            <TextBlock Text="Message:" FontSize="14"/>
+        <TextBlock Style="{StaticResource PageName}" Text="{Binding PageName}"/>
+        <StackPanel Style="{Binding StackPanel}">
+            <TextBlock Text="{Binding {x:Static dictionary:ViewTexts.To}, Mode=OneWay}" FontSize="14"/>
+            <TextBox Text="{Binding Path=Mail.To, Mode=TwoWay}" Style="{Binding MailTextBox}"/>
+            <TextBlock Text="{Binding {x:Static dictionary:ViewTexts.Subject}, Mode=OneWay}" FontSize="14"/>
+            <TextBox Text="{Binding Mail.Subject, Mode=TwoWay}" Style="{Binding MailTextBox}"/>
+            <TextBlock Text="{Binding {x:Static dictionary:ViewTexts.Message}, Mode=OneWay}" FontSize="14"/>
             <TextBox                 
                     Text="{Binding Mail.Message, Mode=TwoWay}"
-                    TextWrapping="Wrap"
-                    MinWidth="500"         
-                    Width="500"
-                    Height="300"
-                    FontSize="14"
-                    Margin="0 0 0 12"
-                    HorizontalAlignment="Left"
-                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                    ScrollViewer.VerticalScrollBarVisibility="Auto"
-                    ScrollViewer.CanContentScroll="True"
-                    AcceptsReturn="True"
+                    Style="{Binding MessageTextBox}"
              />
             <Button Content="Send" Command="{Binding SendCommand}" Width="100" HorizontalAlignment="Left"/>
         </StackPanel>
