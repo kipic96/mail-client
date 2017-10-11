@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
 
-namespace MailClient.Mechanism
+namespace MailClient.Model.Mechanism
 {
     class MailMechanism : IMailMechanism
     {
@@ -34,7 +34,7 @@ namespace MailClient.Mechanism
                 MailConnection.UseSsl))
             {
                 imapClient.SelectMailbox(MailConnection.MailboxName);
-                // max number of received mails is default 100
+                // max number of received mails default is 100
                 int messageCount = Math.Min(imapClient.GetMessageCount(), MailConnection.MaxNumberOfReceivedMails);
                 var mailMessages = imapClient.GetMessages(0, messageCount, MailConnection.HeadersOnly);
                 int mailIndex = messageCount - 1;
@@ -65,9 +65,9 @@ namespace MailClient.Mechanism
             {
                 mailer.Send(message);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Log.LogMessage.Show(ex.Message);
+                throw;
             }
         }
 

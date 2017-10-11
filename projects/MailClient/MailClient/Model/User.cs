@@ -1,6 +1,5 @@
 ﻿using System.Security;
 using MailClient.Enum;
-using MailClient.Model.Interface;
 
 namespace MailClient.Model
 {

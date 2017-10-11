@@ -1,4 +1,4 @@
-﻿namespace MailClient.Dictionary
+﻿namespace MailClient.ViewModel.Dictionary
 {
     class PageName
     {

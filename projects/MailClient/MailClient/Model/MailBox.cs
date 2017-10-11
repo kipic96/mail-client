@@ -1,6 +1,6 @@
 ﻿using MailClient.Model.Connection;
 using MailClient.Model.Interface;
-using MailClient.Mechanism;
+using MailClient.Model.Mechanism;
 using System.Collections.Generic;
 
 namespace MailClient.Model

@@ -1,7 +1,6 @@
 ﻿using MailClient.Enum;
-using MailClient.HelperClass;
 using MailClient.Model;
-using MailClient.Model.Interface;
+using MailClient.ViewModel.Helper;
 using MailClient.ViewModel.Interface;
 
 namespace MailClient.ViewModel

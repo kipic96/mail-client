@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace MailClient.Log
+namespace MailClient.ViewModel.Log
 {
     public static class LogMessage
     {

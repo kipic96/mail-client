@@ -1,10 +1,10 @@
-﻿using MailClient.HelperClass;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Windows.Input;
 using MailClient.Model;
 using MailClient.ViewModel.Interface;
+using MailClient.ViewModel.Helper;
 
 namespace MailClient.ViewModel
 {

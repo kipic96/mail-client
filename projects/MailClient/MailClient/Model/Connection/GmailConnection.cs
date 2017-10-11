@@ -1,5 +1,4 @@
-﻿using System;
-using MailClient.Model.Interface;
+﻿using MailClient.Model.Interface;
 using MailClient.Model.InterfaceImplementation;
 
 namespace MailClient.Model.Connection

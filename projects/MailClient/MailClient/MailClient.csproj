@@ -100,12 +100,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Dictionary\LogMessage.cs" />
-    <Compile Include="Dictionary\PageName.cs" />
+    <Compile Include="ViewModel\Dictionary\LogMessage.cs" />
+    <Compile Include="ViewModel\Dictionary\PageName.cs" />
     <Compile Include="Enum\PageNumber.cs" />
-    <Compile Include="HelperClass\BindableClass.cs" />
-    <Compile Include="HelperClass\DataContextSpy.cs" />
-    <Compile Include="HelperClass\RelayCommand.cs" />
+    <Compile Include="ViewModel\Helper\BindableClass.cs" />
+    <Compile Include="View\Helper\DataContextSpy.cs" />
+    <Compile Include="ViewModel\Helper\RelayCommand.cs" />
     <Compile Include="Model\InterfaceImplementation\MailCredentials.cs" />
     <Compile Include="Model\InterfaceImplementation\ServerCredentials.cs" />
     <Compile Include="Model\Interface\IMailConnection.cs" />
@@ -113,10 +113,10 @@
     <Compile Include="Model\Interface\IMailMechanism.cs" />
     <Compile Include="ViewModel\Interface\IPageViewModel.cs" />
     <Compile Include="Model\Interface\IServerCredentials.cs" />
-    <Compile Include="Log\LogMessage.cs" />
+    <Compile Include="ViewModel\Log\LogMessage.cs" />
     <Compile Include="Model\Mail.cs" />
     <Compile Include="Model\MailBox.cs" />
-    <Compile Include="Mechanism\MailMechanism.cs" />
+    <Compile Include="Model\Mechanism\MailMechanism.cs" />
     <Compile Include="Model\Security\AuthenticationValidator.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\Connection\GmailConnection.cs" />
@@ -127,7 +127,7 @@
     <Compile Include="ViewModel\LoggingViewModel.cs" />
     <Compile Include="ViewModel\MailViewModel.cs" />
     <Compile Include="ViewModel\PageViewModels.cs" />
-    <Compile Include="Security\EmailValidator.cs" />
+    <Compile Include="ViewModel\Security\EmailValidator.cs" />
     <Compile Include="ViewModel\SendViewModel.cs" />
     <Compile Include="View\Dictionary\ViewTexts.cs" />
     <Compile Include="View\LoggingView.xaml.cs">

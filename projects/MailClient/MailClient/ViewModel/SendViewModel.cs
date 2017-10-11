@@ -1,6 +1,5 @@
-﻿using MailClient.HelperClass;
-using MailClient.Model;
-using MailClient.Model.Interface;
+﻿using MailClient.Model;
+using MailClient.ViewModel.Helper;
 using MailClient.ViewModel.Interface;
 using System;
 using System.Windows.Input;

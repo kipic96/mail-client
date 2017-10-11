@@ -1,5 +1,4 @@
 ﻿using AE.Net.Mail;
-using MailClient.Model.Interface;
 using System.Collections;
 
 namespace MailClient.Model

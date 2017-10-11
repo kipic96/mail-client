@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace MailClient.HelperClass
+namespace MailClient.ViewModel.Helper
 {
     /// <summary>
     /// A command whose sole purpose is to 

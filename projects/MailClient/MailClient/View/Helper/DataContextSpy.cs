@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Data;
 
-namespace MailClient.HelperClass
+namespace MailClient.View.Helper
 {
     public class DataContextSpy
     : Freezable // Enable ElementName and DataContext bindings

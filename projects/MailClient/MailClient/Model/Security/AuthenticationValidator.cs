@@ -1,6 +1,4 @@
-﻿using MailClient.Model.Interface;
-
-namespace MailClient.Model.Security
+﻿namespace MailClient.Model.Security
 {
     public static class AuthenticationValidator
     {

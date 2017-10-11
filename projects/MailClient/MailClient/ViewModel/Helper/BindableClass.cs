@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.ComponentModel;
 
-namespace MailClient.HelperClass
+namespace MailClient.ViewModel.Helper
 {
     public class BindableClass : INotifyPropertyChanged
     {
