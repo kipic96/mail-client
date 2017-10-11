@@ -144,7 +144,7 @@ namespace MailClient.ViewModel
 
         private void LogInAction(User user)
         {
-            _mailBox = new MailBox(user as User);
+            _mailBox = new MailBox(user);
             if (Model.Security.AuthenticationValidator.Authenticate(_mailBox))
             {
                 ChangeViewModel(_pageViewModels.FindPage(Enum.PageNumber.Received));

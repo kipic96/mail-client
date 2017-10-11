@@ -104,6 +104,7 @@
     <Compile Include="ViewModel\Dictionary\PageName.cs" />
     <Compile Include="Enum\PageNumber.cs" />
     <Compile Include="ViewModel\Helper\BindableClass.cs" />
+    <Compile Include="ViewModel\Interface\IPageClearable.cs" />
     <Compile Include="View\Helper\DataContextSpy.cs" />
     <Compile Include="ViewModel\Helper\RelayCommand.cs" />
     <Compile Include="Model\InterfaceImplementation\MailCredentials.cs" />
@@ -123,7 +124,6 @@
     <Compile Include="Model\Connection\ConnectionFactory.cs" />
     <Compile Include="Model\Connection\O2Connection.cs" />
     <Compile Include="Model\Connection\InteriaConnection.cs" />
-    <Compile Include="ViewModel\Interface\IPageClearable.cs" />
     <Compile Include="ViewModel\LoggingViewModel.cs" />
     <Compile Include="ViewModel\MailViewModel.cs" />
     <Compile Include="ViewModel\PageViewModels.cs" />

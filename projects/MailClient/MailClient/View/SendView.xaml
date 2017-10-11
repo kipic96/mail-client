@@ -7,18 +7,18 @@
              xmlns:dictionary="clr-namespace:MailClient.View.Dictionary"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="600">
-    
+
     <StackPanel>
         <TextBlock Style="{StaticResource PageName}" Text="{Binding PageName}"/>
-        <StackPanel Style="{Binding StackPanel}">
-            <TextBlock Text="{Binding {x:Static dictionary:ViewTexts.To}, Mode=OneWay}" FontSize="14"/>
-            <TextBox Text="{Binding Path=Mail.To, Mode=TwoWay}" Style="{Binding MailTextBox}"/>
-            <TextBlock Text="{Binding {x:Static dictionary:ViewTexts.Subject}, Mode=OneWay}" FontSize="14"/>
-            <TextBox Text="{Binding Mail.Subject, Mode=TwoWay}" Style="{Binding MailTextBox}"/>
-            <TextBlock Text="{Binding {x:Static dictionary:ViewTexts.Message}, Mode=OneWay}" FontSize="14"/>
+        <StackPanel Style="{StaticResource StackPanel}">
+            <TextBlock Text="{Binding Source={x:Static dictionary:ViewTexts.From}, Mode=OneWay}" FontSize="14"/>
+            <TextBox Text="{Binding Path=Mail.To, Mode=TwoWay}" Style="{StaticResource MailInputTextBox}"/>
+            <TextBlock Text="{Binding Source={x:Static dictionary:ViewTexts.Subject}, Mode=OneWay}" FontSize="14"/>
+            <TextBox Text="{Binding Mail.Subject, Mode=TwoWay}" Style="{StaticResource MailInputTextBox}"/>
+            <TextBlock Text="{Binding Source={x:Static dictionary:ViewTexts.Message}, Mode=OneWay}" FontSize="14"/>
             <TextBox                 
                     Text="{Binding Mail.Message, Mode=TwoWay}"
-                    Style="{Binding MessageTextBox}"
+                    Style="{StaticResource MessageInputTextBox}"
              />
             <Button Content="Send" Command="{Binding SendCommand}" Width="100" HorizontalAlignment="Left"/>
         </StackPanel>

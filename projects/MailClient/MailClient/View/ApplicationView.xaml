@@ -11,7 +11,6 @@
         MinHeight="600"
         MinWidth="800">
     
-
     <DockPanel>
         <Border Style="{StaticResource PageListBorder}">
             <ItemsControl ItemsSource="{Binding PageViewModels.Pages}">

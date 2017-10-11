@@ -6,6 +6,9 @@
              xmlns:view="clr-namespace:MailClient.View">
     <Application.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="View/ViewStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
             <DataTemplate DataType="{x:Type viewmodel:LoggingViewModel}">
                 <view:LoggingView />
             </DataTemplate>
@@ -17,10 +20,7 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodel:SendViewModel}">
                 <view:SendView/>
-            </DataTemplate>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="View/ViewStyles.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
+            </DataTemplate>            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

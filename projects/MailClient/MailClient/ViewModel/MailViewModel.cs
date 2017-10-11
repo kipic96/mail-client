@@ -5,7 +5,7 @@ using MailClient.ViewModel.Interface;
 
 namespace MailClient.ViewModel
 {
-    public class MailViewModel : BindableClass, IPageViewModel
+    public class MailViewModel : BindableClass, IPageViewModel, IPageClearable
     {
         private Mail _mail;
 
