@@ -100,6 +100,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Extension\ExtentionSecureString.cs" />
+    <Compile Include="Extension\ExtentionString.cs" />
+    <Compile Include="Model\UserManager\UserManager.cs" />
     <Compile Include="ViewModel\Dictionary\LogMessage.cs" />
     <Compile Include="ViewModel\Dictionary\PageName.cs" />
     <Compile Include="Enum\PageNumber.cs" />

@@ -1,5 +1,5 @@
 ﻿using AE.Net.Mail;
-using MailClient.Model;
+using MailClient.Extension;
 using MailClient.Model.Interface;
 using System;
 using System.Collections.Generic;
@@ -24,7 +24,8 @@ namespace MailClient.Model.Mechanism
         {
             List<Mail> receivedMails = new List<Mail>();
             // converting SecureString to string
-            string userPassword = new NetworkCredential(string.Empty, User.Password).Password;
+            string userPassword = User.Password.MakeItString();
+            
             using (var imapClient = new ImapClient(
                 MailConnection.Credentials.Receiving.ServerName,
                 User.Login,
@@ -73,7 +74,7 @@ namespace MailClient.Model.Mechanism
 
         public bool Authenticate()
         {
-            string userPassword = new NetworkCredential(string.Empty, User.Password).Password;
+            string userPassword = User.Password.MakeItString();
             try
             {
                 using (var imapClient = new ImapClient(

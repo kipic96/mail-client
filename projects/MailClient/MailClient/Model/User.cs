@@ -22,6 +22,10 @@ namespace MailClient.Model
             EmailMode = emailMode;
         }
 
+        public User()
+        {
+        }
+
         #endregion
 
     }
