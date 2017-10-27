@@ -59,8 +59,6 @@ namespace MailClient.Model.UserManager
         public static void ForgetUser()
         {
             File.WriteAllText(_userManagerFile, string.Empty);
-        }
-
-        
+        }        
     }
 }
