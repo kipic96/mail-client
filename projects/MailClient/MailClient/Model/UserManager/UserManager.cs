@@ -7,11 +7,10 @@ namespace MailClient.Model.UserManager
 {
     public static class UserManager
     {
-        private readonly static string _userManagerFile = "userManager.txt";
+        private readonly static string _userManagerFile = "userManager.user";
 
         public static void RememberUser(User user)
         {
-            // TODO Check if it works
             ForgetUser();
             using (var streamWriter = new StreamWriter(_userManagerFile))
             {
@@ -25,7 +24,6 @@ namespace MailClient.Model.UserManager
 
         public static User LoadRemeberedUser()
         {
-            // TODO check if it works
             try
             {
                 using (var streamReader = new StreamReader(_userManagerFile))

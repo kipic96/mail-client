@@ -25,7 +25,6 @@ namespace MailClient.ViewModel
             set
             {
                 _pages = value;                
-                 // Its observable collection, but dont know if seen changes in the GUI
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using MailClient.Model;
+using MailClient.Model.UserManager;
 using MailClient.ViewModel.Helper;
 using MailClient.ViewModel.Interface;
 using System;
@@ -10,17 +11,20 @@ namespace MailClient.ViewModel
 {
     class LoggingViewModel : BindableClass, IPageViewModel, IPageClearable
     {
-        // delete it after testing
-        private string _login = "testingemail10002@gmail.com";
+        private string _login;
         private Enum.EmailMode _emailMode = Enum.EmailMode.Undefined;
-        // go to false all of them after testing
-        private bool[] _emailModeTable = new bool[] { true, false, false };
+        private bool[] _emailModeTable = new bool[] { false, false, false };
         private ICommand _logInCommand;
 
         public Enum.PageNumber PageNumber { get; } = Enum.PageNumber.Logging;
         public string PageNameLogIn { get; private set; } = Dictionary.PageName.Logging;
         public string PageName { get; private set; } = Dictionary.PageName.LogOut;
 
+
+        public LoggingViewModel()
+        {
+  
+        }
 
         public string Login
         {
@@ -86,7 +90,7 @@ namespace MailClient.ViewModel
             SecurePassword.Clear();
         }
 
-        private void LogIn()
+        public void LogIn()
         {
             if (Security.EmailValidator.Validate(Login))
             {

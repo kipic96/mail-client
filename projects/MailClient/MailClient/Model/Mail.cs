@@ -42,7 +42,8 @@ namespace MailClient.Model
         public static Mail Parse(AE.Net.Mail.MailMessage mailMessage)
         {
             var mail = new Mail();
-            mail.From = mailMessage.From.ToString();
+            if (mailMessage.From != null)
+                mail.From = mailMessage.From.ToString();
             IList mailAdressesTo = mailMessage.To as IList;
             if (mailAdressesTo.Count > 0)
                 mail.To = mailAdressesTo[0].ToString();

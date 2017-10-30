@@ -1,4 +1,5 @@
 ﻿using MailClient.Model;
+using MailClient.Model.UserManager;
 using MailClient.ViewModel.Helper;
 using MailClient.ViewModel.Interface;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace MailClient.ViewModel
 
         private ICommand _changePageCommand;
         private IPageViewModel _currentPageViewModel;
-        private PageViewModels _pageViewModels = new PageViewModels();
+        private PageViewModels _pageViewModels;
         private MailBox _mailBox;
 
         #endregion
@@ -23,6 +24,7 @@ namespace MailClient.ViewModel
 
         public ApplicationViewModel()
         {
+            _pageViewModels = new PageViewModels();
             (_pageViewModels.FindPage(Enum.PageNumber.Logging) as LoggingViewModel)
                 .LogInAction += LogInAction;
             (_pageViewModels.FindPage(Enum.PageNumber.Received) as ReceivedViewModel)
@@ -32,8 +34,18 @@ namespace MailClient.ViewModel
             (_pageViewModels.FindPage(Enum.PageNumber.Send) as SendViewModel)
                 .SendMail += SendMailAction;
 
-
-            _currentPageViewModel = _pageViewModels.FindPage(Enum.PageNumber.Logging);
+            var user = UserManager.LoadRemeberedUser();
+            
+            if (user != null)
+            {
+                _mailBox = new MailBox(user);
+                _currentPageViewModel = _pageViewModels.FindPage(Enum.PageNumber.Received);
+            }
+            else
+            {
+                _mailBox = new MailBox();
+                _currentPageViewModel = _pageViewModels.FindPage(Enum.PageNumber.Logging);
+            }            
         }
 
         #endregion
@@ -88,22 +100,6 @@ namespace MailClient.ViewModel
                 }
             }
         }       
-        
-        public string UserLogin
-        {
-            // TODO make it work
-            get
-            {
-                if (_mailBox == null)
-                    return string.Empty;
-                return _mailBox.UserLogin;
-            }
-            private set
-            {
-                UserLogin = _mailBox.UserLogin;
-                RaisePropertyChanged(nameof(UserLogin));
-            }
-        }   
 
         #endregion
 
@@ -124,6 +120,7 @@ namespace MailClient.ViewModel
         private void LogOut()
         {
             _mailBox = new MailBox();
+            UserManager.ForgetUser();
             _pageViewModels.Clear();
         }
 
@@ -144,10 +141,11 @@ namespace MailClient.ViewModel
 
         private void LogInAction(User user)
         {
-            _mailBox = new MailBox(user);
+            _mailBox = new MailBox(user);            
             if (Model.Security.AuthenticationValidator.Authenticate(_mailBox))
             {
-                ChangeViewModel(_pageViewModels.FindPage(Enum.PageNumber.Received));
+                UserManager.RememberUser(user);
+                ChangeViewModel(_pageViewModels.FindPage(Enum.PageNumber.Received));                
             }
             else
             {
