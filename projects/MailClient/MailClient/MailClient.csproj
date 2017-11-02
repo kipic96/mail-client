@@ -73,6 +73,9 @@
   <PropertyGroup>
     <StartupObject>MailClient.App</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Graphicloads-100-Flat-2-Email.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AE.Net.Mail, Version=1.7.10.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AE.Net.Mail.1.7.10.0\lib\net45\AE.Net.Mail.dll</HintPath>
@@ -100,12 +103,88 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Extension\ExtentionSecureString.cs" />
+    <Compile Include="Extension\ExtentionString.cs" />
+    <Compile Include="Model\UserManager\UserManager.cs" />
+    <Compile Include="ViewModel\Dictionary\LogMessage.cs" />
+    <Compile Include="ViewModel\Dictionary\PageName.cs" />
+    <Compile Include="Enum\PageNumber.cs" />
+    <Compile Include="ViewModel\Helper\BindableClass.cs" />
+    <Compile Include="ViewModel\Interface\IPageClearable.cs" />
+    <Compile Include="View\Helper\DataContextSpy.cs" />
+    <Compile Include="ViewModel\Helper\RelayCommand.cs" />
+    <Compile Include="Model\InterfaceImplementation\MailCredentials.cs" />
+    <Compile Include="Model\InterfaceImplementation\ServerCredentials.cs" />
+    <Compile Include="Model\Interface\IMailConnection.cs" />
+    <Compile Include="Model\Interface\IMailCredentials.cs" />
+    <Compile Include="Model\Interface\IMailMechanism.cs" />
+    <Compile Include="ViewModel\Interface\IPageViewModel.cs" />
+    <Compile Include="Model\Interface\IServerCredentials.cs" />
+    <Compile Include="ViewModel\Log\LogMessage.cs" />
+    <Compile Include="Model\Mail.cs" />
+    <Compile Include="Model\MailBox.cs" />
+    <Compile Include="Model\Mechanism\MailMechanism.cs" />
+    <Compile Include="Model\Security\AuthenticationValidator.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\Connection\GmailConnection.cs" />
+    <Compile Include="Model\Connection\ConnectionFactory.cs" />
+    <Compile Include="Model\Connection\O2Connection.cs" />
+    <Compile Include="Model\Connection\InteriaConnection.cs" />
+    <Compile Include="ViewModel\LoggingViewModel.cs" />
+    <Compile Include="ViewModel\MailViewModel.cs" />
+    <Compile Include="ViewModel\PageViewModels.cs" />
+    <Compile Include="ViewModel\Security\EmailValidator.cs" />
+    <Compile Include="ViewModel\SendViewModel.cs" />
+    <Compile Include="View\Dictionary\ViewTexts.cs" />
+    <Compile Include="View\LoggingView.xaml.cs">
+      <DependentUpon>LoggingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ReceivedViewModel.cs" />
+    <Compile Include="View\MailView.xaml.cs">
+      <DependentUpon>MailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReceivedView.xaml.cs">
+      <DependentUpon>ReceivedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SendView.xaml.cs">
+      <DependentUpon>SendView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\ViewStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ApplicationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="View\ApplicationView.xaml.cs">
+      <DependentUpon>ApplicationView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="View\LoggingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReceivedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SendView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewModel\ApplicationViewModel.cs" />
+    <Compile Include="Enum\EmailMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -145,7 +224,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Graphicloads-100-Flat-2-Email.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

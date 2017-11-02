@@ -1,5 +1,26 @@
 ﻿<Application x:Class="MailClient.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:MailClient">
+             xmlns:local="clr-namespace:MailClient"
+             xmlns:viewmodel="clr-namespace:MailClient.ViewModel"
+             xmlns:view="clr-namespace:MailClient.View">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="View/ViewStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type viewmodel:LoggingViewModel}">
+                <view:LoggingView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:ReceivedViewModel}">
+                <view:ReceivedView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:MailViewModel}">
+                <view:MailView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:SendViewModel}">
+                <view:SendView/>
+            </DataTemplate>            
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>
