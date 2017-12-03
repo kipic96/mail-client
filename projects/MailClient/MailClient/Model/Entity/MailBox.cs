@@ -3,10 +3,13 @@ using MailClient.Model.Interface;
 using MailClient.Model.Mechanism;
 using System.Collections.Generic;
 
-namespace MailClient.Model
+namespace MailClient.Model.Entity
 {
     public class MailBox 
     {
+        private IMailMechanism _mailMechanism;
+
+
         public string UserLogin
         {
             get
@@ -17,17 +20,15 @@ namespace MailClient.Model
             }
         }
 
+        public MailBox()
+        {
+
+        }
+
         public MailBox(User user)
         {
             _mailMechanism = new MailMechanism(user, ConnectionFactory.Create(user.EmailMode));
-        }
-
-        public MailBox()
-        {
-        }
-
-        private IMailMechanism _mailMechanism;
-        
+        }       
 
         public void Send(Mail mail)
         {

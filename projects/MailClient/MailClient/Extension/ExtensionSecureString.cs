@@ -4,7 +4,7 @@ using System.Security;
 
 namespace MailClient.Extension
 {
-    public static class ExtentionSecureString
+    public static class ExtensionSecureString
     {
         public static string MakeItString(this SecureString source)
         {

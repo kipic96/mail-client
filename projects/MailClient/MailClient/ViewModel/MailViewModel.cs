@@ -1,11 +1,10 @@
 ﻿using MailClient.Enum;
-using MailClient.Model;
-using MailClient.ViewModel.Helper;
-using MailClient.ViewModel.Interface;
+using MailClient.Model.Entity;
+using MailClient.ViewModel.Base;
 
 namespace MailClient.ViewModel
 {
-    public class MailViewModel : BindableClass, IPageViewModel, IPageClearable
+    public class MailViewModel : BaseViewModel
     {
         private Mail _mail;
 
@@ -17,7 +16,14 @@ namespace MailClient.ViewModel
             }
             set
             {
-                _mail = value;
+                _mail = new Mail
+                {
+                    To = value.To,
+                    From = value.From,
+                    Subject = value.Subject,
+                    Message = value.Message,
+                    Id = value.Id
+                };      
                 RaisePropertyChanged(nameof(Mail));
             }
         }
@@ -25,28 +31,8 @@ namespace MailClient.ViewModel
         public MailViewModel(Mail mail)
         {
            _mail = mail;
-        }
-
-        public string PageName
-        {
-            get
-            {
-                return Dictionary.PageName.Mail;
-            }
-        }
-
-        public PageNumber PageNumber
-        {
-            get
-            {
-                return PageNumber.Mail;
-            }
-        }
-
-        public void Clear()
-        {
-            if (_mail != null)
-             _mail.Clear();
+            PageType = PageType.Mail;
+            PageName = Dictionary.PageName.Mail;
         }
     }
 }

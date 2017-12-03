@@ -1,6 +1,8 @@
 ﻿using AE.Net.Mail;
 using MailClient.Extension;
+using MailClient.Model.Entity;
 using MailClient.Model.Interface;
+using MailClient.Model.Parser;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -42,7 +44,7 @@ namespace MailClient.Model.Mechanism
 
                 foreach (var mailMessage in mailMessages)
                 {
-                    Mail mail = Mail.Parse(mailMessage, mailIndex);
+                    Mail mail = MailParser.Parse(mailMessage, mailIndex);
                     receivedMails.Add(mail);
                     mailIndex--;
                 }

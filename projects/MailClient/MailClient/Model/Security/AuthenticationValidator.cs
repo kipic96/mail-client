@@ -1,4 +1,6 @@
-﻿namespace MailClient.Model.Security
+﻿using MailClient.Model.Entity;
+
+namespace MailClient.Model.Security
 {
     public static class AuthenticationValidator
     {

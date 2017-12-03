@@ -2,10 +2,17 @@
 using System.Diagnostics;
 using System.ComponentModel;
 
-namespace MailClient.ViewModel.Helper
+namespace MailClient.ViewModel.Base
 {
-    public class BindableClass : INotifyPropertyChanged
+    public abstract class BaseViewModel : INotifyPropertyChanged
     {
+        #region Page Members
+
+        public string PageName { get; protected set; }
+        public Enum.PageType PageType { get; protected set; }
+
+        #endregion
+
         #region Debugging Aides
 
         /// <summary>

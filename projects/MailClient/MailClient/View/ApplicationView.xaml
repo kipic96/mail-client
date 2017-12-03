@@ -13,7 +13,7 @@
     
     <DockPanel>
         <Border Style="{StaticResource PageListBorder}">
-            <ItemsControl ItemsSource="{Binding PageViewModels.Pages}">
+            <ItemsControl ItemsSource="{Binding Pages}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button Style="{StaticResource PageButton}"/>
@@ -22,7 +22,6 @@
             </ItemsControl>
         </Border>
         <StackPanel>
-            <TextBlock Text="{Binding UserLogin}"/>
             <ContentControl Content="{Binding  CurrentPageViewModel}" />
         </StackPanel>
     </DockPanel>

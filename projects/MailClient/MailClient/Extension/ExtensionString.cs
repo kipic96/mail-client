@@ -2,7 +2,7 @@
 
 namespace MailClient.Extension
 {
-    public static class ExtentionString
+    public static class ExtensionString
     {
         public static SecureString ToSecureString(this string source)
         {

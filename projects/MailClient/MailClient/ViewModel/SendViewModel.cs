@@ -1,31 +1,39 @@
-﻿using MailClient.Model;
-using MailClient.ViewModel.Helper;
-using MailClient.ViewModel.Interface;
+﻿using MailClient.Model.Entity;
+using MailClient.ViewModel.Base;
 using System;
 using System.Windows.Input;
 
 namespace MailClient.ViewModel
 {
-    class SendViewModel : BindableClass, IPageViewModel, IPageClearable
+    class SendViewModel : BaseViewModel
     {
         private ICommand _sendCommand;
         private Mail _mail;
 
-        public string PageName { get; } = Dictionary.PageName.Send;
-
-        public Enum.PageNumber PageNumber { get; } = Enum.PageNumber.Send;
+        public SendViewModel()
+        {
+            PageType = Enum.PageType.Send;
+            PageName = Dictionary.PageName.Send;
+        }
 
         public Mail Mail
         {
             get
             {
                 if (_mail == null)
-                    _mail = new Mail();
+                    _mail = new Mail { };
                 return _mail;
             }
             set
             {
-                _mail = value;
+                _mail = new Mail()
+                {
+                    Id = value.Id,
+                    Subject = value.Subject,
+                    From = value.From,
+                    Message = value.Message,
+                    To = value.To
+                };
                 RaisePropertyChanged(nameof(Mail));
             }
         }
@@ -45,12 +53,6 @@ namespace MailClient.ViewModel
             }
         }
 
-        public void Clear()
-        {
-            if (_mail != null)
-                _mail.Clear();
-        }
-
         public Action<Mail> SendMail { get; set; }
 
         private void Send()
@@ -58,7 +60,7 @@ namespace MailClient.ViewModel
             if (Security.EmailValidator.Validate(Mail.To))
             {
                 SendMail(Mail);
-                Mail = new Mail();
+                Mail = new Mail { };
             }
             else
             {
@@ -68,7 +70,12 @@ namespace MailClient.ViewModel
 
         private bool ValidateSend()
         {
-            return ((Mail.To != null && Mail.To != string.Empty) && (Mail.Subject != null && Mail.Subject != string.Empty) && (Mail.Message != null && Mail.Message != string.Empty)) ;
+            return (
+                (Mail.To != null && Mail.To != string.Empty) && 
+                (Mail.Subject != null && 
+                Mail.Subject != string.Empty) &&
+                (Mail.Message != null && 
+                Mail.Message != string.Empty));
         }
     }
 }

@@ -1,0 +1,104 @@
+##############Enum.PageNumber:
+#################- trochę zły dobór nazewnictwa, raczej bym nazwał PageType
+
+###########Extension:
+#########- są literówki w nazwach klas, extension pisze się przez 'S' 😉
+
+########User:
+##########- żadko się tworzy konstruktory modeli, których jedynynym celem jest przypisanie wartości 
+####do propert. Można wywalić oba konstruktory, a tworzenie obiektu załatwić np tak 
+(kod z LoggingViewModel, linia 97):
+#########LogInAction(new User
+{
+    Login = Login,
+    Password = SecurePassword,
+    EmailMode = EmailMode
+});
+
+#######Mail:
+- podobnie jak powyżej, wywalić konstruktory. Co do metod które tam są: w modelu nie może być
+ metod parsujących, ponieważ one nie wykonują niczego bezpośrednio na danym obiekcie.
+ ##### Wydziel je do osobnej klasy MailParser. Metoda Clear z kolei jest zbędna.
+   Zamiast jej używać możesz tworzyć za każdym razem mowy obiekt; ma to zresztą sens logiczny, 
+ #####  ponieważ po wyczyszczeniu maila tak naprawdę masz nowy twór, a nie ten sam tylko że pusty
+
+###############MailBox:
+- _mailMechanism wrzuć na sam początek klasy, zmienne globalne lepiej mieć na samej górze, 
+########przynajmniej wiadomo gdzie ich szukać
+
+#########Te trzy powyższe klasy można zgrupować w jeden dodatkowy folder (namespace) w obrębie
+ Modelu o nazwie Entities
+
+ReceivedViewModel:
+####- na końcu masz dwie samotne property, przenieś je wyżej, żeby były razem z innymi propertami
+- ValidateReceiveMailsAndSafe i ValidateMailChoose - jest sens tworzyć takie metody?
+### Nie dodają one za dużo do czytelności, bo rozumiem że po to one zostały stworzone
+
+LoggingViewModel:
+###- ten pusty konstruktor tam jest niepotrzebny
+
+PageViewModels:
+###- _pages jako prywatna properta.. zmień to na zwykłą zmienną, bo aktualnie to jest przerost
+ formy nad treścią 😉
+- ta nazwa jest trochę myląca.. Swoją drogą, czy PageViewModels i ApplicationViewModel 
+nie dałoby się jakoś połączyć w jedną klasę, nazwać PageManager i wyciągnąć całkiem na 
+###zewnątrz folderów? Bo nie jestem w stanie określić logicznie, która klasa za co odpowiada
+
+????????????????????????????????????????
+Dictionary:
+- wszystkie dictionary dobrze by było zebrać do jednego nadrzędnego folderu o nazwie
+ Resources, tak się robi
+- a jak bym się bardzo czepiał, to można je wszystkie po kolei zastąpić plikami typu 
+Resource Dictionary 😉
+?????????????????????????????????????????
+
+ViewModel:
+- czy BindableClass, IPageViewModel, IPageClearable nie można by zastąpić jedną
+ abstrakcyjną klasą BaseViewModel? Nie wydaje mi się, żeby dzielenie było wymagane,
+  a uprościłoby czytelność struktury
+- generalnie w tym folderze jest jakoś nasrane wszystkim, kiedy powinno to być czyste,
+ tzn powinny się tam znajdować tylko view modele, ewentualnie folder Base, w którym może
+  wylądować BaseViewModel i RelayCommand, resztę (tj EmailValidator, bo tylko on został)
+   wywalić stamtąd
+
+Model.Connection:
+- fajnie że używasz fabryki, ale zwracanie nulla w defaulcie jest ryzykowne. Poczytaj o null
+ object pattern, warto znać
+- może IMailConnection zastąpić abstrakcyjną klasą BaseConnection? W takim przypadku nie
+ musiałbyś za każdym razem implementować 5 propert
+
+Model.Interface:
+- średnio mi się podoba wydzielanie interfejsów w jedno miejsce, mogą one być bezpośrednio
+ obok implementacji, także wywalić ten folder
+
+Model.InterfaceImplementation:
+- z tego co widzę, zawartość tego folderu jest jednoznaczna: Credencials 🙂 zmień nazwę 
+folderu
+
+AuthenticationValidator:
+- jest to w ogóle potrzebne? wywalić
+
+MailMechanism:
+- w metodzie Send ten try..catch jest zbędny
+
+IMailCredentials i IServerCredentials są zbędne.
+
+UserManager i MailMechanism mogą wylądować bezpośrednio w folderze model, są dość ogólne.
+
+Pamiętaj, że jeśli zmieniasz miejsce klasy w folderach, zmienia się im też namespace
+
+
+Resourcy: prawym na folderze/projekcie -> add -> resource dictionary
+
+AuthenticationValidator ma tylko jedną metodę, której za zadanie jest wywołać jedną metodę 
+z obiektu przekazywanego jako parametr.. serio jest potrzebny? 🙂 nie wystarczyłoby zamiast:
+Model.Security.AuthenticationValidator.Authenticate(_mailBox)
+zrobić
+_mailBox.Authenticate()
+?
+
+Interfejsy razem z implementacją, a przynajmniej w tym przypadku. Zdarzają się różne 
+projekty, gdzie jest to wydzielone, szczególnie przy stosowaniu IoC. Ale tutaj do jednego
+
+A co do ApplicationViewModel.. dziwna struktura, z dziwnym nazewnictwem. 
+Tak jak pisałem powyżej: zmerguj ją z PageViewModel i nazwij managerem. 

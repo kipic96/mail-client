@@ -1,7 +1,5 @@
-﻿using MailClient.Model;
-using MailClient.Model.UserManager;
-using MailClient.ViewModel.Helper;
-using MailClient.ViewModel.Interface;
+﻿using MailClient.Model.Entity;
+using MailClient.ViewModel.Base;
 using System;
 using System.Security;
 using System.Windows.Input;
@@ -9,21 +7,19 @@ using System.Windows.Input;
 
 namespace MailClient.ViewModel
 {
-    class LoggingViewModel : BindableClass, IPageViewModel, IPageClearable
+    class LoggingViewModel : BaseViewModel
     {
         private string _login;
         private Enum.EmailMode _emailMode = Enum.EmailMode.Undefined;
         private bool[] _emailModeTable = new bool[] { false, false, false };
         private ICommand _logInCommand;
 
-        public Enum.PageNumber PageNumber { get; } = Enum.PageNumber.Logging;
         public string PageNameLogIn { get; private set; } = Dictionary.PageName.Logging;
-        public string PageName { get; private set; } = Dictionary.PageName.LogOut;
-
-
+       
         public LoggingViewModel()
         {
-  
+            PageName = Dictionary.PageName.LogOut;
+            PageType = Enum.PageType.Logging;
         }
 
         public string Login
@@ -82,19 +78,11 @@ namespace MailClient.ViewModel
             }
         }
 
-        public void Clear()
-        {
-            _login = string.Empty;
-            _emailModeTable = new bool[] { false, false, false };
-            _emailMode = Enum.EmailMode.Undefined;
-            SecurePassword.Clear();
-        }
-
         public void LogIn()
         {
             if (Security.EmailValidator.Validate(Login))
             {
-                LogInAction(new User(Login, SecurePassword, EmailMode));
+                LogInAction(new User { Login = Login,Password = SecurePassword, EmailMode = EmailMode });
             }
             else
             {

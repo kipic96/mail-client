@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MailClient.Model.Entity;
+using System.Collections.Generic;
 
 namespace MailClient.Model.Interface
 {

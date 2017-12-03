@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using MailClient.Extension;
-
+using MailClient.Model.Entity;
 
 namespace MailClient.Model.UserManager
 {
