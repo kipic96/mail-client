@@ -53,10 +53,10 @@ Resource Dictionary 😉
 ?????????????????????????????????????????
 
 ViewModel:
-- czy BindableClass, IPageViewModel, IPageClearable nie można by zastąpić jedną
+####- czy BindableClass, IPageViewModel, IPageClearable nie można by zastąpić jedną
  abstrakcyjną klasą BaseViewModel? Nie wydaje mi się, żeby dzielenie było wymagane,
   a uprościłoby czytelność struktury
-- generalnie w tym folderze jest jakoś nasrane wszystkim, kiedy powinno to być czyste,
+????- generalnie w tym folderze jest jakoś nasrane wszystkim, kiedy powinno to być czyste,
  tzn powinny się tam znajdować tylko view modele, ewentualnie folder Base, w którym może
   wylądować BaseViewModel i RelayCommand, resztę (tj EmailValidator, bo tylko on został)
    wywalić stamtąd
@@ -64,38 +64,38 @@ ViewModel:
 Model.Connection:
 - fajnie że używasz fabryki, ale zwracanie nulla w defaulcie jest ryzykowne. Poczytaj o null
  object pattern, warto znać
-- może IMailConnection zastąpić abstrakcyjną klasą BaseConnection? W takim przypadku nie
+#####- może IMailConnection zastąpić abstrakcyjną klasą BaseConnection? W takim przypadku nie
  musiałbyś za każdym razem implementować 5 propert
 
 Model.Interface:
-- średnio mi się podoba wydzielanie interfejsów w jedno miejsce, mogą one być bezpośrednio
+#####- średnio mi się podoba wydzielanie interfejsów w jedno miejsce, mogą one być bezpośrednio
  obok implementacji, także wywalić ten folder
 
-Model.InterfaceImplementation:
-- z tego co widzę, zawartość tego folderu jest jednoznaczna: Credencials 🙂 zmień nazwę 
+######Model.InterfaceImplementation:
+###- z tego co widzę, zawartość tego folderu jest jednoznaczna: Credencials 🙂 zmień nazwę 
 folderu
 
 AuthenticationValidator:
-- jest to w ogóle potrzebne? wywalić
+#####- jest to w ogóle potrzebne? wywalić
 
 MailMechanism:
-- w metodzie Send ten try..catch jest zbędny
+####- w metodzie Send ten try..catch jest zbędny
 
-IMailCredentials i IServerCredentials są zbędne.
+#####IMailCredentials i IServerCredentials są zbędne.
 
-UserManager i MailMechanism mogą wylądować bezpośrednio w folderze model, są dość ogólne.
+####UserManager i MailMechanism mogą wylądować bezpośrednio w folderze model, są dość ogólne.
 
 Pamiętaj, że jeśli zmieniasz miejsce klasy w folderach, zmienia się im też namespace
 
 
 Resourcy: prawym na folderze/projekcie -> add -> resource dictionary
 
-AuthenticationValidator ma tylko jedną metodę, której za zadanie jest wywołać jedną metodę 
+####AuthenticationValidator ma tylko jedną metodę, której za zadanie jest wywołać jedną metodę 
 z obiektu przekazywanego jako parametr.. serio jest potrzebny? 🙂 nie wystarczyłoby zamiast:
 Model.Security.AuthenticationValidator.Authenticate(_mailBox)
 zrobić
-_mailBox.Authenticate()
-?
+###_mailBox.Authenticate()
+
 
 Interfejsy razem z implementacją, a przynajmniej w tym przypadku. Zdarzają się różne 
 projekty, gdzie jest to wydzielone, szczególnie przy stosowaniu IoC. Ale tutaj do jednego

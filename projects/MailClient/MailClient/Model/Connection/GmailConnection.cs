@@ -1,26 +1,13 @@
-﻿using MailClient.Model.Interface;
-using MailClient.Model.InterfaceImplementation;
-
-namespace MailClient.Model.Connection
+﻿namespace MailClient.Model.Connection
 {
-    class GmailConnection : IMailConnection
+    class GmailConnection : BaseConnection
     {
-        public IMailCredentials Credentials { get; } = new MailCredentials();
-        public bool UseSsl { get; }
-        public string MailboxName { get; }
-        public bool HeadersOnly { get; }
-        public int MaxNumberOfReceivedMails { get; }
-
         public GmailConnection()
         {
-            Credentials.Sending.ServerName = "smtp.gmail.com";
-            Credentials.Sending.ServerPort = 587;
-            Credentials.Receiving.ServerName = "imap.gmail.com";
-            Credentials.Receiving.ServerPort = 993;
-            UseSsl = true;
-            MailboxName = "INBOX";
-            HeadersOnly = false;
-            MaxNumberOfReceivedMails = 100;
+            SendingServerName = "smtp.gmail.com";
+            SendingServerPort = 587;
+            ReceivingServerName = "imap.gmail.com";
+            ReceivingServerPort = 993;
         }        
     }
 }

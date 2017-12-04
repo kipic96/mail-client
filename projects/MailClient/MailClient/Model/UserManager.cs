@@ -3,7 +3,7 @@ using System.IO;
 using MailClient.Extension;
 using MailClient.Model.Entity;
 
-namespace MailClient.Model.UserManager
+namespace MailClient.Model
 {
     public static class UserManager
     {

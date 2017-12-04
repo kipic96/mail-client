@@ -1,11 +1,10 @@
 ﻿using MailClient.Enum;
-using MailClient.Model.Interface;
 
 namespace MailClient.Model.Connection
 {
     static class ConnectionFactory
     {
-        public static IMailConnection Create(EmailMode emailMode)
+        public static BaseConnection Create(EmailMode emailMode)
         {
             switch (emailMode)
             {

@@ -1,29 +1,11 @@
 ﻿using MailClient.Model.Connection;
-using MailClient.Model.Interface;
-using MailClient.Model.Mechanism;
 using System.Collections.Generic;
 
 namespace MailClient.Model.Entity
 {
     public class MailBox 
     {
-        private IMailMechanism _mailMechanism;
-
-
-        public string UserLogin
-        {
-            get
-            {
-                if (_mailMechanism == null)
-                    return string.Empty;
-                return _mailMechanism.User.Login;
-            }
-        }
-
-        public MailBox()
-        {
-
-        }
+        private BaseMechanism _mailMechanism;
 
         public MailBox(User user)
         {

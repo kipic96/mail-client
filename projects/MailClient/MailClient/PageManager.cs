@@ -1,5 +1,4 @@
 ﻿using MailClient.Model.Entity;
-using MailClient.Model.UserManager;
 using MailClient.ViewModel.Base;
 using MailClient.ViewModel;
 using System;
@@ -8,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using MailClient.ViewModel.Log;
+using MailClient.Model;
 
 namespace MailClient
 {
@@ -21,6 +21,26 @@ namespace MailClient
         private MailBox _mailBox;
 
         #endregion
+
+        #region properties
+
+        public Action LogoutAction { get; set; }
+
+        public BaseViewModel CurrentPageViewModel
+        {
+            get
+            {
+                return _currentPageViewModel;
+            }
+            private set
+            {
+                if (_currentPageViewModel != value)
+                {
+                    _currentPageViewModel = value;
+                    RaisePropertyChanged(nameof(CurrentPageViewModel));
+                }
+            }
+        }        
 
         public IList<BaseViewModel> Pages
         {
@@ -37,15 +57,7 @@ namespace MailClient
             }
         } 
 
-        public BaseViewModel FindPage(Enum.PageType pageNumber)
-        {
-            foreach (var page in Pages)
-            {
-                if (page.PageType == pageNumber)
-                    return page;
-            }
-            return null;
-        }
+        #endregion 
 
         #region constructors
 
@@ -75,7 +87,6 @@ namespace MailClient
             }
             else
             {
-                _mailBox = new MailBox();
                 _currentPageViewModel = FindPage(Enum.PageType.Logging);
             }            
         }
@@ -100,29 +111,17 @@ namespace MailClient
 
         #endregion
 
-        #region properties
+        #region methods     
 
-        public Action LogoutAction { get; set; }
-
-        public BaseViewModel CurrentPageViewModel
+        public BaseViewModel FindPage(Enum.PageType pageNumber)
         {
-            get
+            foreach (var page in Pages)
             {
-                return _currentPageViewModel;
+                if (page.PageType == pageNumber)
+                    return page;
             }
-            private set
-            {
-                if (_currentPageViewModel != value)
-                {
-                    _currentPageViewModel = value;
-                    RaisePropertyChanged(nameof(CurrentPageViewModel));
-                }
-            }
+            return null;
         }
-
-        #endregion        
-
-        #region methods        
 
         private void ChangeViewModel(BaseViewModel viewModel)
         {            
@@ -138,7 +137,6 @@ namespace MailClient
 
         private void LogOut()
         {
-            _mailBox = new MailBox();
             UserManager.ForgetUser();
             LogoutAction();
         }
@@ -161,14 +159,13 @@ namespace MailClient
         private void LogInAction(User user)
         {
             _mailBox = new MailBox(user);            
-            if (Model.Security.AuthenticationValidator.Authenticate(_mailBox))
+            if (_mailBox.Authenticate())
             {
                 UserManager.RememberUser(user);
                 ChangeViewModel(FindPage(Enum.PageType.Received));                
             }
             else
             {
-                _mailBox = new MailBox();
                 LogMessage.Show(ViewModel.Dictionary.LogMessage.WrongLoginOrPassword);
             }            
         }
