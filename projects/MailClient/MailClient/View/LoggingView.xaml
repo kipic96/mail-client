@@ -4,19 +4,20 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MailClient.View"
+      xmlns:properties="clr-namespace:MailClient.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="600">
 
     <StackPanel>
         <TextBlock Style="{StaticResource PageName}" Text="{Binding PageNameLogIn}"/>
-        <Label Style="{StaticResource LoginLabel}">Login</Label>
+        <Label Style="{StaticResource LoginLabel}" Content="{x:Static properties:Resources.LoginLabel}"/>
         <TextBox Name="boxLogin" Style="{StaticResource Login}" Text="{Binding Login}"/>
-        <Label Style="{StaticResource LoginLabel}">Password</Label>
+        <Label Style="{StaticResource LoginLabel}" Content="{x:Static properties:Resources.Password}"/>
         <PasswordBox Name="boxPassword" FontSize="14" Width="300" Height="25" PasswordChanged="boxPassword_PasswordChanged"/>
-        <Label Style="{StaticResource LoginLabel}">Email type</Label>
-        <RadioButton Style="{StaticResource MailChoosingRadioButton}" Content="Gmail" IsChecked="{Binding EmailModeTable[0], Mode=TwoWay}"/>
-        <RadioButton Style="{StaticResource MailChoosingRadioButton}" Content="Interia" IsChecked="{Binding EmailModeTable[1], Mode=TwoWay}"/>
-        <RadioButton Style="{StaticResource MailChoosingRadioButton}" Content="O2" IsChecked="{Binding EmailModeTable[2], Mode=TwoWay}"/>
-        <Button Content="Log in" Style="{StaticResource LogInButton}" Command="{Binding LogInCommand}"/>
+        <Label Style="{StaticResource LoginLabel}" Content="{x:Static properties:Resources.EmailType}"/>
+        <RadioButton Style="{StaticResource MailChoosingRadioButton}" Content="{x:Static properties:Resources.Gmail}" IsChecked="{Binding EmailModeTable[0], Mode=TwoWay}"/>
+        <RadioButton Style="{StaticResource MailChoosingRadioButton}" Content="{x:Static properties:Resources.Interia}" IsChecked="{Binding EmailModeTable[1], Mode=TwoWay}"/>
+        <RadioButton Style="{StaticResource MailChoosingRadioButton}" Content="{x:Static properties:Resources.O2}" IsChecked="{Binding EmailModeTable[2], Mode=TwoWay}"/>
+        <Button Content="{x:Static properties:Resources.LogIn}" Style="{StaticResource LogInButton}" Command="{Binding LogInCommand}"/>
     </StackPanel>
 </UserControl>

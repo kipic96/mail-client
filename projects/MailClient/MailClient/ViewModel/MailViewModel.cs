@@ -32,7 +32,7 @@ namespace MailClient.ViewModel
         {
            _mail = mail;
             PageType = PageType.Mail;
-            PageName = Dictionary.PageName.Mail;
+            PageName = Properties.Resources.Mail;
         }
     }
 }

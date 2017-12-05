@@ -166,7 +166,7 @@ namespace MailClient
             }
             else
             {
-                LogMessage.Show(ViewModel.Dictionary.LogMessage.WrongLoginOrPassword);
+                LogMessage.Show(Properties.Resources.WrongLoginOrPassword);
             }            
         }
 
@@ -174,7 +174,7 @@ namespace MailClient
         {
             _mailBox.Send(mail);
             ChangeViewModel(FindPage(Enum.PageType.Received));
-            LogMessage.Show(ViewModel.Dictionary.LogMessage.MailSent);
+            LogMessage.Show(Properties.Resources.MailSent);
         }
 
         private void MailChoosenAction(int mailId)

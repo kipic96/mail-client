@@ -15,7 +15,7 @@ namespace MailClient.ViewModel
 
         public ReceivedViewModel()
         {
-            PageName = Dictionary.PageName.Received;
+            PageName = Properties.Resources.Received;
             PageType = Enum.PageType.Received;
         }
 

@@ -14,11 +14,11 @@ namespace MailClient.ViewModel
         private bool[] _emailModeTable = new bool[] { false, false, false };
         private ICommand _logInCommand;
 
-        public string PageNameLogIn { get; private set; } = Dictionary.PageName.Logging;
+        public string PageNameLogIn { get; private set; } = Properties.Resources.Logging;
        
         public LoggingViewModel()
         {
-            PageName = Dictionary.PageName.LogOut;
+            PageName = Properties.Resources.LogOut;
             PageType = Enum.PageType.Logging;
         }
 
@@ -86,7 +86,7 @@ namespace MailClient.ViewModel
             }
             else
             {
-                Log.LogMessage.Show(Dictionary.LogMessage.WrongEmailAdress);
+                Log.LogMessage.Show(Properties.Resources.WrongEmailAdress);
             }      
         }
 

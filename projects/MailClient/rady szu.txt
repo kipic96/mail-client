@@ -1,4 +1,4 @@
-##############Enum.PageNumber:
+﻿##############Enum.PageNumber:
 #################- trochę zły dobór nazewnictwa, raczej bym nazwał PageType
 
 ###########Extension:
@@ -44,9 +44,8 @@ PageViewModels:
 nie dałoby się jakoś połączyć w jedną klasę, nazwać PageManager i wyciągnąć całkiem na 
 ###zewnątrz folderów? Bo nie jestem w stanie określić logicznie, która klasa za co odpowiada
 
-????????????????????????????????????????
 Dictionary:
-- wszystkie dictionary dobrze by było zebrać do jednego nadrzędnego folderu o nazwie
+#####- wszystkie dictionary dobrze by było zebrać do jednego nadrzędnego folderu o nazwie
  Resources, tak się robi
 - a jak bym się bardzo czepiał, to można je wszystkie po kolei zastąpić plikami typu 
 Resource Dictionary 😉

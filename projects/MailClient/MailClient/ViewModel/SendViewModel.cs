@@ -13,7 +13,7 @@ namespace MailClient.ViewModel
         public SendViewModel()
         {
             PageType = Enum.PageType.Send;
-            PageName = Dictionary.PageName.Send;
+            PageName = Properties.Resources.Send;
         }
 
         public Mail Mail
@@ -64,7 +64,7 @@ namespace MailClient.ViewModel
             }
             else
             {
-                Log.LogMessage.Show(Dictionary.LogMessage.WrongEmailAdress);
+                Log.LogMessage.Show(Properties.Resources.WrongEmailAdress);
             }            
         }
 

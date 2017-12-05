@@ -108,7 +108,6 @@
     <Compile Include="Model\Parser\MailParser.cs" />
     <Compile Include="Model\UserManager.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
-    <Compile Include="ViewModel\Dictionary\LogMessage.cs" />
     <Compile Include="ViewModel\Dictionary\PageName.cs" />
     <Compile Include="Enum\PageType.cs" />
     <Compile Include="View\Helper\DataContextSpy.cs" />
@@ -128,7 +127,6 @@
     <Compile Include="ViewModel\MailViewModel.cs" />
     <Compile Include="ViewModel\Security\EmailValidator.cs" />
     <Compile Include="ViewModel\SendViewModel.cs" />
-    <Compile Include="View\Dictionary\ViewTexts.cs" />
     <Compile Include="View\LoggingView.xaml.cs">
       <DependentUpon>LoggingView.xaml</DependentUpon>
     </Compile>
@@ -192,7 +190,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -220,9 +218,7 @@
   <ItemGroup>
     <Resource Include="Graphicloads-100-Flat-2-Email.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
