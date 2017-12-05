@@ -108,7 +108,6 @@
     <Compile Include="Model\Parser\MailParser.cs" />
     <Compile Include="Model\UserManager.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />
-    <Compile Include="ViewModel\Dictionary\PageName.cs" />
     <Compile Include="Enum\PageType.cs" />
     <Compile Include="View\Helper\DataContextSpy.cs" />
     <Compile Include="ViewModel\Base\RelayCommand.cs" />

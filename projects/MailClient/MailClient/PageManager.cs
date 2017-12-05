@@ -67,7 +67,7 @@ namespace MailClient
             Pages.Add(new LoggingViewModel());
             Pages.Add(new ReceivedViewModel());
             Pages.Add(new SendViewModel());
-            // TODO here add new viewModels
+            // TODO here add new viewModels if nesseary
 
             (FindPage(Enum.PageType.Logging) as LoggingViewModel)
                 .LogInAction += LogInAction;
@@ -103,7 +103,7 @@ namespace MailClient
                 {
                     _changePageCommand = new RelayCommand(
                         p => ChangeViewModel((BaseViewModel)p),
-                        p => ValidateChangeViewModel((BaseViewModel)p));
+                        p => ValidateChangeViewModel());
                 }
                 return _changePageCommand;
             }
@@ -141,9 +141,9 @@ namespace MailClient
             LogoutAction();
         }
 
-        private bool ValidateChangeViewModel(BaseViewModel viewModel)
+        private bool ValidateChangeViewModel()
         {
-            return !(_currentPageViewModel is LoggingViewModel);
+            return !(_currentPageViewModel.PageType == Enum.PageType.Logging);
         }
 
         private void ChangePageAction(Enum.PageType pageNumber)

@@ -14,7 +14,7 @@ namespace MailClient.Model.Entity
 
         public void Send(Mail mail)
         {
-            _mailMechanism.Send(mail as Mail);            
+            _mailMechanism.Send(mail);            
         }
 
         public IEnumerable<Mail> Receive()

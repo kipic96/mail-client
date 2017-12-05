@@ -82,7 +82,7 @@ namespace MailClient.ViewModel
         {
             if (Security.EmailValidator.Validate(Login))
             {
-                LogInAction(new User { Login = Login,Password = SecurePassword, EmailMode = EmailMode });
+                LogInAction(new User { Login = Login, Password = SecurePassword, EmailMode = EmailMode });
             }
             else
             {
