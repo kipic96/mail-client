@@ -142,11 +142,11 @@ namespace MailClient.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email sent.
+        ///   Looks up a localized string similar to Email sent to .
         /// </summary>
-        public static string MailSent {
+        public static string MailSentTo {
             get {
-                return ResourceManager.GetString("MailSent", resourceCulture);
+                return ResourceManager.GetString("MailSentTo", resourceCulture);
             }
         }
         

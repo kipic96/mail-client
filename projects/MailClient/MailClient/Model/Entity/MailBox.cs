@@ -10,7 +10,11 @@ namespace MailClient.Model.Entity
         public MailBox(User user)
         {
             _mailMechanism = new MailMechanism(user, ConnectionFactory.Create(user.EmailMode));
-        }       
+        }
+
+        public MailBox()
+        {
+        }
 
         public void Send(Mail mail)
         {
@@ -22,9 +26,9 @@ namespace MailClient.Model.Entity
             return _mailMechanism.Receive();
         }
 
-        public void ChangeUser(User user)
+        public bool ValidateEmail(string email)
         {
-            _mailMechanism = new MailMechanism(user, ConnectionFactory.Create(user.EmailMode));
+            return Validator.EmailValidator.Validate(email);
         }
 
         public bool Authenticate()

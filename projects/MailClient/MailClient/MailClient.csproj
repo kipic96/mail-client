@@ -124,7 +124,7 @@
     <Compile Include="Model\Connection\InteriaConnection.cs" />
     <Compile Include="ViewModel\LoggingViewModel.cs" />
     <Compile Include="ViewModel\MailViewModel.cs" />
-    <Compile Include="ViewModel\Security\EmailValidator.cs" />
+    <Compile Include="Model\Validator\EmailValidator.cs" />
     <Compile Include="ViewModel\SendViewModel.cs" />
     <Compile Include="View\LoggingView.xaml.cs">
       <DependentUpon>LoggingView.xaml</DependentUpon>

@@ -55,9 +55,11 @@ namespace MailClient.ViewModel
 
         public Action<Mail> SendMail { get; set; }
 
+        public Func<string, bool> ValidateEmail { get; set; }
+
         private void Send()
         {
-            if (Security.EmailValidator.Validate(Mail.To))
+            if (ValidateEmail(Mail.To))
             {
                 SendMail(Mail);
                 Mail = new Mail { };

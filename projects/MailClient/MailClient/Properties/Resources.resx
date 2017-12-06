@@ -144,8 +144,8 @@
   <data name="Mail" xml:space="preserve">
     <value>Mail</value>
   </data>
-  <data name="MailSent" xml:space="preserve">
-    <value>Email sent</value>
+  <data name="MailSentTo" xml:space="preserve">
+    <value>Email sent to </value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>Message:</value>

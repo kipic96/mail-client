@@ -47,20 +47,20 @@ nie dałoby się jakoś połączyć w jedną klasę, nazwać PageManager i wyci�
 Dictionary:
 #####- wszystkie dictionary dobrze by było zebrać do jednego nadrzędnego folderu o nazwie
  Resources, tak się robi
-- a jak bym się bardzo czepiał, to można je wszystkie po kolei zastąpić plikami typu 
+####- a jak bym się bardzo czepiał, to można je wszystkie po kolei zastąpić plikami typu 
 Resource Dictionary 😉
 
 ViewModel:
 ####- czy BindableClass, IPageViewModel, IPageClearable nie można by zastąpić jedną
  abstrakcyjną klasą BaseViewModel? Nie wydaje mi się, żeby dzielenie było wymagane,
   a uprościłoby czytelność struktury
-????- generalnie w tym folderze jest jakoś nasrane wszystkim, kiedy powinno to być czyste,
+#####- generalnie w tym folderze jest jakoś nasrane wszystkim, kiedy powinno to być czyste,
  tzn powinny się tam znajdować tylko view modele, ewentualnie folder Base, w którym może
   wylądować BaseViewModel i RelayCommand, resztę (tj EmailValidator, bo tylko on został)
    wywalić stamtąd
 
 Model.Connection:
-- fajnie że używasz fabryki, ale zwracanie nulla w defaulcie jest ryzykowne. Poczytaj o null
+###- fajnie że używasz fabryki, ale zwracanie nulla w defaulcie jest ryzykowne. Poczytaj o null
  object pattern, warto znać
 #####- może IMailConnection zastąpić abstrakcyjną klasą BaseConnection? W takim przypadku nie
  musiałbyś za każdym razem implementować 5 propert

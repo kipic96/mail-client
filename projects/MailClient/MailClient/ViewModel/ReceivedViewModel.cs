@@ -42,7 +42,7 @@ namespace MailClient.ViewModel
                 if (_mailChooseCommand == null)
                 {
                     _mailChooseCommand = new RelayCommand(
-                        p => ReceiveMailsAndSafe(),
+                        p => SaveReceivedMails(),
                         p => { return true; });
                 }
                 return _mailChooseCommand;
@@ -56,22 +56,16 @@ namespace MailClient.ViewModel
                 if (_receivedMailsCommand == null)
                 {
                     _receivedMailsCommand = new RelayCommand(
-                        mail => MailChoose((int)mail),
-                        mail => { return true; });
+                        mailId => MailChoosen((int)mailId),
+                        mailId => { return true; });
                 }
                 return _receivedMailsCommand;
             }
         }
 
-        private void MailChoose(int mailId)
+        private void SaveReceivedMails()
         {
-            MailChoosen(mailId);
-        }
-
-        private void ReceiveMailsAndSafe()
-        {
-            IEnumerable<Mail> receivedMails = ReceiveMails();
-            ReceivedMails = new ObservableCollection<Mail>(receivedMails);
+            ReceivedMails = new ObservableCollection<Mail>(ReceiveMails());
         }       
     }
 }

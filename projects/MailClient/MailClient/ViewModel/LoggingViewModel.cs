@@ -45,7 +45,6 @@ namespace MailClient.ViewModel
             }
         }
 
-
         public Enum.EmailMode EmailMode
         {
             get
@@ -61,8 +60,9 @@ namespace MailClient.ViewModel
             }
         }
 
-        public Action<User> LogInAction { get; set; }
+        public Action<User> LogInUser { get; set; }
 
+        public Func<string, bool> ValidateEmail { get; set; }
 
         public ICommand LogInCommand
         {
@@ -72,7 +72,12 @@ namespace MailClient.ViewModel
                 {
                     _logInCommand = new RelayCommand(
                         p => LogIn(),
-                        p => LogInValidation());
+                        p =>
+                        {
+                            return (EmailMode != Enum.EmailMode.Undefined 
+                                     && Login != string.Empty 
+                                     && SecurePassword.Length != 0);
+                        });
                 }
                 return _logInCommand;
             }
@@ -80,19 +85,20 @@ namespace MailClient.ViewModel
 
         public void LogIn()
         {
-            if (Security.EmailValidator.Validate(Login))
+            if (ValidateEmail(Login))
             {
-                LogInAction(new User { Login = Login, Password = SecurePassword, EmailMode = EmailMode });
+                LogInUser(
+                new User
+                {
+                    Login = Login,
+                    Password = SecurePassword,
+                    EmailMode = EmailMode
+                });
             }
             else
             {
                 Log.LogMessage.Show(Properties.Resources.WrongEmailAdress);
             }      
-        }
-
-        private bool LogInValidation()
-        {
-            return (EmailMode != Enum.EmailMode.Undefined && Login != string.Empty && SecurePassword.Length != 0);
         }
     }
 }

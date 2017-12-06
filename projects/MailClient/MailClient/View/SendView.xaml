@@ -11,7 +11,7 @@
     <StackPanel>
         <TextBlock Style="{StaticResource PageName}" Text="{Binding PageName}"/>
         <StackPanel Style="{StaticResource StackPanel}">
-            <TextBlock Text="{x:Static properties:Resources.From}" FontSize="14"/>
+            <TextBlock Text="{x:Static properties:Resources.To}" FontSize="14"/>
             <TextBox Text="{Binding Path=Mail.To, Mode=TwoWay}" Style="{StaticResource MailInputTextBox}"/>
             <TextBlock Text="{x:Static properties:Resources.Subject}" FontSize="14"/>
             <TextBox Text="{Binding Mail.Subject, Mode=TwoWay}" Style="{StaticResource MailInputTextBox}"/>

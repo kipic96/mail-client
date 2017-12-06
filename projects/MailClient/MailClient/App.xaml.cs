@@ -20,7 +20,7 @@ namespace MailClient
             {
                 app = new ApplicationView();
                 context = new PageManager();
-                context.LogoutAction = OnLogout;
+                context.OnLogOut = OnLogout;
                 app.Show();
                 app.DataContext = context;
             }
@@ -35,7 +35,7 @@ namespace MailClient
             try
             {
                 context = new PageManager();
-                context.LogoutAction = OnLogout;
+                context.OnLogOut = OnLogout;
                 app.DataContext = context;
             }
             catch (Exception ex)

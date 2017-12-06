@@ -9,22 +9,23 @@ using System.Windows.Input;
 using MailClient.ViewModel.Log;
 using MailClient.Model;
 
+
 namespace MailClient
 {
     class PageManager : BaseViewModel
     {
-        #region fields
+        #region fields    
 
-        private ICommand _changePageCommand;
-        private BaseViewModel _currentPageViewModel;
-        private IList<BaseViewModel> _pages;
         private MailBox _mailBox;
+        private IList<BaseViewModel> _pages;
+        private BaseViewModel _currentPageViewModel;
+        private ICommand _changePageCommand;
 
         #endregion
 
         #region properties
 
-        public Action LogoutAction { get; set; }
+        public Action OnLogOut { get; set; }
 
         public BaseViewModel CurrentPageViewModel
         {
@@ -67,19 +68,9 @@ namespace MailClient
             Pages.Add(new LoggingViewModel());
             Pages.Add(new ReceivedViewModel());
             Pages.Add(new SendViewModel());
-            // TODO here add new viewModels if nesseary
-
-            (FindPage(Enum.PageType.Logging) as LoggingViewModel)
-                .LogInAction += LogInAction;
-            (FindPage(Enum.PageType.Received) as ReceivedViewModel)
-                .ReceiveMails += ReceiveMailsAction;
-            (FindPage(Enum.PageType.Received) as ReceivedViewModel)
-                .MailChoosen += MailChoosenAction;
-            (FindPage(Enum.PageType.Send) as SendViewModel)
-                .SendMail += SendMailAction;
+            // Add new ViewModels here
 
             var user = UserManager.LoadRemeberedUser();
-            
             if (user != null)
             {
                 _mailBox = new MailBox(user);
@@ -87,8 +78,19 @@ namespace MailClient
             }
             else
             {
+                _mailBox = new MailBox();
                 _currentPageViewModel = FindPage(Enum.PageType.Logging);
-            }            
+            }
+
+            var loggingVM = FindPage(Enum.PageType.Logging) as LoggingViewModel;
+            var receivedVM = FindPage(Enum.PageType.Received) as ReceivedViewModel;
+            var sendVM = FindPage(Enum.PageType.Send) as SendViewModel;
+            loggingVM.LogInUser += OnLogIn;
+            loggingVM.ValidateEmail += OnValidateEmail;            
+            receivedVM.ReceiveMails += OnReceiveMails;
+            receivedVM.MailChoosen += OnMailChoosen;
+            sendVM.SendMail += OnMailSend;
+            sendVM.ValidateEmail += OnValidateEmail;
         }
 
         #endregion
@@ -103,7 +105,11 @@ namespace MailClient
                 {
                     _changePageCommand = new RelayCommand(
                         p => ChangeViewModel((BaseViewModel)p),
-                        p => ValidateChangeViewModel());
+                        p => 
+                        {
+                            return !(_currentPageViewModel.PageType
+                                        == Enum.PageType.Logging);
+                        });
                 }
                 return _changePageCommand;
             }
@@ -127,7 +133,7 @@ namespace MailClient
         {            
             if (CurrentPageViewModel != viewModel)
             {
-                if (viewModel is LoggingViewModel)
+                if (viewModel.PageType == Enum.PageType.Logging)
                 {
                     LogOut();
                 }
@@ -138,46 +144,41 @@ namespace MailClient
         private void LogOut()
         {
             UserManager.ForgetUser();
-            LogoutAction();
+            OnLogOut();
         }
 
-        private bool ValidateChangeViewModel()
+        private void OnLogIn(User user)
         {
-            return !(_currentPageViewModel.PageType == Enum.PageType.Logging);
-        }
-
-        private void ChangePageAction(Enum.PageType pageNumber)
-        {
-            ChangeViewModel(FindPage(pageNumber));
-        }
-
-        private IEnumerable<Mail> ReceiveMailsAction()
-        {            
-            return _mailBox.Receive();           
-        }
-
-        private void LogInAction(User user)
-        {
-            _mailBox = new MailBox(user);            
+            _mailBox = new MailBox(user);
             if (_mailBox.Authenticate())
             {
                 UserManager.RememberUser(user);
-                ChangeViewModel(FindPage(Enum.PageType.Received));                
+                ChangeViewModel(FindPage(Enum.PageType.Received));
             }
             else
             {
                 LogMessage.Show(Properties.Resources.WrongLoginOrPassword);
-            }            
+            }
         }
 
-        private void SendMailAction(Mail mail)
+        private bool OnValidateEmail(string email)
+        {
+            return _mailBox.ValidateEmail(email);
+        }
+
+        private IEnumerable<Mail> OnReceiveMails()
+        {            
+            return _mailBox.Receive();           
+        }
+
+        private void OnMailSend(Mail mail)
         {
             _mailBox.Send(mail);
             ChangeViewModel(FindPage(Enum.PageType.Received));
-            LogMessage.Show(Properties.Resources.MailSent);
+            LogMessage.Show(Properties.Resources.MailSentTo + mail.To);
         }
 
-        private void MailChoosenAction(int mailId)
+        private void OnMailChoosen(int mailId)
         {
             Mail mail = (FindPage(Enum.PageType.Received) 
                 as ReceivedViewModel).ReceivedMails.ElementAt(mailId);

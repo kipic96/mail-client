@@ -15,9 +15,9 @@ namespace MailClient.Model.Connection
                 case EmailMode.Interia:
                     return new InteriaConnection();
                 case EmailMode.Undefined:
-                    return null;
+                    return BaseConnection.EmptyConnection;
                 default:
-                    return null;                  
+                    return BaseConnection.EmptyConnection;                  
             }
         }
     }
