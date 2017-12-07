@@ -1,4 +1,4 @@
-# private-projects
+# mail-client
 
 Mail Client Application in C# by Marcin Chilicki
 

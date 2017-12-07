@@ -5,7 +5,7 @@
 #########- są literówki w nazwach klas, extension pisze się przez 'S' 😉
 
 ########User:
-##########- żadko się tworzy konstruktory modeli, których jedynynym celem jest przypisanie wartości 
+##########- rzadko się tworzy konstruktory modeli, których jedynynym celem jest przypisanie wartości 
 ####do propert. Można wywalić oba konstruktory, a tworzenie obiektu załatwić np tak 
 (kod z LoggingViewModel, linia 97):
 #########LogInAction(new User

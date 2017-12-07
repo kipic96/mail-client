@@ -1,8 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="SQLTimetableProject" id="F2626A1E-0FB1-367A-B561-C8FED0BA6A5C" version="3.5">
-<createdBy>Marcin</createdBy>
-<createdTime>2017-08-14 11:06:12 UTC</createdTime>
-<ownerDesignName>SQLTimetableProject</ownerDesignName>
-<capitalNames>false</capitalNames>
-<designId>F2626A1E-0FB1-367A-B561-C8FED0BA6A5C</designId>
-</OSDM_Design>

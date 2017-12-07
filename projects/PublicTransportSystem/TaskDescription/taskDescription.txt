@@ -1,4 +1,0 @@
-System obs³ugi komunikacji miejskiej 
-Dla pasa¿erów: wyszukiwanie po³¹czeñ po nr linii, przystankach i
-godzinie odjazdu
-Dla kierowców: odpytywanie o aktualne opóŸnienie
