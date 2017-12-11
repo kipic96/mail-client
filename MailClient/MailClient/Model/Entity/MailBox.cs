@@ -7,33 +7,47 @@ namespace MailClient.Model.Entity
     {
         private BaseMechanism _mailMechanism;
 
+        public static readonly MailBox EmptyMailBox =
+            new MailBoxNull();
+
+        public MailBox() { }
+
         public MailBox(User user)
         {
             _mailMechanism = new MailMechanism(user, ConnectionFactory.Create(user.EmailMode));
-        }
+        }        
 
-        public MailBox()
-        {
-        }
-
-        public void Send(Mail mail)
+        public virtual void Send(Mail mail)
         {
             _mailMechanism.Send(mail);            
         }
 
-        public IEnumerable<Mail> Receive()
+        public virtual IEnumerable<Mail> Receive()
         {
             return _mailMechanism.Receive();
         }
 
-        public bool ValidateEmail(string email)
+        public virtual bool ValidateEmail(string email)
         {
             return Validator.EmailValidator.Validate(email);
         }
 
-        public bool Authenticate()
+        public virtual bool Authenticate()
         {
             return _mailMechanism.Authenticate();
+        }
+
+        private class MailBoxNull : MailBox
+        {
+            public MailBoxNull() { }
+
+            public MailBoxNull(User user) : base(user) { }
+
+            public override void Send(Mail mail) { }
+
+            public override IEnumerable<Mail> Receive() { return new List<Mail>(); }
+
+            public override bool Authenticate() { return false; }
         }
     }
 }

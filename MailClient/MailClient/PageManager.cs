@@ -14,6 +14,37 @@ namespace MailClient
 {
     class PageManager : BaseViewModel
     {
+        public PageManager()
+        {
+            Pages = new ObservableCollection<BaseViewModel>();
+            Pages.Add(new LoggingViewModel());
+            Pages.Add(new ReceivedViewModel());
+            Pages.Add(new SendViewModel());
+            // Add new ViewModels here
+
+            var user = UserManager.LoadRemeberedUser();
+            if (user != null)
+            {
+                _mailBox = new MailBox(user);
+                _currentPageViewModel = FindPage(Enum.PageType.Received);
+            }
+            else
+            {
+                _mailBox = MailBox.EmptyMailBox;
+                _currentPageViewModel = FindPage(Enum.PageType.Logging);
+            }
+
+            var loggingVM = FindPage(Enum.PageType.Logging) as LoggingViewModel;
+            var receivedVM = FindPage(Enum.PageType.Received) as ReceivedViewModel;
+            var sendVM = FindPage(Enum.PageType.Send) as SendViewModel;
+            loggingVM.LogInUser += OnLogIn;
+            loggingVM.ValidateEmail += OnValidateEmail;
+            receivedVM.ReceiveMails += OnReceiveMails;
+            receivedVM.MailChoosen += OnMailChoosen;
+            sendVM.SendMail += OnMailSend;
+            sendVM.ValidateEmail += OnValidateEmail;
+        }
+
         #region fields    
 
         private MailBox _mailBox;
@@ -58,42 +89,7 @@ namespace MailClient
             }
         } 
 
-        #endregion 
-
-        #region constructors
-
-        public PageManager()
-        {
-            Pages = new ObservableCollection<BaseViewModel>();
-            Pages.Add(new LoggingViewModel());
-            Pages.Add(new ReceivedViewModel());
-            Pages.Add(new SendViewModel());
-            // Add new ViewModels here
-
-            var user = UserManager.LoadRemeberedUser();
-            if (user != null)
-            {
-                _mailBox = new MailBox(user);
-                _currentPageViewModel = FindPage(Enum.PageType.Received);
-            }
-            else
-            {
-                _mailBox = new MailBox();
-                _currentPageViewModel = FindPage(Enum.PageType.Logging);
-            }
-
-            var loggingVM = FindPage(Enum.PageType.Logging) as LoggingViewModel;
-            var receivedVM = FindPage(Enum.PageType.Received) as ReceivedViewModel;
-            var sendVM = FindPage(Enum.PageType.Send) as SendViewModel;
-            loggingVM.LogInUser += OnLogIn;
-            loggingVM.ValidateEmail += OnValidateEmail;            
-            receivedVM.ReceiveMails += OnReceiveMails;
-            receivedVM.MailChoosen += OnMailChoosen;
-            sendVM.SendMail += OnMailSend;
-            sendVM.ValidateEmail += OnValidateEmail;
-        }
-
-        #endregion
+        #endregion         
 
         #region commands
 

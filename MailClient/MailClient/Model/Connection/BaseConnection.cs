@@ -17,12 +17,13 @@
 
         private class NullConnection : BaseConnection
         {
-            /* 
-             * 1. Hi Szu, how are you today? :D
-             * 2. Is this ok how i implemented Null Object Pattern?
-             * 3. How do i initialize the server names, ports 
-             *      for NullConnection? What values should i use?    
-            */
+            public NullConnection()
+            {
+                SendingServerName = "";
+                ReceivingServerName = "";
+                SendingServerPort = 0;
+                ReceivingServerPort = 0;
+            }
         }
     }
 }
