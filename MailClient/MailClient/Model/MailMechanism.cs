@@ -12,13 +12,16 @@ namespace MailClient.Model
 {
     class MailMechanism : BaseMechanism
     {
+        private User _user { get; set; }
+        private BaseConnection _mailConnection { get; set; }
+
         public MailMechanism(User user, BaseConnection mailConnetion)
         {
             _user = user;
             _mailConnection = mailConnetion;
         }
 
-        public override IEnumerable<Mail> Receive()
+        public IEnumerable<Mail> Receive()
         {
             List<Mail> receivedMails = new List<Mail>();
             // converting SecureString to string
@@ -53,7 +56,7 @@ namespace MailClient.Model
             return receivedMails;
         }
 
-        public override void Send(Mail mail)
+        public void Send(Mail mail)
         {
             var message = new System.Net.Mail.MailMessage(_user.Login, mail.To);
             message.Subject = mail.Subject;
@@ -68,7 +71,7 @@ namespace MailClient.Model
             mailer.Send(message);
         }
 
-        public override bool Authenticate()
+        public bool Authenticate()
         {
             string userPassword = _user.Password.MakeItString();
             try

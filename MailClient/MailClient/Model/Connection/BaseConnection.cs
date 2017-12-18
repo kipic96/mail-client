@@ -14,16 +14,5 @@
 
         public static readonly BaseConnection EmptyConnection =
             new NullConnection();
-
-        private class NullConnection : BaseConnection
-        {
-            public NullConnection()
-            {
-                SendingServerName = "";
-                ReceivingServerName = "";
-                SendingServerPort = 0;
-                ReceivingServerPort = 0;
-            }
-        }
     }
 }

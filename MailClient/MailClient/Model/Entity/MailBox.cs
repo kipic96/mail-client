@@ -10,7 +10,7 @@ namespace MailClient.Model.Entity
         public static readonly MailBox EmptyMailBox =
             new MailBoxNull();
 
-        public MailBox() { }
+        private MailBox() { }
 
         public MailBox(User user)
         {

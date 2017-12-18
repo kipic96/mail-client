@@ -47,7 +47,12 @@ namespace MailClient.ViewModel
                 {
                     _sendCommand = new RelayCommand(
                         p => Send(),
-                        p => ValidateSend());
+                        p =>
+                        {
+                            return (!string.IsNullOrEmpty(Mail.To)
+                                && !string.IsNullOrEmpty(Mail.Subject)
+                                && !string.IsNullOrEmpty(Mail.Message));
+                        });
                 }
                 return _sendCommand;                
             }
@@ -68,16 +73,6 @@ namespace MailClient.ViewModel
             {
                 Log.LogMessage.Show(Properties.Resources.WrongEmailAdress);
             }            
-        }
-
-        private bool ValidateSend()
-        {
-            return (
-                (Mail.To != null && Mail.To != string.Empty) && 
-                (Mail.Subject != null && 
-                Mail.Subject != string.Empty) &&
-                (Mail.Message != null && 
-                Mail.Message != string.Empty));
         }
     }
 }
