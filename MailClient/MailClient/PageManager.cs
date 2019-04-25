@@ -8,7 +8,8 @@ using System.Linq;
 using System.Windows.Input;
 using MailClient.ViewModel.Log;
 using MailClient.Model;
-
+using System.Threading.Tasks;
+using System.IO;
 
 namespace MailClient
 {
@@ -169,9 +170,16 @@ namespace MailClient
 
         private void OnMailSend(Mail mail)
         {
-            _mailBox.Send(mail);
+            var sendEmailsTask = Task<IEnumerable<string>>.Factory.StartNew(() => _mailBox.Send(mail));
+            var sentEmails = sendEmailsTask.Result;
             ChangeViewModel(FindPage(Enum.PageType.Received));
-            LogMessage.Show(Properties.Resources.MailSentTo + mail.To);
+            string sentEmailsCommunicate = Properties.Resources.MailSentTo + ":" + Environment.NewLine;
+            foreach (var sentEmail in sentEmails)
+            {
+                sentEmailsCommunicate += sentEmail + Environment.NewLine;
+            }
+            File.WriteAllText("sentEmailsOn" + DateTime.Now.ToString("yyyy-MM-dd HH-mm") + ".txt", sentEmailsCommunicate);
+            LogMessage.Show(sentEmailsCommunicate);
         }
 
         private void OnMailChoosen(int mailId)

@@ -31,6 +31,7 @@ namespace MailClient.ViewModel
                 _mail.From = value.From;
                 _mail.Message = value.Message;
                 _mail.To = value.To;
+                _mail.SendMultipleEmails = value.SendMultipleEmails;
                 _mail.Attachment1 = value.Attachment1;
                 _mail.Attachment2 = value.Attachment2;
                 _mail.Attachment3 = value.Attachment1;
@@ -79,8 +80,6 @@ namespace MailClient.ViewModel
                 RaisePropertyChanged(nameof(ThirdFile));
             }
         }
-
-
 
         public ICommand SendCommand
         {
@@ -143,7 +142,7 @@ namespace MailClient.ViewModel
                 !string.IsNullOrWhiteSpace(Mail.Subject) && 
                 !string.IsNullOrWhiteSpace(Mail.Message))
             {
-                if (ValidateEmail(Mail.To))
+                if (Mail.SendMultipleEmails || ValidateEmail(Mail.To))
                 {
                     SendMail(Mail);
                     Mail = new Mail { };

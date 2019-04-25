@@ -11,6 +11,8 @@
     <StackPanel>
         <TextBlock Style="{StaticResource PageName}" Text="{Binding PageName}"/>
         <StackPanel Style="{StaticResource StackPanel}">
+            <TextBlock Text="Send multiple individual emails" FontSize="14"/>
+            <CheckBox IsChecked="{Binding Mail.SendMultipleEmails}" />
             <TextBlock Text="{x:Static properties:Resources.To}" FontSize="14"/>
             <TextBox Text="{Binding Path=Mail.To, Mode=TwoWay}" Style="{StaticResource MailInputTextBox}"/>
             <TextBlock Text="{x:Static properties:Resources.Subject}" FontSize="14"/>

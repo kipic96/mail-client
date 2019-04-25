@@ -1,5 +1,7 @@
 ﻿using MailClient.Model.Connection;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MailClient.Model.Entity
 {
@@ -17,9 +19,19 @@ namespace MailClient.Model.Entity
             _mailMechanism = new MailMechanism(user, ConnectionFactory.Create(user.EmailMode));
         }        
 
-        public virtual void Send(Mail mail)
+        public virtual List<string> Send(Mail mail)
         {
-            _mailMechanism.Send(mail);            
+            var sentEmailAdresses = new List<string>();
+            if (mail.SendMultipleEmails)
+            {
+                sentEmailAdresses = SendMultiple(mail).ToList();
+            }
+            else
+            {
+                var sentEmailAdress = _mailMechanism.Send(mail);
+                sentEmailAdresses.Add(sentEmailAdress);
+            }
+            return sentEmailAdresses;
         }
 
         public virtual IEnumerable<Mail> Receive()
@@ -37,13 +49,47 @@ namespace MailClient.Model.Entity
             return _mailMechanism.Authenticate();
         }
 
+        private List<string> SendMultiple(Mail mail)
+        {
+            List<string> toAdresses = GetMultipleEmailAdresses(mail);
+            var sentEmailAdresses = new List<string>();
+            foreach (var toAdrress in toAdresses)
+            {
+                var newMail = mail;
+                newMail.To = toAdrress;
+                if (ValidateEmail(newMail.To))
+                {
+                    var sentEmailAdress = _mailMechanism.Send(newMail);
+                    sentEmailAdresses.Add(sentEmailAdress);
+                }
+                else
+                {
+                    var notSentEmailAdress = newMail.To + " --> NOT SENT, WRONG EMAIL FORMAT";
+                    sentEmailAdresses.Add(notSentEmailAdress);
+                }
+            }
+            return sentEmailAdresses;
+        }
+
+        private List<string> GetMultipleEmailAdresses(Mail mail)
+        {
+            var toAdresses = mail.To.Split(' ').ToList();
+            toAdresses.ForEach(toAdrress =>
+            {
+                toAdrress.Replace(" ", "");
+                toAdrress.Replace(",", "");
+                toAdrress.Replace(Environment.NewLine, "");
+            });
+            return toAdresses;
+        }
+
         private class MailBoxNull : MailBox
         {
             public MailBoxNull() { }
 
             public MailBoxNull(User user) : base(user) { }
 
-            public override void Send(Mail mail) { }
+            public override List<string> Send(Mail mail) { return new List<string>(); }
 
             public override IEnumerable<Mail> Receive() { return new List<Mail>(); }
 

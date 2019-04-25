@@ -151,7 +151,7 @@ namespace MailClient.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email sent to .
+        ///   Looks up a localized string similar to Emails sent to.
         /// </summary>
         public static string MailSentTo {
             get {

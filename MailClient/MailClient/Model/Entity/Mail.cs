@@ -10,5 +10,6 @@
         public AttachmentDTO Attachment1 { get; set; } = new AttachmentDTO();
         public AttachmentDTO Attachment2 { get; set; } = new AttachmentDTO();
         public AttachmentDTO Attachment3 { get; set; } = new AttachmentDTO();
+        public bool SendMultipleEmails { get; set; }
     }
 }

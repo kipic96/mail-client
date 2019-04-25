@@ -145,7 +145,7 @@
     <value>Mail</value>
   </data>
   <data name="MailSentTo" xml:space="preserve">
-    <value>Email sent to </value>
+    <value>Emails sent to</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>Message:</value>

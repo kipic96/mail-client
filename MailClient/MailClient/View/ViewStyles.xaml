@@ -98,7 +98,7 @@
         <Setter Property="IsReadOnly" Value="False"/>
     </Style>
     <Style x:Key="MessageInputTextBox" TargetType="TextBox" BasedOn="{StaticResource MessageTextBox}">
-        <Setter Property="Height" Value="250"/>
+        <Setter Property="Height" Value="290"/>
         <Setter Property="IsReadOnly" Value="False"/>
     </Style>
     

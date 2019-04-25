@@ -56,7 +56,7 @@ namespace MailClient.Model
             return receivedMails;
         }
 
-        public void Send(Mail mail)
+        public string Send(Mail mail)
         {
             var message = new System.Net.Mail.MailMessage(_user.Login, mail.To);
             message.Subject = mail.Subject;
@@ -77,6 +77,7 @@ namespace MailClient.Model
                 _user.Login, _user.Password);
             smtpClient.EnableSsl = _mailConnection.UseSsl;
             smtpClient.Send(message);
+            return mail.To;
         }
 
         public bool Authenticate()
