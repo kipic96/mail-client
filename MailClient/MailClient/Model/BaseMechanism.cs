@@ -6,7 +6,7 @@ namespace MailClient.Model
 {
     public interface BaseMechanism
     {
-        string Send(Mail mail);
+        string Send(Mail mail, string logName);
         IEnumerable<Mail> Receive();
         bool Authenticate();
     }

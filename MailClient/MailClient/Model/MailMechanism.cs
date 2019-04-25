@@ -5,6 +5,7 @@ using MailClient.Model.Entity;
 using MailClient.Model.Parser;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Mail;
 
@@ -56,7 +57,7 @@ namespace MailClient.Model
             return receivedMails;
         }
 
-        public string Send(Mail mail)
+        public string Send(Mail mail, string logName)
         {
             var message = new System.Net.Mail.MailMessage(_user.Login, mail.To);
             message.Subject = mail.Subject;
@@ -77,6 +78,7 @@ namespace MailClient.Model
                 _user.Login, _user.Password);
             smtpClient.EnableSsl = _mailConnection.UseSsl;
             smtpClient.Send(message);
+            File.AppendAllText(logName, mail.To + Environment.NewLine);
             return mail.To;
         }
 

@@ -170,16 +170,25 @@ namespace MailClient
 
         private void OnMailSend(Mail mail)
         {
-            var sendEmailsTask = Task<IEnumerable<string>>.Factory.StartNew(() => _mailBox.Send(mail));
-            var sentEmails = sendEmailsTask.Result;
-            ChangeViewModel(FindPage(Enum.PageType.Received));
-            string sentEmailsCommunicate = Properties.Resources.MailSentTo + ":" + Environment.NewLine;
-            foreach (var sentEmail in sentEmails)
+            try
             {
-                sentEmailsCommunicate += sentEmail + Environment.NewLine;
+                string sentEmailsCommunicate = Properties.Resources.MailSentTo + ":" + Environment.NewLine;
+                string logName = "sentEmailsOn" + DateTime.Now.ToString("yyyy-MM-dd HH-mm") + ".txt";
+                File.WriteAllText(logName, sentEmailsCommunicate);
+
+                var sentEmails = _mailBox.Send(mail, logName);
+
+                ChangeViewModel(FindPage(Enum.PageType.Received));                
+                foreach (var sentEmail in sentEmails)
+                {
+                    sentEmailsCommunicate += sentEmail + Environment.NewLine;
+                }
+                LogMessage.Show(sentEmailsCommunicate);
             }
-            File.WriteAllText("sentEmailsOn" + DateTime.Now.ToString("yyyy-MM-dd HH-mm") + ".txt", sentEmailsCommunicate);
-            LogMessage.Show(sentEmailsCommunicate);
+            catch (Exception ex)
+            {
+                LogMessage.Show(ex.Message);
+            }            
         }
 
         private void OnMailChoosen(int mailId)

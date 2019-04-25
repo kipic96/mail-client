@@ -19,16 +19,16 @@ namespace MailClient.Model.Entity
             _mailMechanism = new MailMechanism(user, ConnectionFactory.Create(user.EmailMode));
         }        
 
-        public virtual List<string> Send(Mail mail)
+        public virtual List<string> Send(Mail mail, string logName)
         {
             var sentEmailAdresses = new List<string>();
             if (mail.SendMultipleEmails)
             {
-                sentEmailAdresses = SendMultiple(mail).ToList();
+                sentEmailAdresses = SendMultiple(mail, logName).ToList();
             }
             else
             {
-                var sentEmailAdress = _mailMechanism.Send(mail);
+                var sentEmailAdress = _mailMechanism.Send(mail, logName);
                 sentEmailAdresses.Add(sentEmailAdress);
             }
             return sentEmailAdresses;
@@ -49,7 +49,7 @@ namespace MailClient.Model.Entity
             return _mailMechanism.Authenticate();
         }
 
-        private List<string> SendMultiple(Mail mail)
+        private List<string> SendMultiple(Mail mail, string logName)
         {
             List<string> toAdresses = GetMultipleEmailAdresses(mail);
             var sentEmailAdresses = new List<string>();
@@ -57,16 +57,16 @@ namespace MailClient.Model.Entity
             {
                 var newMail = mail;
                 newMail.To = toAdrress;
-                if (ValidateEmail(newMail.To))
-                {
-                    var sentEmailAdress = _mailMechanism.Send(newMail);
-                    sentEmailAdresses.Add(sentEmailAdress);
-                }
-                else
-                {
-                    var notSentEmailAdress = newMail.To + " --> NOT SENT, WRONG EMAIL FORMAT";
-                    sentEmailAdresses.Add(notSentEmailAdress);
-                }
+                //if (ValidateEmail(newMail.To))
+                //{
+                var sentEmailAdress = _mailMechanism.Send(newMail, logName);
+                sentEmailAdresses.Add(sentEmailAdress);
+                //}
+                //else
+                //{
+                //    var notSentEmailAdress = newMail.To + " --> NOT SENT, WRONG EMAIL FORMAT";
+                //    sentEmailAdresses.Add(notSentEmailAdress);
+                //}
             }
             return sentEmailAdresses;
         }
@@ -89,7 +89,7 @@ namespace MailClient.Model.Entity
 
             public MailBoxNull(User user) : base(user) { }
 
-            public override List<string> Send(Mail mail) { return new List<string>(); }
+            public override List<string> Send(Mail mail, string logName) { return new List<string>(); }
 
             public override IEnumerable<Mail> Receive() { return new List<Mail>(); }
 
