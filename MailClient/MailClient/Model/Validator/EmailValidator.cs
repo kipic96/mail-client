@@ -7,7 +7,7 @@ namespace MailClient.Model.Validator
         private static string _emailPattern = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";     
         public static bool Validate(string email)
         {
-            return Regex.IsMatch (email, _emailPattern);
+            return Regex.IsMatch(email, _emailPattern);
         }
     }
 }

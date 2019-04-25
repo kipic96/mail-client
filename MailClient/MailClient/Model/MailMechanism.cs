@@ -61,14 +61,22 @@ namespace MailClient.Model
             var message = new System.Net.Mail.MailMessage(_user.Login, mail.To);
             message.Subject = mail.Subject;
             message.Body = mail.Message;
+            if (mail.Attachment1 != null && !string.IsNullOrWhiteSpace(mail.Attachment1.FileName))
+                message.Attachments.Add(new System.Net.Mail.Attachment(mail.Attachment1.FileName));
 
-            var mailer = new SmtpClient
+            if (mail.Attachment2 != null && !string.IsNullOrWhiteSpace(mail.Attachment2.FileName))
+                message.Attachments.Add(new System.Net.Mail.Attachment(mail.Attachment2.FileName));
+
+            if (mail.Attachment3 != null && !string.IsNullOrWhiteSpace(mail.Attachment3.FileName))
+                message.Attachments.Add(new System.Net.Mail.Attachment(mail.Attachment3.FileName));
+
+            var smtpClient = new SmtpClient
                 (_mailConnection.SendingServerName,
                  _mailConnection.SendingServerPort);
-            mailer.Credentials = new NetworkCredential(
+            smtpClient.Credentials = new NetworkCredential(
                 _user.Login, _user.Password);
-            mailer.EnableSsl = _mailConnection.UseSsl;
-            mailer.Send(message);
+            smtpClient.EnableSsl = _mailConnection.UseSsl;
+            smtpClient.Send(message);
         }
 
         public bool Authenticate()

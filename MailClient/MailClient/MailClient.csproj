@@ -106,6 +106,7 @@
     <Compile Include="Extension\ExtensionSecureString.cs" />
     <Compile Include="Extension\ExtensionString.cs" />
     <Compile Include="Model\Connection\NullConnection.cs" />
+    <Compile Include="Model\Entity\AttachmentDTO.cs" />
     <Compile Include="Model\Parser\MailParser.cs" />
     <Compile Include="Model\UserManager.cs" />
     <Compile Include="ViewModel\Base\BaseViewModel.cs" />

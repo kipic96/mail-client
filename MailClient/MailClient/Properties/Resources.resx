@@ -177,4 +177,7 @@
   <data name="WrongLoginOrPassword" xml:space="preserve">
     <value>The login or the password is incorrect</value>
   </data>
+  <data name="FillInToSubjectAndBody" xml:space="preserve">
+    <value>Fill in to, subject and message</value>
+  </data>
 </root>

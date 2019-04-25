@@ -20,6 +20,12 @@
                     Text="{Binding Mail.Message, Mode=TwoWay}"
                     Style="{StaticResource MessageInputTextBox}"
              />
+            <Button Content="Attach first file" Command="{Binding AttachFirstFile}" Width="100" HorizontalAlignment="Left"/>
+            <TextBlock Text="{Binding Path=FirstFile, Mode=TwoWay}" FontSize="14"/>
+            <Button Content="Attach second file" Command="{Binding AttachSecondFile}" Width="100" HorizontalAlignment="Left"/>
+            <TextBlock Text="{Binding Path=SecondFile, Mode=TwoWay}" FontSize="14"/>
+            <Button Content="Attach third file" Command="{Binding AttachThirdFile}" Width="100" HorizontalAlignment="Left"/>
+            <TextBlock Text="{Binding Path=ThirdFile, Mode=TwoWay}" FontSize="14"/>
             <Button Content="Send" Command="{Binding SendCommand}" Width="100" HorizontalAlignment="Left"/>
         </StackPanel>
     </StackPanel>
